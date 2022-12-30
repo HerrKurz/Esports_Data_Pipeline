@@ -28,7 +28,7 @@ class ElasticsearchConnector:
             batch = clean_json(batch)
             resp = bulk(
                 client=self.es_client,
-                index=f"test-index-v2",
+                index=f"esports-data-{self.today}",
                 actions=batch,
             )
             print(f"Sending: {len(msg_batches)}, response: {resp}")
