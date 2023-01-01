@@ -3,28 +3,23 @@
 """
 
 import pandas as pd
-# import datetime
-
+from config import CSV_2014, CSV_2023
 
 class GetData:
-    """A class that extracts main data source"""
-    def __init__(self, limits = None):
-        # self.date_now = str(datetime.date.today()).replace("-", "")
-        self.df_matches = self.download_csv(limits)
+    """Downloads .csv file with LoL esports match data from OraclesElixir and returns it as a dataframe"""
+    def __init__(self, limits: int or None = None):
+        self.df_matches = self.download_csv(limits=20)
         self.player_names = self.get_player_name(self.df_matches)
 
-    @staticmethod
-    def download_csv(limits: int or None) -> pd.DataFrame:
-        """Downloads .csv file with 2022 LoL esports match data from OraclesElixir and returns it as a dataframe"""
+    def download_csv(self, limits: int or None) -> pd.DataFrame:
+        """Downloads .csv file with LoL esports match data from OraclesElixir and returns it as a dataframe"""
         try:
-            # url = f"https://oracleselixir-downloadable-match-data.s3-us-west-2.amazonaws.com/2022_LoL_esports_match_data_from_OraclesElixir_{self.date_now}.csv"
-            url = "https://drive.google.com/uc?id=1EHmptHyzY8owv0BAcNKtkQpMwfkURwRy"
-            # Dodać do configa i pobierać z niego URL NP. URL_CSV
+            url = "https://drive.google.com/uc?id=12syQsRH2QnKrQZTQQ6G5zyVeTG2pAYvu"
             df = pd.read_csv(url, low_memory=False)
             print("File successfully downloaded.")
             return df[:limits] if limits else df
         except Exception as e:
-            print(f"An exception {e} has occurred.")
+            print(f"An exception {e} has occurred. File NOT downloaded.")
 
     @staticmethod
     def get_player_name(df: pd.DataFrame) -> list:

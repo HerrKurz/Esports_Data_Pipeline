@@ -7,6 +7,6 @@ if __name__ == "__main__":
     data = GetData()
     data_enricher = DataEnricher(data.player_names, data.df_matches)
     enriched_data = data_enricher.enrich_data(data.df_matches)
-    elasticsearch_connector.send_data(enriched_data, 5000)
+    elasticsearch_connector.send_data(message_list=enriched_data, batch_size=5000)
 
 

@@ -3,6 +3,7 @@ import json
 import pandas as pd
 import requests
 from src.utils import convert_to_json
+from config import FIELDS
 
 
 class DataEnricher:
@@ -19,7 +20,6 @@ class DataEnricher:
 
     def enrich_data(self, main_df: pd.DataFrame) -> list:
         main_df["Player_info"] = main_df["playername"].map(self.complementary_dict)
-        # add function backfill liquipedia api/ or scraping
         self.append_coordinates_to_country(main_df)
         self.append_country_codes_to_country(main_df)
         return convert_to_json(main_df)
@@ -31,8 +31,7 @@ class DataEnricher:
             response = self.lol_site.api('cargoquery',
                 limit = 'max',
                 tables = "Players",
-                # add fields to config.py
-                fields = "ID, OverviewPage, Player, Image, Name, NativeName, NameAlphabet, NameFull, Country, Nationality, NationalityPrimary, Age, Birthdate, ResidencyFormer, Team, Team2, CurrentTeams, TeamSystem, Team2System, Residency, Role, FavChamps, SoloqueueIds, Askfm, Discord, Facebook, Instagram, Lolpros, Reddit, Snapchat, Stream, Twitter, Vk, Website, Weibo, Youtube, TeamLast, RoleLast, IsRetired, ToWildrift, IsPersonality, IsSubstitute, IsTrainee, IsLowercase, IsAutoTeam, IsLowContent",
+                fields = FIELDS,
                 where=f'id="{player}"',
                 format = "json")
             try:
@@ -43,8 +42,8 @@ class DataEnricher:
             except KeyError as e:
                 print(f"KeyError EXCEPTION!!! {e} {response}.")
                 continue
-            except IndexError:
-                print(f"Missing player {player} at Leaguepedia.")
+            except IndexError as e:
+                print(f"Missing player {player} at Leaguepedia. With error {e}.")
                 missing_players.append(player)
                 continue
         print(f"{len(missing_players)} players weren't fetched from Leaguepedia, their names: {missing_players}.")
@@ -70,7 +69,8 @@ class DataEnricher:
                     else:
                         self.countries_missing_coords.append(page['title'])
 
-            except KeyError:
+            except KeyError as e:
+                print(f"Coords not found {e}.")
                 continue
         print(f"Countries without coords matching {self.countries_missing_coords}.")
         return coords
@@ -91,6 +91,7 @@ class DataEnricher:
         return missing_coords
 
     def append_coordinates_to_country(self, df_match: pd.DataFrame) -> pd.DataFrame:
+        """Adds new column involving longitude and latitude to main dataframe based on mapped "Country" values."""
         df_match["Coordinates"] = df_match["Country"].map(self.final_coords)
         return df_match
 
@@ -98,21 +99,19 @@ class DataEnricher:
         """Fetches country codes in ISO 3166-1 numeric encoding system"""
         country_code = {}
         countries_without_code = []
+        self.countries[:] = [x if x != "United States" else "USA" for x in self.countries]
         countries = set(self.countries)
         for country in countries:
             try:
-                if country == "United States":
-                    response = requests.get(f"https://restcountries.com/v3.1/name/USA")
-                    country_code[country] = response.json()[0]["ccn3"]
-                else:
-                    response = requests.get(f"https://restcountries.com/v3.1/name/{country}")
-                    country_code[country] = response.json()[0]["ccn3"]
+                response = requests.get(f"https://restcountries.com/v3.1/name/{country}")
+                country_code[country] = response.json()[0]["ccn3"]
             except KeyError as e:
-                countries_without_code.append((country))
+                countries_without_code.append(country)
                 print(f"Error {e} for {countries_without_code}. Can't find matching country code.")
                 continue
         return country_code
 
     def append_country_codes_to_country(self, df_match: pd.DataFrame) -> pd.DataFrame:
+        """Adds new column involving country code to main dataframe based on mapped "Country" values."""
         df_match["Country_code"] = df_match["Country"].map(self.country_code)
         return df_match
