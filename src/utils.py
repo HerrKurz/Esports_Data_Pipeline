@@ -26,3 +26,5 @@ def create_msg_batches(messages: list, batch_size: int) -> list:
     return [messages[i * batch_size:(i + 1) * batch_size] for i in range((len(messages) + batch_size - 1) // batch_size)]
 
 
+def add_id_column(df: pd.DataFrame) -> None:
+    df['id'] = df[['gameid', 'playerid']].apply(lambda x: '-'.join(x.map(str)), axis=1)

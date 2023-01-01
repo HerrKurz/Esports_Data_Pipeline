@@ -13,4 +13,4 @@ venv/
 ENV/
 
 # User-specific stuff
-.idea
+.idea/**

@@ -2,7 +2,7 @@ import mwclient
 import json
 import pandas as pd
 import requests
-from src.utils import convert_to_json
+from src.utils import convert_to_json, add_id_column
 from config import FIELDS
 
 
@@ -22,6 +22,7 @@ class DataEnricher:
         main_df["Player_info"] = main_df["playername"].map(self.complementary_dict)
         self.append_coordinates_to_country(main_df)
         self.append_country_codes_to_country(main_df)
+        add_id_column(main_df)
         return convert_to_json(main_df)
 
     def enrich_player_data(self, list_of_players: list, df_match: pd.DataFrame) -> dict:
