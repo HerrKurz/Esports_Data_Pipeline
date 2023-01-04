@@ -1,34 +1,37 @@
 """
-
+Downloads
 """
-
 import pandas as pd
-# import datetime
+import datetime
+from src.utils import convert_years_to_url, merge_csv_files
 
 
 class GetData:
-    """A class that extracts main data source"""
-    def __init__(self, limits = None):
-        # self.date_now = str(datetime.date.today()).replace("-", "")
-        self.df_matches = self.download_csv(limits)
-        self.player_names = self.get_player_name(self.df_matches)
+    """Downloads .csv file with LoL esports match data from OraclesElixir and returns it as a dataframe"""
+    def __init__(self, year: list, retries=1, limits: int or None = None):
+        self.retries = retries
+        self.current_year = datetime.date.today().year-1
+        self.df_matches = self.download_csv(limits, year)
+        self.player_names = self.get_player_name()
 
-    @staticmethod
-    def download_csv(limits: int or None) -> pd.DataFrame:
-        """Downloads .csv file with 2022 LoL esports match data from OraclesElixir and returns it as a dataframe"""
-        try:
-            # url = f"https://oracleselixir-downloadable-match-data.s3-us-west-2.amazonaws.com/2022_LoL_esports_match_data_from_OraclesElixir_{self.date_now}.csv"
-            url = "https://drive.google.com/uc?id=1EHmptHyzY8owv0BAcNKtkQpMwfkURwRy"
-            # Dodać do configa i pobierać z niego URL NP. URL_CSV
-            df = pd.read_csv(url, low_memory=False)
-            print("File successfully downloaded.")
-            return df[:limits] if limits else df
-        except Exception as e:
-            print(f"An exception {e} has occurred.")
+    def download_csv(self, limits: int or None, year: list) -> pd.DataFrame:
+        """Downloads .csv file with LoL esports match data from OraclesElixir and returns it as a dataframe"""
+        counter = 0
+        while counter < self.retries:
+            try:
+                url_list = convert_years_to_url(year, self.current_year)
+                print(url_list)
+                df = merge_csv_files(url_list)
+                print(f"Dataframe consists of {df.shape[0]} rows and {df.shape[1]} columns.")
+                return df[:limits] if limits else df
+            except pd.errors.EmptyDataError as e:
+                print(f"{e} for year {self.current_year}. Trying to fetch previous year.")
+                self.current_year = self.current_year - 1
+                convert_years_to_url(year, self.current_year)
+                counter += 1
 
-    @staticmethod
-    def get_player_name(df: pd.DataFrame) -> list:
-        """Gets unique, non-empty player list from a dataframe"""
-        df_playername = df["playername"].dropna().unique()
-        player_list = list(df_playername)
+    def get_player_name(self) -> set:
+        """Gets unique, non-empty player list from a dataframe used later to enrich the data."""
+        df_playername = self.df_matches["playername"].dropna().unique()
+        player_list = set(list(df_playername))
         return player_list

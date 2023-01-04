@@ -11,3 +11,15 @@ pip-delete-this-directory.txt
 # virtualenv
 venv/
 ENV/
+
+# User-specific stuff
+**/**.ipynb
+
+# idea
+.idea
+
+# exportToHTML
+.exportToHTML
+
+# logs
+**/**.log
