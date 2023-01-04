@@ -13,4 +13,13 @@ venv/
 ENV/
 
 # User-specific stuff
+**/**.ipynb
+
+# idea
 .idea
+
+# exportToHTML
+.exportToHTML
+
+# logs
+**/**.log

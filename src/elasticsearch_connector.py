@@ -10,10 +10,10 @@ TODAY = str(datetime.date.today())
 
 
 class ElasticsearchConnector:
-    """Provides a mapping from Python to Elasticsearch REST API."""
-    def __init__(self, elastic_url=URL):
+    """Setup for a communication between Python and Elasticsearch. Can specify True if localhost."""
+    def __init__(self, local: bool = False):
         self.es_client = Elasticsearch(
-            hosts=[{'host': elastic_url, 'port': PORT}],
+            hosts=[{'host': URL if not local else "localhost", 'port': PORT}],
             http_auth=(ELASTIC_USERNAME, ELASTIC_PASSWORD),
             scheme='http',
             use_ssl=True,
@@ -22,7 +22,6 @@ class ElasticsearchConnector:
             retry_on_timeout=False,
             timeout=5000
         )
-        self.today = str(datetime.date.today())
 
     def send_data(self, message_list: list, batch_size: int, index: str = f"esports-data-{TODAY}"):
         """Loads the data as a list of dicts into Elasticsearch using bulks of specified batch size.

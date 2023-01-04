@@ -2,33 +2,37 @@ import mwclient
 import json
 import pandas as pd
 import requests
-from src.utils import convert_to_json, add_id_column
+from src.data_extractor import GetData
+from src.utils import convert_to_json, add_id_column, clean_countries_list
 from config import FIELDS
 
 
 class DataEnricher:
-    def __init__(self, list_of_players, df_matches):
+    def __init__(self, data):
         self.lol_site = mwclient.Site('lol.fandom.com', path='/')
         self.wiki_site = mwclient.Site('en.wikipedia.org')
         self.countries = []
         self.countries_missing_coords = []
-        self.complementary_dict = self.enrich_player_data(list_of_players, df_matches)
+        self.complementary_dict = self.enrich_player_data(data)
         self.coords = self.get_country_coordinates()
         self.missing_coords = self.fill_missing_coordinates()
         self.final_coords = self.coords | self.missing_coords
         self.country_code = self.get_country_codes()
 
     def enrich_data(self, main_df: pd.DataFrame) -> list:
+        """Main method that takes main data frame and applies transformations on the data."""
         main_df["Player_info"] = main_df["playername"].map(self.complementary_dict)
         self.append_coordinates_to_country(main_df)
         self.append_country_codes_to_country(main_df)
         add_id_column(main_df)
+        print(main_df["_id"])
         return convert_to_json(main_df)
 
-    def enrich_player_data(self, list_of_players: list, df_match: pd.DataFrame) -> dict:
+    def enrich_player_data(self, data: GetData) -> dict:
         player_dict = {}
         missing_players = []
-        for count, player in enumerate(list_of_players):
+        countries = []
+        for count, player in enumerate(data.player_names):
             response = self.lol_site.api('cargoquery',
                 limit = 'max',
                 tables = "Players",
@@ -37,9 +41,10 @@ class DataEnricher:
                 format = "json")
             try:
                 parsed = json.loads(json.dumps(response["cargoquery"]))[0]["title"]
-                print(f"Getting player {player} {count + 1}/{len(list_of_players)} of players from Leaguepedia.")
+                print(f"Getting player {player} {count + 1}/{len(data.player_names)} of players from Leaguepedia.")
                 player_dict[parsed["ID"]] = parsed
-                self.countries.append(parsed["Country"])
+                countries.append(parsed["Country"])
+
             except KeyError as e:
                 print(f"KeyError EXCEPTION!!! {e} {response}.")
                 continue
@@ -51,17 +56,18 @@ class DataEnricher:
 
         try:
             player_country_dict = {player_name: country["Country"] for player_name, country in player_dict.items()}
-            df_match['Country'] = df_match['playername'].map(player_country_dict)
+            data.df_matches['Country'] = data.df_matches['playername'].map(player_country_dict)
         except KeyError as e:
-            df_match['Country'] = ""
+            data.df_matches['Country'] = ""
             print(f"Key error {e}.")
+
+        self.countries = clean_countries_list(countries)
         return player_dict
 
     def get_country_coordinates(self) -> dict:
         """Provides X"""
         coords = {}
-        countries = set(self.countries)
-        for country in countries:
+        for country in self.countries:
             result = self.wiki_site.api('query', prop='coordinates', titles=country)
             try:
                 for page in result['query']['pages'].values():
@@ -100,9 +106,7 @@ class DataEnricher:
         """Fetches country codes in ISO 3166-1 numeric encoding system"""
         country_code = {}
         countries_without_code = []
-        self.countries[:] = [x if x != "United States" else "USA" for x in self.countries]
-        countries = set(self.countries)
-        for country in countries:
+        for country in self.countries:
             try:
                 response = requests.get(f"https://restcountries.com/v3.1/name/{country}")
                 country_code[country] = response.json()[0]["ccn3"]
