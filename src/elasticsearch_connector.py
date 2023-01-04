@@ -1,5 +1,5 @@
 """
-Loads transformed and enriched data into Elasticsearch.
+Handles the connection between Python and Elasticsearch and loads the data to the database.
 """
 import datetime
 from elasticsearch import Elasticsearch, RequestsHttpConnection
@@ -23,12 +23,14 @@ class ElasticsearchConnector:
             timeout=5000
         )
 
-    def send_data(self, message_list: list, batch_size: int, index: str = f"esports-data-{TODAY}"):
+    def send_data(self, message_list: list, batch_size: int = 500, index: str = f"esports-data-{TODAY}"):
         """Loads the data as a list of dicts into Elasticsearch using bulks of specified batch size.
-        Possible to specify the name of the Elasticsearch index as an argument"""
+        Possible to specify the name of the Elasticsearch index as an argument.
+        """
         msg_batches = create_msg_batches(message_list, batch_size)
+        counter = 0
         for batch in msg_batches:
-            counter = 0
+            counter += 1
             clean_json(batch)
             resp = bulk(
                 client=self.es_client,
@@ -36,5 +38,5 @@ class ElasticsearchConnector:
                 actions=batch,
             )
             counter += 1
-            print(f"Sending: batch {counter}/{len(msg_batches)}, to index {index} with response: {resp}.")
-        print(f"Loading data to Elasticsearch at index {index} has been completed.")
+            print(f"Sending: batch {counter}/{len(msg_batches)}, to the index {index} with response: {resp}.")
+        print(f"Loading data to Elasticsearch to index {index} has been completed.")

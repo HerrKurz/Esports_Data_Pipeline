@@ -1,3 +1,7 @@
+"""
+Handles additional extractions and data transformations.
+"""
+
 import mwclient
 import json
 import pandas as pd
@@ -20,15 +24,15 @@ class DataEnricher:
         self.country_code = self.get_country_codes()
 
     def enrich_data(self, main_df: pd.DataFrame) -> list:
-        """Main method that takes main data frame and applies transformations on the data."""
+        """Takes main data frame and applies the transformations on the data."""
         main_df["Player_info"] = main_df["playername"].map(self.complementary_dict)
         self.append_coordinates_to_country(main_df)
         self.append_country_codes_to_country(main_df)
         add_id_column(main_df)
-        print(main_df["_id"])
         return convert_to_json(main_df)
 
     def enrich_player_data(self, data: GetData) -> dict:
+        """Extracts data about the players from Leaguepedia API."""
         player_dict = {}
         missing_players = []
         countries = []
@@ -65,7 +69,8 @@ class DataEnricher:
         return player_dict
 
     def get_country_coordinates(self) -> dict:
-        """Provides X"""
+        """Collects geographical coordinates - GeoPoint(longitude, latitude) for unique list
+        of countries using MediaWiki API."""
         coords = {}
         for country in self.countries:
             result = self.wiki_site.api('query', prop='coordinates', titles=country)
@@ -83,7 +88,7 @@ class DataEnricher:
         return coords
 
     def fill_missing_coordinates(self) -> dict:
-        """Fetches missing coords using backup Countries REST API."""
+        """Fetches missing geographical coordinates using backup Countries REST API."""
         missing_coords = {}
         for country in self.countries_missing_coords:
             try:
@@ -98,12 +103,12 @@ class DataEnricher:
         return missing_coords
 
     def append_coordinates_to_country(self, df_match: pd.DataFrame) -> pd.DataFrame:
-        """Adds new column involving longitude and latitude to main dataframe based on mapped "Country" values."""
+        """Adds new column which contains longitude and latitude to main dataframe based on mapped "Country" values."""
         df_match["Coordinates"] = df_match["Country"].map(self.final_coords)
         return df_match
 
     def get_country_codes(self) -> dict:
-        """Fetches country codes in ISO 3166-1 numeric encoding system"""
+        """Fetches country codes in ISO 3166-1 numeric encoding system."""
         country_code = {}
         countries_without_code = []
         for country in self.countries:
@@ -117,6 +122,6 @@ class DataEnricher:
         return country_code
 
     def append_country_codes_to_country(self, df_match: pd.DataFrame) -> pd.DataFrame:
-        """Adds new column involving country code to main dataframe based on mapped "Country" values."""
+        """Adds new column which contains country code to main dataframe based on mapped "Country" values."""
         df_match["Country_code"] = df_match["Country"].map(self.country_code)
         return df_match

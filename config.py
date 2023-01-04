@@ -1,3 +1,6 @@
+"""
+Configuration file that contains constant variables.
+"""
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -30,5 +33,3 @@ CSV_FILES = {
 COUNTRIES_TRANSLATE_DICT = {
     "United States": "USA"
 }
-# Entire match history
-ALL_YEARS = [key for key in CSV_FILES]
