@@ -11,7 +11,7 @@ The purpose of this project is to build a data pipeline that extracts data from 
 
 ## Architecture diagram
 
-![Architecture diagram](images/architecture diagram.jpg)
+![Architecture diagram](images/diagram_architecture.jpg) 
 
 ## Dashboard
 
