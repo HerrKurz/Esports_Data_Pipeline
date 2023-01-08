@@ -29,18 +29,14 @@ def add_id_column(df: pd.DataFrame) -> None:
     df['_id'] = df[['gameid', 'participantid']].apply(lambda x: '-'.join(x.map(str)), axis=1)
 
 
-# def add_id_column_test(df: pd.DataFrame) -> None:
-#     df['_id'] = f"{df['gameid']}-{df['playerid'] if df['playerid'].empty else df['teamid']}"
-
-
 def clean_countries_list(country_list: list) -> list:
     """Converts country names to fit the endpoint at REST countries."""
-    return [country.replace(country, COUNTRIES_TRANSLATE_DICT.get(country, country)) for country in set(country_list) if country is not None]
+    return [country.replace(country, COUNTRIES_TRANSLATE_DICT.get(country, country)) for country in set(country_list) if country]
 
 
 def convert_years_to_url(years: list, current_year: int) -> list:
     """Gets the list of URL links for provided list of years."""
-    return list(set([CSV_FILES.get(f"{year}", CSV_FILES[f"{current_year}"]) for year in years if year is not None]))
+    return list(set([CSV_FILES.get(f"{year}", CSV_FILES[f"{current_year}"]) for year in years if year]))
 
 
 def merge_csv_files(csv_files: list) -> pd.DataFrame:

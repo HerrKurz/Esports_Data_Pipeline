@@ -1,0 +1,476 @@
+#! this request accesses system indices: [.kibana_8.2.3_001, .kibana_security_session_1, .kibana_task_manager_8.2.3_001], but in a future major version, direct access to system indices will be prevented by default
+{
+  "took" : 3,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 5,
+    "successful" : 5,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 3,
+      "relation" : "eq"
+    },
+    "max_score" : 5.9049726,
+    "hits" : [
+      {
+        "_index" : ".kibana_8.2.3_001",
+        "_id" : "dashboard:edf84fe0-e1a0-11e7-b6d5-4dc382ef7f5b",
+        "_score" : 5.9049726,
+        "_source" : {
+          "dashboard" : {
+            "title" : "[Logs] Web Traffic",
+            "hits" : 0,
+            "description" : "Analyze mock web traffic log data for Elastic's website",
+            "panelsJSON" : """[{"version":"8.0.0","type":"map","gridData":{"x":0,"y":19,"w":24,"h":18,"i":"4"},"panelIndex":"4","embeddableConfig":{"isLayerTOCOpen":false,"hiddenLayers":[],"mapCenter":{"lat":42.16337,"lon":-88.92107,"zoom":3.64},"openTOCDetails":[]},"panelRefName":"panel_4"},{"version":"8.0.0","type":"visualization","gridData":{"x":0,"y":52,"w":24,"h":13,"i":"9"},"panelIndex":"9","embeddableConfig":{"mapCenter":[36.8092847020594,-96.94335937500001],"vis":{"params":{"sort":{"columnIndex":null,"direction":null}}},"enhancements":{}},"panelRefName":"panel_9"},{"version":"8.0.0","type":"visualization","gridData":{"x":12,"y":6,"w":12,"h":8,"i":"11"},"panelIndex":"11","embeddableConfig":{"vis":{"colors":{"0 - 500":"#BF1B00","1000 - 1500":"#7EB26D","500 - 1000":"#F2C96D"},"defaultColors":{"0 - 500":"rgb(165,0,38)","1000 - 1500":"rgb(0,104,55)","500 - 1000":"rgb(255,255,190)"},"legendOpen":false},"enhancements":{},"hidePanelTitles":true},"title":"","panelRefName":"panel_11"},{"version":"8.0.0","type":"visualization","gridData":{"x":24,"y":19,"w":24,"h":33,"i":"14"},"panelIndex":"14","embeddableConfig":{"enhancements":{}},"panelRefName":"panel_14"},{"version":"8.0.0","type":"visualization","gridData":{"x":24,"y":6,"w":24,"h":13,"i":"15"},"panelIndex":"15","embeddableConfig":{"enhancements":{"dynamicActions":{"events":[]}}},"panelRefName":"panel_15"},{"version":"8.2.0","type":"visualization","gridData":{"x":0,"y":0,"w":17,"h":6,"i":"343f0bef-0b19-452e-b1c8-59beb18b6f0c"},"panelIndex":"343f0bef-0b19-452e-b1c8-59beb18b6f0c","embeddableConfig":{"savedVis":{"title":"[Logs] Markdown Instructions","description":"","type":"markdown","params":{"fontSize":12,"openLinksInNewTab":true,"markdown":"### Sample Logs Data\nThis dashboard contains sample data for you to play with. You can view it, search it, and interact with the visualizations. For more information about Kibana, check our [docs](https://www.elastic.co/guide/en/kibana/current/index.html)."},"uiState":{},"data":{"aggs":[],"searchSource":{"query":{"query":"","language":"kuery"},"filter":[]}}},"enhancements":{},"hidePanelTitles":true,"type":"visualization"}},{"version":"8.2.0","type":"visualization","gridData":{"x":17,"y":0,"w":31,"h":6,"i":"30326cdb-4ddd-49eb-a4f1-b555caa21d7c"},"panelIndex":"30326cdb-4ddd-49eb-a4f1-b555caa21d7c","embeddableConfig":{"savedVis":{"title":"[Logs] Input Controls","description":"","type":"input_control_vis","params":{"controls":[{"id":"1523980210832","fieldName":"geo.src","label":"Source Country","type":"list","options":{"type":"terms","multiselect":true,"size":100,"order":"desc"},"parent":"","indexPatternRefName":"control_30326cdb-4ddd-49eb-a4f1-b555caa21d7c_0_index_pattern"},{"id":"1523980191978","fieldName":"machine.os.keyword","label":"OS","type":"list","options":{"type":"terms","multiselect":true,"size":100,"order":"desc"},"parent":"1523980210832","indexPatternRefName":"control_30326cdb-4ddd-49eb-a4f1-b555caa21d7c_1_index_pattern"},{"id":"1523980232790","fieldName":"bytes","label":"Bytes","type":"range","options":{"decimalPlaces":0,"step":1024},"indexPatternRefName":"control_30326cdb-4ddd-49eb-a4f1-b555caa21d7c_2_index_pattern"}],"updateFiltersOnChange":true,"useTimeFilter":true,"pinFilters":false},"uiState":{},"data":{"aggs":[],"searchSource":{"query":{"query":"","language":"kuery"},"filter":[]}}},"enhancements":{},"hidePanelTitles":true,"type":"visualization"}},{"version":"8.2.0","type":"lens","gridData":{"x":0,"y":6,"w":12,"h":8,"i":"bb94016e-f4a6-49ca-87a9-296a2869d570"},"panelIndex":"bb94016e-f4a6-49ca-87a9-296a2869d570","embeddableConfig":{"attributes":{"title":"","type":"lens","visualizationType":"lnsMetric","state":{"datasourceStates":{"indexpattern":{"layers":{"483defd2-775b-4a62-bdef-496c819bb8ed":{"columns":{"37430d12-7452-4cc9-b035-5cfd4061edf0":{"label":"Visits","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","customLabel":true}},"columnOrder":["37430d12-7452-4cc9-b035-5cfd4061edf0"],"incompleteColumns":{}}}}},"visualization":{"layerId":"483defd2-775b-4a62-bdef-496c819bb8ed","accessor":"37430d12-7452-4cc9-b035-5cfd4061edf0","layerType":"data"},"query":{"query":"","language":"kuery"},"filters":[]},"references":[{"type":"index-pattern","id":"90943e30-9a47-11e8-b64d-95841ca0b247","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"90943e30-9a47-11e8-b64d-95841ca0b247","name":"indexpattern-datasource-layer-483defd2-775b-4a62-bdef-496c819bb8ed"}]},"enhancements":{},"type":"lens"}},{"version":"8.2.0","type":"lens","gridData":{"x":0,"y":14,"w":12,"h":5,"i":"01d8e435-91c0-484f-a11e-856747050b0a"},"panelIndex":"01d8e435-91c0-484f-a11e-856747050b0a","embeddableConfig":{"attributes":{"title":"","type":"lens","visualizationType":"lnsMetric","state":{"datasourceStates":{"indexpattern":{"layers":{"f3793bb7-3971-4753-866d-4008e77a9f9a":{"columns":{"71c076a6-e782-4866-b8df-5fd85a41f08bX0":{"label":"Part of HTTP 5xx","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","filter":{"query":"response.keyword >= 400 and response.keyword < 500","language":"kuery"},"customLabel":true},"71c076a6-e782-4866-b8df-5fd85a41f08bX1":{"label":"Part of HTTP 5xx","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","customLabel":true},"71c076a6-e782-4866-b8df-5fd85a41f08bX2":{"label":"Part of HTTP 5xx","dataType":"number","operationType":"math","isBucketed":false,"scale":"ratio","params":{"tinymathAst":{"type":"function","name":"divide","args":["71c076a6-e782-4866-b8df-5fd85a41f08bX0","71c076a6-e782-4866-b8df-5fd85a41f08bX1"],"location":{"min":0,"max":73},"text":"count(kql='response.keyword >= 400 and response.keyword < 500') / count()"}},"references":["71c076a6-e782-4866-b8df-5fd85a41f08bX0","71c076a6-e782-4866-b8df-5fd85a41f08bX1"],"customLabel":true},"71c076a6-e782-4866-b8df-5fd85a41f08b":{"label":"HTTP 4xx","dataType":"number","operationType":"formula","isBucketed":false,"scale":"ratio","params":{"formula":"count(kql='response.keyword >= 400 and response.keyword < 500') / count()","isFormulaBroken":false,"format":{"id":"percent","params":{"decimals":1}}},"references":["71c076a6-e782-4866-b8df-5fd85a41f08bX2"],"customLabel":true}},"columnOrder":["71c076a6-e782-4866-b8df-5fd85a41f08b","71c076a6-e782-4866-b8df-5fd85a41f08bX0","71c076a6-e782-4866-b8df-5fd85a41f08bX1","71c076a6-e782-4866-b8df-5fd85a41f08bX2"],"incompleteColumns":{}}}}},"visualization":{"layerId":"f3793bb7-3971-4753-866d-4008e77a9f9a","accessor":"71c076a6-e782-4866-b8df-5fd85a41f08b","layerType":"data"},"query":{"query":"","language":"kuery"},"filters":[]},"references":[{"type":"index-pattern","id":"90943e30-9a47-11e8-b64d-95841ca0b247","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"90943e30-9a47-11e8-b64d-95841ca0b247","name":"indexpattern-datasource-layer-f3793bb7-3971-4753-866d-4008e77a9f9a"}]},"enhancements":{},"type":"lens"}},{"version":"8.2.0","type":"lens","gridData":{"x":12,"y":14,"w":12,"h":5,"i":"8c1456d4-1993-4ba2-b701-04aca02c9fef"},"panelIndex":"8c1456d4-1993-4ba2-b701-04aca02c9fef","embeddableConfig":{"attributes":{"title":"","type":"lens","visualizationType":"lnsMetric","state":{"datasourceStates":{"indexpattern":{"layers":{"f3793bb7-3971-4753-866d-4008e77a9f9a":{"columns":{"71c076a6-e782-4866-b8df-5fd85a41f08bX0":{"label":"Part of HTTP 5xx","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","filter":{"query":"response.keyword >= 500","language":"kuery"},"customLabel":true},"71c076a6-e782-4866-b8df-5fd85a41f08bX1":{"label":"Part of HTTP 5xx","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","customLabel":true},"71c076a6-e782-4866-b8df-5fd85a41f08bX2":{"label":"Part of HTTP 5xx","dataType":"number","operationType":"math","isBucketed":false,"scale":"ratio","params":{"tinymathAst":{"type":"function","name":"divide","args":["71c076a6-e782-4866-b8df-5fd85a41f08bX0","71c076a6-e782-4866-b8df-5fd85a41f08bX1"],"location":{"min":0,"max":46},"text":"count(kql='response.keyword >= 500') / count()"}},"references":["71c076a6-e782-4866-b8df-5fd85a41f08bX0","71c076a6-e782-4866-b8df-5fd85a41f08bX1"],"customLabel":true},"71c076a6-e782-4866-b8df-5fd85a41f08b":{"label":"HTTP 5xx","dataType":"number","operationType":"formula","isBucketed":false,"scale":"ratio","params":{"formula":"count(kql='response.keyword >= 500') / count()","isFormulaBroken":false,"format":{"id":"percent","params":{"decimals":1}}},"references":["71c076a6-e782-4866-b8df-5fd85a41f08bX2"],"customLabel":true}},"columnOrder":["71c076a6-e782-4866-b8df-5fd85a41f08b","71c076a6-e782-4866-b8df-5fd85a41f08bX0","71c076a6-e782-4866-b8df-5fd85a41f08bX1","71c076a6-e782-4866-b8df-5fd85a41f08bX2"],"incompleteColumns":{}}}}},"visualization":{"layerId":"f3793bb7-3971-4753-866d-4008e77a9f9a","accessor":"71c076a6-e782-4866-b8df-5fd85a41f08b","layerType":"data"},"query":{"query":"","language":"kuery"},"filters":[]},"references":[{"type":"index-pattern","id":"90943e30-9a47-11e8-b64d-95841ca0b247","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"90943e30-9a47-11e8-b64d-95841ca0b247","name":"indexpattern-datasource-layer-f3793bb7-3971-4753-866d-4008e77a9f9a"}]},"enhancements":{},"type":"lens"}},{"version":"8.2.0","type":"visualization","gridData":{"x":0,"y":37,"w":24,"h":15,"i":"8e59c7cf-6e42-4343-a113-c4a255fcf2ce"},"panelIndex":"8e59c7cf-6e42-4343-a113-c4a255fcf2ce","embeddableConfig":{"savedVis":{"title":"","description":"","type":"vega","params":{"spec":"{\n  $schema: https://vega.github.io/schema/vega-lite/v5.json\n  data: {\n    url: {\n      %context%: true\n      %timefield%: @timestamp\n      index: kibana_sample_data_logs\n      body: {\n        aggs: {\n          countries: {\n            terms: {\n              field: geo.src\n              size: 25\n            }\n            aggs: {\n              hours: {\n                histogram: {\n                  field: hour_of_day\n                  interval: 1\n                }\n                aggs: {\n                  unique: {\n                    cardinality: {\n                      field: clientip\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n        size: 0\n      }\n    }\n    format: {property: \"aggregations.countries.buckets\"}\n  }\n  \n  transform: [\n    {\n      flatten: [\"hours.buckets\"],\n      as: [\"buckets\"]\n    }\n  ]\n\n  mark: {\n    type: rect\n    tooltip: true\n  }\n\n  encoding: {\n    x: {\n      field: buckets.key\n      type: ordinal\n      axis: {\n        title: false\n        labelAngle: 0\n      }\n    }\n    y: {\n      field: key\n      type: nominal\n      sort: {\n        field: -buckets.unique.value\n      }\n      axis: {title: false}\n    }\n    color: {\n      field: buckets.unique.value\n      type: quantitative\n      axis: {title: false}\n      scale: {\n        scheme: reds\n      }\n    }\n  }\n}\n"},"uiState":{},"data":{"aggs":[],"searchSource":{"query":{"query":"","language":"kuery"},"filter":[]}}},"enhancements":{},"type":"visualization"},"panelRefName":"panel_8e59c7cf-6e42-4343-a113-c4a255fcf2ce"},{"version":"8.2.0","type":"lens","gridData":{"x":0,"y":65,"w":48,"h":19,"i":"1d5f0b3f-d9d2-4b26-997b-83bc5ca3090b"},"panelIndex":"1d5f0b3f-d9d2-4b26-997b-83bc5ca3090b","embeddableConfig":{"attributes":{"title":"","type":"lens","visualizationType":"lnsDatatable","state":{"datasourceStates":{"indexpattern":{"layers":{"c35dc8ee-50d1-4ef7-8b4b-9c21a7e7d3b0":{"columns":{"42783ad7-dbcf-4310-bc06-f21f4eaaac96":{"label":"URL","dataType":"string","operationType":"terms","scale":"ordinal","sourceField":"url.keyword","isBucketed":true,"params":{"size":1000,"orderBy":{"type":"column","columnId":"f7835375-4d5b-4839-95ea-41928192a319"},"orderDirection":"desc","otherBucket":true,"missingBucket":false},"customLabel":true},"f7835375-4d5b-4839-95ea-41928192a319":{"label":"Visits","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","customLabel":true},"07fc84ca-4147-4ba9-879e-d1b4e086e1daX0":{"label":"Part of HTTP 4xx","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","filter":{"query":"response.keyword >= 400 and response.keyword < 500","language":"kuery"},"customLabel":true},"07fc84ca-4147-4ba9-879e-d1b4e086e1daX1":{"label":"Part of HTTP 4xx","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","customLabel":true},"07fc84ca-4147-4ba9-879e-d1b4e086e1daX2":{"label":"Part of HTTP 4xx","dataType":"number","operationType":"math","isBucketed":false,"scale":"ratio","params":{"tinymathAst":{"type":"function","name":"divide","args":["07fc84ca-4147-4ba9-879e-d1b4e086e1daX0","07fc84ca-4147-4ba9-879e-d1b4e086e1daX1"],"location":{"min":0,"max":73},"text":"count(kql='response.keyword >= 400 and response.keyword < 500') / count()"}},"references":["07fc84ca-4147-4ba9-879e-d1b4e086e1daX0","07fc84ca-4147-4ba9-879e-d1b4e086e1daX1"],"customLabel":true},"07fc84ca-4147-4ba9-879e-d1b4e086e1da":{"label":"HTTP 4xx","dataType":"number","operationType":"formula","isBucketed":false,"scale":"ratio","params":{"formula":"count(kql='response.keyword >= 400 and response.keyword < 500') / count()","isFormulaBroken":false,"format":{"id":"percent","params":{"decimals":1}}},"references":["07fc84ca-4147-4ba9-879e-d1b4e086e1daX2"],"customLabel":true},"791d5a5b-a7ba-4e9e-b533-51b33c7d7747":{"label":"Unique","dataType":"number","operationType":"unique_count","scale":"ratio","sourceField":"clientip","isBucketed":false,"customLabel":true},"611e3509-e834-4fdd-b573-44e959e95d27":{"label":"95th percentile of bytes","dataType":"number","operationType":"percentile","sourceField":"bytes","isBucketed":false,"scale":"ratio","params":{"percentile":95,"format":{"id":"bytes","params":{"decimals":0}}}},"9f79ecca-123f-4098-a658-6b0e998da003":{"label":"Median of bytes","dataType":"number","operationType":"median","sourceField":"bytes","isBucketed":false,"scale":"ratio","params":{"format":{"id":"bytes","params":{"decimals":0}}}},"491285fd-0196-402c-9b7f-4660fdc1c22aX0":{"label":"Part of HTTP 5xx","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","filter":{"query":"response.keyword >= 500","language":"kuery"},"customLabel":true},"491285fd-0196-402c-9b7f-4660fdc1c22aX1":{"label":"Part of HTTP 5xx","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","customLabel":true},"491285fd-0196-402c-9b7f-4660fdc1c22aX2":{"label":"Part of HTTP 5xx","dataType":"number","operationType":"math","isBucketed":false,"scale":"ratio","params":{"tinymathAst":{"type":"function","name":"divide","args":["491285fd-0196-402c-9b7f-4660fdc1c22aX0","491285fd-0196-402c-9b7f-4660fdc1c22aX1"],"location":{"min":0,"max":46},"text":"count(kql='response.keyword >= 500') / count()"}},"references":["491285fd-0196-402c-9b7f-4660fdc1c22aX0","491285fd-0196-402c-9b7f-4660fdc1c22aX1"],"customLabel":true},"491285fd-0196-402c-9b7f-4660fdc1c22a":{"label":"HTTP 5xx","dataType":"number","operationType":"formula","isBucketed":false,"scale":"ratio","params":{"formula":"count(kql='response.keyword >= 500') / count()","isFormulaBroken":false,"format":{"id":"percent","params":{"decimals":1}}},"references":["491285fd-0196-402c-9b7f-4660fdc1c22aX2"],"customLabel":true}},"columnOrder":["42783ad7-dbcf-4310-bc06-f21f4eaaac96","f7835375-4d5b-4839-95ea-41928192a319","791d5a5b-a7ba-4e9e-b533-51b33c7d7747","07fc84ca-4147-4ba9-879e-d1b4e086e1da","491285fd-0196-402c-9b7f-4660fdc1c22a","491285fd-0196-402c-9b7f-4660fdc1c22aX0","491285fd-0196-402c-9b7f-4660fdc1c22aX1","491285fd-0196-402c-9b7f-4660fdc1c22aX2","07fc84ca-4147-4ba9-879e-d1b4e086e1daX0","07fc84ca-4147-4ba9-879e-d1b4e086e1daX1","07fc84ca-4147-4ba9-879e-d1b4e086e1daX2","611e3509-e834-4fdd-b573-44e959e95d27","9f79ecca-123f-4098-a658-6b0e998da003"],"incompleteColumns":{}}}}},"visualization":{"layerId":"c35dc8ee-50d1-4ef7-8b4b-9c21a7e7d3b0","columns":[{"columnId":"42783ad7-dbcf-4310-bc06-f21f4eaaac96","width":650.6666666666666},{"columnId":"f7835375-4d5b-4839-95ea-41928192a319"},{"columnId":"491285fd-0196-402c-9b7f-4660fdc1c22a","isTransposed":false,"width":81.66666666666669,"colorMode":"cell","palette":{"name":"custom","type":"palette","params":{"steps":5,"stops":[{"color":"#fbddd6","stop":0.1},{"color":"#CC5642","stop":1}],"rangeType":"number","name":"custom","colorStops":[{"color":"#fbddd6","stop":0.05},{"color":"#CC5642","stop":0.1}],"rangeMin":0.05,"rangeMax":0.1}}},{"columnId":"07fc84ca-4147-4ba9-879e-d1b4e086e1da","isTransposed":false,"colorMode":"cell","palette":{"name":"custom","type":"palette","params":{"steps":5,"stops":[{"color":"#fbddd6","stop":0.1},{"color":"#cc5642","stop":1.1}],"name":"custom","colorStops":[{"color":"#fbddd6","stop":0.05},{"color":"#cc5642","stop":0.1}],"rangeType":"number","rangeMin":0.05,"rangeMax":0.1}}},{"columnId":"791d5a5b-a7ba-4e9e-b533-51b33c7d7747","isTransposed":false},{"columnId":"611e3509-e834-4fdd-b573-44e959e95d27","isTransposed":false},{"columnId":"9f79ecca-123f-4098-a658-6b0e998da003","isTransposed":false}],"sorting":{"columnId":"491285fd-0196-402c-9b7f-4660fdc1c22a","direction":"desc"},"layerType":"data","rowHeight":"single","rowHeightLines":1},"query":{"query":"","language":"kuery"},"filters":[]},"references":[{"type":"index-pattern","id":"90943e30-9a47-11e8-b64d-95841ca0b247","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"90943e30-9a47-11e8-b64d-95841ca0b247","name":"indexpattern-datasource-layer-c35dc8ee-50d1-4ef7-8b4b-9c21a7e7d3b0"}]},"enhancements":{"dynamicActions":{"events":[]}},"hidePanelTitles":false,"type":"lens"},"title":"[Logs] Errors by host"},{"version":"8.0.0","type":"lens","gridData":{"x":24,"y":52,"w":24,"h":13,"i":"cbca842c-b9fa-4523-9ce0-14e350866e33"},"panelIndex":"cbca842c-b9fa-4523-9ce0-14e350866e33","embeddableConfig":{"hidePanelTitles":false,"enhancements":{}},"title":"[Logs] Bytes distribution","panelRefName":"panel_cbca842c-b9fa-4523-9ce0-14e350866e33"}]""",
+            "optionsJSON" : """{"hidePanelTitles":false,"useMargins":true}""",
+            "version" : 2,
+            "timeRestore" : true,
+            "timeTo" : "now",
+            "timeFrom" : "now-7d",
+            "refreshInterval" : {
+              "pause" : false,
+              "value" : 900000
+            },
+            "kibanaSavedObjectMeta" : {
+              "searchSourceJSON" : """{"query":{"language":"kuery","query":""},"filter":[],"highlightAll":true,"version":true}"""
+            }
+          },
+          "type" : "dashboard",
+          "references" : [
+            {
+              "id" : "de71f4f0-1902-11e9-919b-ffe5949a18d2",
+              "name" : "4:panel_4",
+              "type" : "map"
+            },
+            {
+              "id" : "4eb6e500-e1c7-11e7-b6d5-4dc382ef7f5b",
+              "name" : "9:panel_9",
+              "type" : "visualization"
+            },
+            {
+              "id" : "69a34b00-9ee8-11e7-8711-e7a007dcef99",
+              "name" : "11:panel_11",
+              "type" : "visualization"
+            },
+            {
+              "id" : "7cbd2350-2223-11e8-b802-5bcf64c2cfb4",
+              "name" : "14:panel_14",
+              "type" : "visualization"
+            },
+            {
+              "id" : "314c6f60-2224-11e8-b802-5bcf64c2cfb4",
+              "name" : "15:panel_15",
+              "type" : "visualization"
+            },
+            {
+              "id" : "90943e30-9a47-11e8-b64d-95841ca0b247",
+              "name" : "30326cdb-4ddd-49eb-a4f1-b555caa21d7c:control_30326cdb-4ddd-49eb-a4f1-b555caa21d7c_0_index_pattern",
+              "type" : "index-pattern"
+            },
+            {
+              "id" : "90943e30-9a47-11e8-b64d-95841ca0b247",
+              "name" : "30326cdb-4ddd-49eb-a4f1-b555caa21d7c:control_30326cdb-4ddd-49eb-a4f1-b555caa21d7c_1_index_pattern",
+              "type" : "index-pattern"
+            },
+            {
+              "id" : "90943e30-9a47-11e8-b64d-95841ca0b247",
+              "name" : "30326cdb-4ddd-49eb-a4f1-b555caa21d7c:control_30326cdb-4ddd-49eb-a4f1-b555caa21d7c_2_index_pattern",
+              "type" : "index-pattern"
+            },
+            {
+              "id" : "90943e30-9a47-11e8-b64d-95841ca0b247",
+              "name" : "bb94016e-f4a6-49ca-87a9-296a2869d570:indexpattern-datasource-current-indexpattern",
+              "type" : "index-pattern"
+            },
+            {
+              "id" : "90943e30-9a47-11e8-b64d-95841ca0b247",
+              "name" : "bb94016e-f4a6-49ca-87a9-296a2869d570:indexpattern-datasource-layer-483defd2-775b-4a62-bdef-496c819bb8ed",
+              "type" : "index-pattern"
+            },
+            {
+              "id" : "90943e30-9a47-11e8-b64d-95841ca0b247",
+              "name" : "01d8e435-91c0-484f-a11e-856747050b0a:indexpattern-datasource-current-indexpattern",
+              "type" : "index-pattern"
+            },
+            {
+              "id" : "90943e30-9a47-11e8-b64d-95841ca0b247",
+              "name" : "01d8e435-91c0-484f-a11e-856747050b0a:indexpattern-datasource-layer-f3793bb7-3971-4753-866d-4008e77a9f9a",
+              "type" : "index-pattern"
+            },
+            {
+              "id" : "90943e30-9a47-11e8-b64d-95841ca0b247",
+              "name" : "8c1456d4-1993-4ba2-b701-04aca02c9fef:indexpattern-datasource-current-indexpattern",
+              "type" : "index-pattern"
+            },
+            {
+              "id" : "90943e30-9a47-11e8-b64d-95841ca0b247",
+              "name" : "8c1456d4-1993-4ba2-b701-04aca02c9fef:indexpattern-datasource-layer-f3793bb7-3971-4753-866d-4008e77a9f9a",
+              "type" : "index-pattern"
+            },
+            {
+              "id" : "cb099a20-ea66-11eb-9425-113343a037e3",
+              "name" : "8e59c7cf-6e42-4343-a113-c4a255fcf2ce:panel_8e59c7cf-6e42-4343-a113-c4a255fcf2ce",
+              "type" : "visualization"
+            },
+            {
+              "id" : "90943e30-9a47-11e8-b64d-95841ca0b247",
+              "name" : "1d5f0b3f-d9d2-4b26-997b-83bc5ca3090b:indexpattern-datasource-current-indexpattern",
+              "type" : "index-pattern"
+            },
+            {
+              "id" : "90943e30-9a47-11e8-b64d-95841ca0b247",
+              "name" : "1d5f0b3f-d9d2-4b26-997b-83bc5ca3090b:indexpattern-datasource-layer-c35dc8ee-50d1-4ef7-8b4b-9c21a7e7d3b0",
+              "type" : "index-pattern"
+            },
+            {
+              "id" : "16b1d7d0-ea71-11eb-8b4b-f7b600de0f7d",
+              "name" : "cbca842c-b9fa-4523-9ce0-14e350866e33:panel_cbca842c-b9fa-4523-9ce0-14e350866e33",
+              "type" : "lens"
+            }
+          ],
+          "namespaces" : [
+            "default"
+          ],
+          "migrationVersion" : {
+            "dashboard" : "8.2.0"
+          },
+          "coreMigrationVersion" : "8.2.3",
+          "updated_at" : "2022-06-20T15:53:09.263Z"
+        }
+      },
+      {
+        "_index" : ".kibana_8.2.3_001",
+        "_id" : "dashboard:082f58f0-3024-11ed-9119-6ba9cd163d2b",
+        "_score" : 5.9049726,
+        "_source" : {
+          "dashboard" : {
+            "title" : "12_09_dashboard",
+            "hits" : 0,
+            "description" : "esports data",
+            "panelsJSON" : """[{"version":"8.2.3","type":"visualization","gridData":{"x":0,"y":0,"w":24,"h":13,"i":"67add966-753a-40fe-b280-41bbdc60b210"},"panelIndex":"67add966-753a-40fe-b280-41bbdc60b210","embeddableConfig":{"savedVis":{"id":"","title":"","description":"","type":"input_control_vis","params":{"controls":[{"id":"1662716718916","fieldName":"teamname","parent":"","label":"","type":"list","options":{"type":"terms","multiselect":true,"dynamicOptions":true,"size":5,"order":"desc"},"indexPatternRefName":"control_67add966-753a-40fe-b280-41bbdc60b210_0_index_pattern"},{"id":"1662716748473","fieldName":"playername","parent":"","label":"","type":"list","options":{"type":"terms","multiselect":true,"dynamicOptions":true,"size":5,"order":"desc"},"indexPatternRefName":"control_67add966-753a-40fe-b280-41bbdc60b210_1_index_pattern"},{"id":"1662716845602","fieldName":"total cs","parent":"","label":"","type":"range","options":{"decimalPlaces":0,"step":1},"indexPatternRefName":"control_67add966-753a-40fe-b280-41bbdc60b210_2_index_pattern"},{"id":"1662716862188","fieldName":"kills","parent":"","label":"kill","type":"range","options":{"decimalPlaces":0,"step":1},"indexPatternRefName":"control_67add966-753a-40fe-b280-41bbdc60b210_3_index_pattern"}],"updateFiltersOnChange":false,"useTimeFilter":false,"pinFilters":false},"uiState":{},"data":{"aggs":[],"searchSource":{"query":{"query":"","language":"kuery"},"filter":[{"$state":{"store":"appState"},"meta":{"alias":null,"controlledBy":"1662716718916","disabled":false,"key":"teamname","negate":false,"params":{"query":"G2 Esports"},"type":"phrase","indexRefName":"kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index"},"query":{"match_phrase":{"teamname":"G2 Esports"}}},{"$state":{"store":"appState"},"meta":{"alias":null,"controlledBy":"1662716748473","disabled":false,"key":"playername","negate":false,"params":{"query":"Jankos"},"type":"phrase","indexRefName":"kibanaSavedObjectMeta.searchSourceJSON.filter[1].meta.index"},"query":{"match_phrase":{"playername":"Jankos"}}},{"$state":{"store":"appState"},"meta":{"alias":null,"controlledBy":"1662716845602","disabled":false,"field":"total cs","key":"total cs","negate":false,"params":{"gte":0,"lte":631},"type":"range","indexRefName":"kibanaSavedObjectMeta.searchSourceJSON.filter[2].meta.index"},"query":{"range":{"total cs":{"gte":0,"lte":631}}}}]}}},"enhancements":{}}}]""",
+            "optionsJSON" : """{"useMargins":true,"syncColors":false,"hidePanelTitles":false}""",
+            "version" : 1,
+            "timeRestore" : false,
+            "kibanaSavedObjectMeta" : {
+              "searchSourceJSON" : """{"query":{"query":"","language":"kuery"},"filter":[]}"""
+            }
+          },
+          "type" : "dashboard",
+          "references" : [
+            {
+              "name" : "67add966-753a-40fe-b280-41bbdc60b210:kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "name" : "67add966-753a-40fe-b280-41bbdc60b210:kibanaSavedObjectMeta.searchSourceJSON.filter[1].meta.index",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "name" : "67add966-753a-40fe-b280-41bbdc60b210:kibanaSavedObjectMeta.searchSourceJSON.filter[2].meta.index",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "name" : "67add966-753a-40fe-b280-41bbdc60b210:control_67add966-753a-40fe-b280-41bbdc60b210_0_index_pattern",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "name" : "67add966-753a-40fe-b280-41bbdc60b210:control_67add966-753a-40fe-b280-41bbdc60b210_1_index_pattern",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "name" : "67add966-753a-40fe-b280-41bbdc60b210:control_67add966-753a-40fe-b280-41bbdc60b210_2_index_pattern",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "name" : "67add966-753a-40fe-b280-41bbdc60b210:control_67add966-753a-40fe-b280-41bbdc60b210_3_index_pattern",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            }
+          ],
+          "namespaces" : [
+            "default"
+          ],
+          "migrationVersion" : {
+            "dashboard" : "8.2.0"
+          },
+          "coreMigrationVersion" : "8.2.3",
+          "updated_at" : "2022-09-09T09:49:04.561Z"
+        }
+      },
+      {
+        "_index" : ".kibana_8.2.3_001",
+        "_id" : "dashboard:11a60b30-2dd2-11ed-8ef3-63a747542379",
+        "_score" : 5.9049726,
+        "_source" : {
+          "dashboard" : {
+            "title" : "team_odds_stats",
+            "hits" : 0,
+            "description" : "",
+            "panelsJSON" : """[{"version":"8.2.3","type":"visualization","gridData":{"x":13,"y":0,"w":23,"h":7,"i":"16cbff27-ddf4-4ed9-93d4-3d64c5c8912a"},"panelIndex":"16cbff27-ddf4-4ed9-93d4-3d64c5c8912a","embeddableConfig":{"savedVis":{"id":"","title":"","description":"","type":"metric","params":{"addTooltip":true,"addLegend":false,"type":"metric","metric":{"percentageMode":false,"useRanges":false,"colorSchema":"Green to Red","metricColorMode":"None","colorsRange":[{"from":0,"to":10000}],"labels":{"show":true},"invertColors":false,"style":{"bgFill":"#000","bgColor":false,"labelColor":false,"subText":"","fontSize":49}}},"uiState":{},"data":{"aggs":[{"id":"2","enabled":true,"type":"count","params":{"customLabel":"Number of games","emptyAsNull":false},"schema":"metric"},{"id":"3","enabled":true,"type":"terms","params":{"field":"teamname","orderBy":"2","order":"desc","size":5,"otherBucket":false,"otherBucketLabel":"Other","missingBucket":false,"missingBucketLabel":"Missing"},"schema":"group"}],"searchSource":{"query":{"query":"","language":"kuery"},"filter":[{"$state":{"store":"appState"},"meta":{"alias":null,"disabled":false,"key":"position","negate":false,"params":{"query":"team"},"type":"phrase","indexRefName":"kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index"},"query":{"match_phrase":{"position":"team"}}},{"$state":{"store":"appState"},"meta":{"alias":"Head-to-head G2 vs Fnatic ","disabled":false,"key":"teamname","negate":false,"params":["Fnatic","G2 Esports"],"type":"phrases","indexRefName":"kibanaSavedObjectMeta.searchSourceJSON.filter[1].meta.index"},"query":{"bool":{"minimum_should_match":1,"should":[{"match_phrase":{"teamname":"Fnatic"}},{"match_phrase":{"teamname":"G2 Esports"}}]}}}],"indexRefName":"kibanaSavedObjectMeta.searchSourceJSON.index"}}},"enhancements":{}}},{"version":"8.2.3","type":"lens","gridData":{"x":10,"y":7,"w":7,"h":6,"i":"b6d6c0e9-1885-4e7b-ab75-eafdefa7d71f"},"panelIndex":"b6d6c0e9-1885-4e7b-ab75-eafdefa7d71f","embeddableConfig":{"enhancements":{},"attributes":{"title":"g2 WR% (copy)","visualizationType":"lnsMetric","type":"lens","references":[{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-layer-a74beb3b-0dc8-4408-8727-1db00a438018"},{"type":"index-pattern","name":"18838fd7-532f-4987-9fcf-58ec2a549b79","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"},{"type":"index-pattern","name":"9431f846-4ebc-48ac-a4b6-7c03f9b4798b","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"}],"state":{"visualization":{"layerId":"a74beb3b-0dc8-4408-8727-1db00a438018","accessor":"55a4e003-70a8-4d85-97e9-2acbb3994c43","layerType":"data"},"query":{"query":"","language":"kuery"},"filters":[{"meta":{"index":"18838fd7-532f-4987-9fcf-58ec2a549b79","alias":null,"negate":false,"disabled":false,"type":"phrase","key":"teamname","params":{"query":"G2 Esports"}},"query":{"match_phrase":{"teamname":"G2 Esports"}},"$state":{"store":"appState"}},{"meta":{"index":"9431f846-4ebc-48ac-a4b6-7c03f9b4798b","alias":null,"negate":false,"disabled":false,"type":"phrase","key":"position","params":{"query":"team"}},"query":{"match_phrase":{"position":"team"}},"$state":{"store":"appState"}}],"datasourceStates":{"indexpattern":{"layers":{"a74beb3b-0dc8-4408-8727-1db00a438018":{"columns":{"55a4e003-70a8-4d85-97e9-2acbb3994c43X0":{"label":"Part of G2 Win Ratio","dataType":"number","operationType":"sum","sourceField":"firstblood","isBucketed":false,"scale":"ratio","params":{"emptyAsNull":false},"customLabel":true},"55a4e003-70a8-4d85-97e9-2acbb3994c43X1":{"label":"Part of G2 Win Ratio","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","params":{"emptyAsNull":false},"customLabel":true},"55a4e003-70a8-4d85-97e9-2acbb3994c43X2":{"label":"Part of G2 Win Ratio","dataType":"number","operationType":"math","isBucketed":false,"scale":"ratio","params":{"tinymathAst":{"type":"function","name":"divide","args":["55a4e003-70a8-4d85-97e9-2acbb3994c43X0","55a4e003-70a8-4d85-97e9-2acbb3994c43X1"],"location":{"min":0,"max":25},"text":"sum(firstblood) / count()"}},"references":["55a4e003-70a8-4d85-97e9-2acbb3994c43X0","55a4e003-70a8-4d85-97e9-2acbb3994c43X1"],"customLabel":true},"55a4e003-70a8-4d85-97e9-2acbb3994c43":{"label":"G2 - First blood ratio","dataType":"number","operationType":"formula","isBucketed":false,"scale":"ratio","params":{"formula":"sum(firstblood) / count()","isFormulaBroken":false,"format":{"id":"percent","params":{"decimals":1}}},"references":["55a4e003-70a8-4d85-97e9-2acbb3994c43X2"],"customLabel":true}},"columnOrder":["55a4e003-70a8-4d85-97e9-2acbb3994c43","55a4e003-70a8-4d85-97e9-2acbb3994c43X0","55a4e003-70a8-4d85-97e9-2acbb3994c43X1","55a4e003-70a8-4d85-97e9-2acbb3994c43X2"],"incompleteColumns":{}}}}}}},"hidePanelTitles":false},"title":"G2 FB% "},{"version":"8.2.3","type":"lens","gridData":{"x":17,"y":7,"w":7,"h":6,"i":"4ba0d09b-af85-4eaa-af72-3df2fb63fc53"},"panelIndex":"4ba0d09b-af85-4eaa-af72-3df2fb63fc53","embeddableConfig":{"enhancements":{},"hidePanelTitles":false},"title":"G2 WR%","panelRefName":"panel_4ba0d09b-af85-4eaa-af72-3df2fb63fc53"},{"version":"8.2.3","type":"lens","gridData":{"x":24,"y":7,"w":7,"h":6,"i":"a3f5af4a-f9a0-4084-89bf-49af7116a269"},"panelIndex":"a3f5af4a-f9a0-4084-89bf-49af7116a269","embeddableConfig":{"attributes":{"title":"fnatic WR% (copy)","visualizationType":"lnsMetric","type":"lens","references":[{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-layer-a74beb3b-0dc8-4408-8727-1db00a438018"},{"type":"index-pattern","name":"b009bb32-2c27-471e-9f4e-74c13ee3785d","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"},{"type":"index-pattern","name":"cba2659e-30a0-48da-b25e-10fed7793080","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"}],"state":{"visualization":{"layerId":"a74beb3b-0dc8-4408-8727-1db00a438018","accessor":"55a4e003-70a8-4d85-97e9-2acbb3994c43","layerType":"data","textAlign":"center","titlePosition":"bottom"},"query":{"language":"kuery","query":""},"filters":[{"meta":{"index":"b009bb32-2c27-471e-9f4e-74c13ee3785d","alias":null,"negate":false,"disabled":false,"type":"phrase","key":"position","params":{"query":"team"}},"query":{"match_phrase":{"position":"team"}},"$state":{"store":"appState"}},{"meta":{"index":"cba2659e-30a0-48da-b25e-10fed7793080","type":"phrases","key":"teamname","params":["Fnatic"],"alias":null,"negate":false,"disabled":false},"query":{"bool":{"should":[{"match_phrase":{"teamname":"Fnatic"}}],"minimum_should_match":1}},"$state":{"store":"appState"}}],"datasourceStates":{"indexpattern":{"layers":{"a74beb3b-0dc8-4408-8727-1db00a438018":{"columns":{"55a4e003-70a8-4d85-97e9-2acbb3994c43X0":{"label":"Part of Win Ratio","dataType":"number","operationType":"sum","sourceField":"result","isBucketed":false,"scale":"ratio","filter":{"query":"","language":"kuery"},"params":{"emptyAsNull":false},"customLabel":true},"55a4e003-70a8-4d85-97e9-2acbb3994c43X1":{"label":"Part of Win Ratio","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","params":{"emptyAsNull":false},"customLabel":true},"55a4e003-70a8-4d85-97e9-2acbb3994c43X2":{"label":"Part of Win Ratio","dataType":"number","operationType":"math","isBucketed":false,"scale":"ratio","params":{"tinymathAst":{"type":"function","name":"divide","args":["55a4e003-70a8-4d85-97e9-2acbb3994c43X0","55a4e003-70a8-4d85-97e9-2acbb3994c43X1"],"location":{"min":0,"max":29},"text":"sum(result, kql='') / count()"}},"references":["55a4e003-70a8-4d85-97e9-2acbb3994c43X0","55a4e003-70a8-4d85-97e9-2acbb3994c43X1"],"customLabel":true},"55a4e003-70a8-4d85-97e9-2acbb3994c43":{"label":"Win Ratio","dataType":"number","operationType":"formula","isBucketed":false,"scale":"ratio","params":{"formula":"sum(result, kql='') / count()","isFormulaBroken":false,"format":{"id":"percent","params":{"decimals":2}}},"references":["55a4e003-70a8-4d85-97e9-2acbb3994c43X2"],"customLabel":true}},"columnOrder":["55a4e003-70a8-4d85-97e9-2acbb3994c43","55a4e003-70a8-4d85-97e9-2acbb3994c43X0","55a4e003-70a8-4d85-97e9-2acbb3994c43X1","55a4e003-70a8-4d85-97e9-2acbb3994c43X2"],"incompleteColumns":{}}}}}}},"enhancements":{},"hidePanelTitles":false},"title":"FNC WR%"},{"version":"8.2.3","type":"lens","gridData":{"x":31,"y":7,"w":7,"h":6,"i":"f6fe893d-9605-4e0a-bcfb-ef7c1cab5605"},"panelIndex":"f6fe893d-9605-4e0a-bcfb-ef7c1cab5605","embeddableConfig":{"enhancements":{},"attributes":{"title":"g2 WR% (copy)","visualizationType":"lnsMetric","type":"lens","references":[{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-layer-a74beb3b-0dc8-4408-8727-1db00a438018"},{"type":"index-pattern","name":"39cf8f47-87ce-40cf-95ba-e61493c9fc24","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"},{"type":"index-pattern","name":"26fd5cf7-db9c-48dd-8f2e-d19ded88a83e","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"}],"state":{"visualization":{"layerId":"a74beb3b-0dc8-4408-8727-1db00a438018","accessor":"55a4e003-70a8-4d85-97e9-2acbb3994c43","layerType":"data"},"query":{"query":"","language":"kuery"},"filters":[{"meta":{"index":"39cf8f47-87ce-40cf-95ba-e61493c9fc24","alias":null,"negate":false,"disabled":false,"type":"phrase","key":"teamname","params":{"query":"Fnatic"}},"query":{"match_phrase":{"teamname":"Fnatic"}},"$state":{"store":"appState"}},{"meta":{"index":"26fd5cf7-db9c-48dd-8f2e-d19ded88a83e","alias":null,"negate":false,"disabled":false,"type":"phrase","key":"position","params":{"query":"team"}},"query":{"match_phrase":{"position":"team"}},"$state":{"store":"appState"}}],"datasourceStates":{"indexpattern":{"layers":{"a74beb3b-0dc8-4408-8727-1db00a438018":{"columns":{"55a4e003-70a8-4d85-97e9-2acbb3994c43X0":{"label":"Part of G2 - First blood ratio","dataType":"number","operationType":"sum","sourceField":"firstblood","isBucketed":false,"scale":"ratio","params":{"emptyAsNull":false},"customLabel":true},"55a4e003-70a8-4d85-97e9-2acbb3994c43X1":{"label":"Part of G2 - First blood ratio","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","params":{"emptyAsNull":false},"customLabel":true},"55a4e003-70a8-4d85-97e9-2acbb3994c43X2":{"label":"Part of G2 - First blood ratio","dataType":"number","operationType":"math","isBucketed":false,"scale":"ratio","params":{"tinymathAst":{"type":"function","name":"divide","args":["55a4e003-70a8-4d85-97e9-2acbb3994c43X0","55a4e003-70a8-4d85-97e9-2acbb3994c43X1"],"location":{"min":0,"max":25},"text":"sum(firstblood) / count()"}},"references":["55a4e003-70a8-4d85-97e9-2acbb3994c43X0","55a4e003-70a8-4d85-97e9-2acbb3994c43X1"],"customLabel":true},"55a4e003-70a8-4d85-97e9-2acbb3994c43":{"label":"Fnatic - First blood ratio","dataType":"number","operationType":"formula","isBucketed":false,"scale":"ratio","params":{"formula":"sum(firstblood) / count()","isFormulaBroken":false,"format":{"id":"percent","params":{"decimals":1}}},"references":["55a4e003-70a8-4d85-97e9-2acbb3994c43X2"],"customLabel":true}},"columnOrder":["55a4e003-70a8-4d85-97e9-2acbb3994c43","55a4e003-70a8-4d85-97e9-2acbb3994c43X0","55a4e003-70a8-4d85-97e9-2acbb3994c43X1","55a4e003-70a8-4d85-97e9-2acbb3994c43X2"],"incompleteColumns":{}}}}}}},"hidePanelTitles":false},"title":"FNC FB% "},{"version":"8.2.3","type":"lens","gridData":{"x":17,"y":13,"w":7,"h":6,"i":"5bc35241-0e18-489b-9358-f511fd8abcb7"},"panelIndex":"5bc35241-0e18-489b-9358-f511fd8abcb7","embeddableConfig":{"enhancements":{},"attributes":{"title":"g2 WR% (copy)","visualizationType":"lnsMetric","type":"lens","references":[{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-layer-a74beb3b-0dc8-4408-8727-1db00a438018"},{"type":"index-pattern","name":"e83434b2-6eff-4d9e-88d8-0be160750cd0","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"},{"type":"index-pattern","name":"a1368554-32d0-422e-adf0-f4c7da00b36a","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"}],"state":{"visualization":{"layerId":"a74beb3b-0dc8-4408-8727-1db00a438018","accessor":"41cabe05-8030-4cd9-8f17-5038604336a3","layerType":"data","colorMode":"None"},"query":{"language":"kuery","query":""},"filters":[{"meta":{"index":"e83434b2-6eff-4d9e-88d8-0be160750cd0","alias":null,"negate":false,"disabled":false,"type":"phrase","key":"position","params":{"query":"team"}},"query":{"match_phrase":{"position":"team"}},"$state":{"store":"appState"}},{"meta":{"index":"a1368554-32d0-422e-adf0-f4c7da00b36a","type":"phrases","key":"teamname","params":["G2 Esports"],"alias":"Head-to-head G2 vs Fnatic ","negate":false,"disabled":false},"query":{"bool":{"should":[{"match_phrase":{"teamname":"G2 Esports"}}],"minimum_should_match":1}},"$state":{"store":"appState"}}],"datasourceStates":{"indexpattern":{"layers":{"a74beb3b-0dc8-4408-8727-1db00a438018":{"columns":{"41cabe05-8030-4cd9-8f17-5038604336a3X0":{"label":"Part of Player KDA","dataType":"number","operationType":"sum","sourceField":"kills","isBucketed":false,"scale":"ratio","params":{"emptyAsNull":false},"customLabel":true},"41cabe05-8030-4cd9-8f17-5038604336a3X1":{"label":"Part of Player KDA","dataType":"number","operationType":"sum","sourceField":"assists","isBucketed":false,"scale":"ratio","params":{"emptyAsNull":false},"customLabel":true},"41cabe05-8030-4cd9-8f17-5038604336a3X2":{"label":"Part of Player KDA","dataType":"number","operationType":"sum","sourceField":"deaths","isBucketed":false,"scale":"ratio","params":{"emptyAsNull":false},"customLabel":true},"41cabe05-8030-4cd9-8f17-5038604336a3X3":{"label":"Part of Player KDA","dataType":"number","operationType":"math","isBucketed":false,"scale":"ratio","params":{"tinymathAst":{"type":"function","name":"divide","args":[{"type":"function","name":"add","args":["41cabe05-8030-4cd9-8f17-5038604336a3X0","41cabe05-8030-4cd9-8f17-5038604336a3X1"],"location":{"min":1,"max":26},"text":"sum(kills) + sum(assists)"},"41cabe05-8030-4cd9-8f17-5038604336a3X2"],"location":{"min":0,"max":39},"text":"(sum(kills) + sum(assists))/sum(deaths)"}},"references":["41cabe05-8030-4cd9-8f17-5038604336a3X0","41cabe05-8030-4cd9-8f17-5038604336a3X1","41cabe05-8030-4cd9-8f17-5038604336a3X2"],"customLabel":true},"41cabe05-8030-4cd9-8f17-5038604336a3":{"label":"KDA","dataType":"number","operationType":"formula","isBucketed":false,"scale":"ratio","params":{"formula":"(sum(kills) + sum(assists))/sum(deaths)","isFormulaBroken":false},"references":["41cabe05-8030-4cd9-8f17-5038604336a3X3"],"customLabel":true}},"columnOrder":["41cabe05-8030-4cd9-8f17-5038604336a3","41cabe05-8030-4cd9-8f17-5038604336a3X0","41cabe05-8030-4cd9-8f17-5038604336a3X1","41cabe05-8030-4cd9-8f17-5038604336a3X2","41cabe05-8030-4cd9-8f17-5038604336a3X3"],"incompleteColumns":{}}}}}}},"hidePanelTitles":false},"title":"G2 KDA"},{"version":"8.2.3","type":"lens","gridData":{"x":24,"y":13,"w":7,"h":6,"i":"711d221b-418b-46f3-a3af-2b45207618cb"},"panelIndex":"711d221b-418b-46f3-a3af-2b45207618cb","embeddableConfig":{"enhancements":{},"attributes":{"title":"g2 WR% (copy)","visualizationType":"lnsMetric","type":"lens","references":[{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-layer-a74beb3b-0dc8-4408-8727-1db00a438018"},{"type":"index-pattern","name":"16a9d3f8-d4d5-4c2a-98af-1541399fee51","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"},{"type":"index-pattern","name":"74222afa-e1c9-427f-aad4-22fd5d7a08f7","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"}],"state":{"visualization":{"layerId":"a74beb3b-0dc8-4408-8727-1db00a438018","accessor":"41cabe05-8030-4cd9-8f17-5038604336a3","layerType":"data","colorMode":"None"},"query":{"language":"kuery","query":""},"filters":[{"meta":{"index":"16a9d3f8-d4d5-4c2a-98af-1541399fee51","alias":null,"negate":false,"disabled":false,"type":"phrase","key":"position","params":{"query":"team"}},"query":{"match_phrase":{"position":"team"}},"$state":{"store":"appState"}},{"meta":{"index":"74222afa-e1c9-427f-aad4-22fd5d7a08f7","type":"phrases","key":"teamname","params":["Fnatic"],"alias":"Head-to-head G2 vs Fnatic ","negate":false,"disabled":false},"query":{"bool":{"should":[{"match_phrase":{"teamname":"Fnatic"}}],"minimum_should_match":1}},"$state":{"store":"appState"}}],"datasourceStates":{"indexpattern":{"layers":{"a74beb3b-0dc8-4408-8727-1db00a438018":{"columns":{"41cabe05-8030-4cd9-8f17-5038604336a3X0":{"label":"Part of Player KDA","dataType":"number","operationType":"sum","sourceField":"kills","isBucketed":false,"scale":"ratio","params":{"emptyAsNull":false},"customLabel":true},"41cabe05-8030-4cd9-8f17-5038604336a3X1":{"label":"Part of Player KDA","dataType":"number","operationType":"sum","sourceField":"assists","isBucketed":false,"scale":"ratio","params":{"emptyAsNull":false},"customLabel":true},"41cabe05-8030-4cd9-8f17-5038604336a3X2":{"label":"Part of Player KDA","dataType":"number","operationType":"sum","sourceField":"deaths","isBucketed":false,"scale":"ratio","params":{"emptyAsNull":false},"customLabel":true},"41cabe05-8030-4cd9-8f17-5038604336a3X3":{"label":"Part of Player KDA","dataType":"number","operationType":"math","isBucketed":false,"scale":"ratio","params":{"tinymathAst":{"type":"function","name":"divide","args":[{"type":"function","name":"add","args":["41cabe05-8030-4cd9-8f17-5038604336a3X0","41cabe05-8030-4cd9-8f17-5038604336a3X1"],"location":{"min":1,"max":26},"text":"sum(kills) + sum(assists)"},"41cabe05-8030-4cd9-8f17-5038604336a3X2"],"location":{"min":0,"max":39},"text":"(sum(kills) + sum(assists))/sum(deaths)"}},"references":["41cabe05-8030-4cd9-8f17-5038604336a3X0","41cabe05-8030-4cd9-8f17-5038604336a3X1","41cabe05-8030-4cd9-8f17-5038604336a3X2"],"customLabel":true},"41cabe05-8030-4cd9-8f17-5038604336a3":{"label":"KDA","dataType":"number","operationType":"formula","isBucketed":false,"scale":"ratio","params":{"formula":"(sum(kills) + sum(assists))/sum(deaths)","isFormulaBroken":false},"references":["41cabe05-8030-4cd9-8f17-5038604336a3X3"],"customLabel":true}},"columnOrder":["41cabe05-8030-4cd9-8f17-5038604336a3","41cabe05-8030-4cd9-8f17-5038604336a3X0","41cabe05-8030-4cd9-8f17-5038604336a3X1","41cabe05-8030-4cd9-8f17-5038604336a3X2","41cabe05-8030-4cd9-8f17-5038604336a3X3"],"incompleteColumns":{}}}}}}},"hidePanelTitles":false},"title":"FNC KDA"},{"version":"8.2.3","type":"visualization","gridData":{"x":1,"y":19,"w":47,"h":22,"i":"37c56853-4f13-426a-941f-9079acccecf0"},"panelIndex":"37c56853-4f13-426a-941f-9079acccecf0","embeddableConfig":{"savedVis":{"title":"","description":"","type":"metric","params":{"addTooltip":true,"addLegend":false,"type":"metric","metric":{"percentageMode":false,"useRanges":false,"colorSchema":"Green to Red","metricColorMode":"None","colorsRange":[{"from":0,"to":10000}],"labels":{"show":true},"invertColors":false,"style":{"bgFill":"#000","bgColor":false,"labelColor":false,"subText":"","fontSize":60}}},"uiState":{},"data":{"aggs":[{"id":"2","enabled":true,"type":"avg","params":{"field":"towers"},"schema":"metric"},{"id":"3","enabled":true,"type":"terms","params":{"field":"teamname","orderBy":"2","order":"desc","size":5,"otherBucket":true,"otherBucketLabel":"Test","missingBucket":false,"missingBucketLabel":"Missing"},"schema":"group"},{"id":"6","enabled":true,"type":"avg","params":{"field":"inhibitors"},"schema":"metric"},{"id":"4","enabled":true,"type":"avg","params":{"field":"barons"},"schema":"metric"},{"id":"5","enabled":true,"type":"avg","params":{"field":"dragons"},"schema":"metric"},{"id":"7","enabled":true,"type":"avg","params":{"field":"heralds"},"schema":"metric"},{"id":"8","enabled":false,"type":"avg","params":{"field":"gamelength","json":"","customLabel":"Average game length"},"schema":"metric"}],"searchSource":{"query":{"query":"","language":"kuery"},"filter":[{"$state":{"store":"appState"},"meta":{"alias":null,"disabled":false,"key":"position","negate":false,"params":{"query":"team"},"type":"phrase","indexRefName":"kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index"},"query":{"match_phrase":{"position":"team"}}},{"$state":{"store":"appState"},"meta":{"alias":"Head-to-head G2 vs Fnatic ","disabled":false,"key":"teamname","negate":false,"params":["Fnatic","G2 Esports"],"type":"phrases","indexRefName":"kibanaSavedObjectMeta.searchSourceJSON.filter[1].meta.index"},"query":{"bool":{"minimum_should_match":1,"should":[{"match_phrase":{"teamname":"Fnatic"}},{"match_phrase":{"teamname":"G2 Esports"}}]}}}],"indexRefName":"kibanaSavedObjectMeta.searchSourceJSON.index"}}},"enhancements":{},"hidePanelTitles":false},"title":"Head-to-head"},{"version":"8.2.3","type":"lens","gridData":{"x":0,"y":41,"w":24,"h":15,"i":"5430d465-13bf-45c9-b921-1a7707234568"},"panelIndex":"5430d465-13bf-45c9-b921-1a7707234568","embeddableConfig":{"attributes":{"title":"","visualizationType":"lnsXY","type":"lens","references":[{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-layer-ebfc4422-98bf-42d5-adf2-302c5c8dc858"},{"type":"index-pattern","name":"31c8baa7-57e8-4b56-b82b-4fb4c86b52c7","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"}],"state":{"visualization":{"legend":{"isVisible":true,"position":"right"},"valueLabels":"hide","fittingFunction":"None","axisTitlesVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"tickLabelsVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"labelsOrientation":{"x":0,"yLeft":0,"yRight":0},"gridlinesVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"preferredSeriesType":"bar_stacked","layers":[{"layerId":"ebfc4422-98bf-42d5-adf2-302c5c8dc858","accessors":["90582442-5719-4c66-a4fb-5d591899980c"],"position":"top","seriesType":"bar_stacked","showGridlines":false,"layerType":"data","xAccessor":"d63d2dec-8a59-4e59-914f-245204b240dd","splitAccessor":"6b372a3f-dd3e-4be9-9ca7-dae52e05fa49"}]},"query":{"language":"kuery","query":""},"filters":[{"meta":{"index":"31c8baa7-57e8-4b56-b82b-4fb4c86b52c7","type":"phrases","key":"teamname","params":["Fnatic","G2 Esports"],"alias":"Head-to-head G2 vs Fnatic ","negate":false,"disabled":false},"query":{"bool":{"should":[{"match_phrase":{"teamname":"Fnatic"}},{"match_phrase":{"teamname":"G2 Esports"}}],"minimum_should_match":1}},"$state":{"store":"appState"}}],"datasourceStates":{"indexpattern":{"layers":{"ebfc4422-98bf-42d5-adf2-302c5c8dc858":{"columns":{"d63d2dec-8a59-4e59-914f-245204b240dd":{"label":"Role / Team","dataType":"string","operationType":"terms","scale":"ordinal","sourceField":"playername","isBucketed":true,"params":{"size":10,"orderBy":{"type":"column","columnId":"90582442-5719-4c66-a4fb-5d591899980c"},"orderDirection":"desc","otherBucket":true,"missingBucket":false,"parentFormat":{"id":"terms"}},"customLabel":true},"90582442-5719-4c66-a4fb-5d591899980c":{"label":"Average of earned gpm","dataType":"number","operationType":"average","sourceField":"earned gpm","isBucketed":false,"scale":"ratio","params":{"emptyAsNull":true}},"6b372a3f-dd3e-4be9-9ca7-dae52e05fa49":{"label":"Top 5 values of teamname","dataType":"string","operationType":"terms","scale":"ordinal","sourceField":"teamname","isBucketed":true,"params":{"size":5,"orderBy":{"type":"column","columnId":"90582442-5719-4c66-a4fb-5d591899980c"},"orderDirection":"desc","otherBucket":true,"missingBucket":false,"parentFormat":{"id":"terms"},"secondaryFields":[]}}},"columnOrder":["d63d2dec-8a59-4e59-914f-245204b240dd","6b372a3f-dd3e-4be9-9ca7-dae52e05fa49","90582442-5719-4c66-a4fb-5d591899980c"],"incompleteColumns":{}}}}}}},"enhancements":{}}},{"version":"8.2.3","type":"lens","gridData":{"x":24,"y":41,"w":24,"h":15,"i":"3bea95c1-9092-4520-b838-555ad1b021e8"},"panelIndex":"3bea95c1-9092-4520-b838-555ad1b021e8","embeddableConfig":{"attributes":{"title":"","visualizationType":"lnsXY","type":"lens","references":[{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-layer-16960086-ebcd-4b26-95e5-7cfcc307204e"},{"type":"index-pattern","name":"5cdf2766-4096-420a-8615-5ef9bf3b3fe0","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"}],"state":{"visualization":{"title":"Empty XY chart","legend":{"isVisible":true,"position":"right"},"valueLabels":"hide","preferredSeriesType":"bar_stacked","layers":[{"layerId":"16960086-ebcd-4b26-95e5-7cfcc307204e","accessors":["7d323f30-b968-467d-8943-59509e4d7d23"],"position":"top","seriesType":"bar_stacked","showGridlines":false,"layerType":"data","xAccessor":"9664c5d8-04a9-4007-8364-5b8c1cbcb7ef","yConfig":[{"forAccessor":"7d323f30-b968-467d-8943-59509e4d7d23","axisMode":"left"}]}]},"query":{"query":"","language":"kuery"},"filters":[{"meta":{"index":"5cdf2766-4096-420a-8615-5ef9bf3b3fe0","alias":null,"negate":false,"disabled":false,"type":"phrase","key":"teamname","params":{"query":"G2 Esports"}},"query":{"match_phrase":{"teamname":"G2 Esports"}},"$state":{"store":"appState"}}],"datasourceStates":{"indexpattern":{"layers":{"16960086-ebcd-4b26-95e5-7cfcc307204e":{"columns":{"9664c5d8-04a9-4007-8364-5b8c1cbcb7ef":{"label":"Most played champions by G2","dataType":"string","operationType":"terms","scale":"ordinal","sourceField":"champion","isBucketed":true,"params":{"size":5,"orderBy":{"type":"column","columnId":"7d323f30-b968-467d-8943-59509e4d7d23"},"orderDirection":"desc","otherBucket":false,"missingBucket":false,"parentFormat":{"id":"terms"}},"customLabel":true},"7d323f30-b968-467d-8943-59509e4d7d23":{"label":"Number of picks","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","params":{"emptyAsNull":true},"customLabel":true}},"columnOrder":["9664c5d8-04a9-4007-8364-5b8c1cbcb7ef","7d323f30-b968-467d-8943-59509e4d7d23"],"incompleteColumns":{}}}}}}},"enhancements":{}}},{"version":"8.2.3","type":"lens","gridData":{"x":0,"y":56,"w":24,"h":15,"i":"82aa7bd6-136e-4780-b6f6-f8983c06d75d"},"panelIndex":"82aa7bd6-136e-4780-b6f6-f8983c06d75d","embeddableConfig":{"attributes":{"title":"","visualizationType":"lnsXY","type":"lens","references":[{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-layer-ebfc4422-98bf-42d5-adf2-302c5c8dc858"},{"type":"index-pattern","name":"43dcd5e9-3b2a-41ee-992c-c5d0140c3fd7","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"}],"state":{"visualization":{"legend":{"isVisible":true,"position":"right"},"valueLabels":"hide","fittingFunction":"None","axisTitlesVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"tickLabelsVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"labelsOrientation":{"x":0,"yLeft":0,"yRight":0},"gridlinesVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"preferredSeriesType":"bar_stacked","layers":[{"layerId":"ebfc4422-98bf-42d5-adf2-302c5c8dc858","accessors":["90582442-5719-4c66-a4fb-5d591899980c"],"position":"top","seriesType":"bar_stacked","showGridlines":false,"layerType":"data","xAccessor":"d63d2dec-8a59-4e59-914f-245204b240dd","splitAccessor":"c7fd71e0-033b-450b-ab57-b164230dd33a"}]},"query":{"language":"kuery","query":""},"filters":[{"meta":{"index":"43dcd5e9-3b2a-41ee-992c-c5d0140c3fd7","type":"phrases","key":"teamname","params":["Fnatic","G2 Esports"],"alias":"Head-to-head G2 vs Fnatic ","negate":false,"disabled":false},"query":{"bool":{"should":[{"match_phrase":{"teamname":"Fnatic"}},{"match_phrase":{"teamname":"G2 Esports"}}],"minimum_should_match":1}},"$state":{"store":"appState"}}],"datasourceStates":{"indexpattern":{"layers":{"ebfc4422-98bf-42d5-adf2-302c5c8dc858":{"columns":{"c7fd71e0-033b-450b-ab57-b164230dd33a":{"label":"Top 6 values of position","dataType":"string","operationType":"terms","scale":"ordinal","sourceField":"position","isBucketed":true,"params":{"size":6,"orderBy":{"type":"column","columnId":"90582442-5719-4c66-a4fb-5d591899980c"},"orderDirection":"desc","otherBucket":true,"missingBucket":false,"parentFormat":{"id":"terms"}}},"d63d2dec-8a59-4e59-914f-245204b240dd":{"label":"Player / Role","dataType":"string","operationType":"terms","scale":"ordinal","sourceField":"playername","isBucketed":true,"params":{"size":10,"orderBy":{"type":"column","columnId":"90582442-5719-4c66-a4fb-5d591899980c"},"orderDirection":"desc","otherBucket":true,"missingBucket":false,"parentFormat":{"id":"terms"}},"customLabel":true},"90582442-5719-4c66-a4fb-5d591899980c":{"label":"Average of earned gpm","dataType":"number","operationType":"average","sourceField":"earned gpm","isBucketed":false,"scale":"ratio","params":{"emptyAsNull":true}}},"columnOrder":["c7fd71e0-033b-450b-ab57-b164230dd33a","d63d2dec-8a59-4e59-914f-245204b240dd","90582442-5719-4c66-a4fb-5d591899980c"],"incompleteColumns":{}}}}}}},"enhancements":{}},"title":""},{"version":"8.2.3","type":"lens","gridData":{"x":24,"y":56,"w":24,"h":15,"i":"5d66984b-23fa-4c21-b68a-6a13728f14a8"},"panelIndex":"5d66984b-23fa-4c21-b68a-6a13728f14a8","embeddableConfig":{"attributes":{"title":"","visualizationType":"lnsXY","type":"lens","references":[{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-layer-16960086-ebcd-4b26-95e5-7cfcc307204e"},{"type":"index-pattern","name":"f7172ab6-12b3-4b7e-a4ed-137ac5207464","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"}],"state":{"visualization":{"legend":{"isVisible":true,"position":"right"},"valueLabels":"hide","fittingFunction":"None","axisTitlesVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"tickLabelsVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"labelsOrientation":{"x":0,"yLeft":0,"yRight":0},"gridlinesVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"preferredSeriesType":"bar_horizontal","layers":[{"layerId":"16960086-ebcd-4b26-95e5-7cfcc307204e","accessors":["7d323f30-b968-467d-8943-59509e4d7d23"],"position":"top","seriesType":"bar_horizontal","showGridlines":false,"layerType":"data","xAccessor":"9664c5d8-04a9-4007-8364-5b8c1cbcb7ef","yConfig":[{"forAccessor":"7d323f30-b968-467d-8943-59509e4d7d23","axisMode":"left"}],"splitAccessor":"3ff1c021-fea7-447e-bca9-1fa15760c11f"}]},"query":{"query":"","language":"kuery"},"filters":[{"meta":{"index":"f7172ab6-12b3-4b7e-a4ed-137ac5207464","type":"phrases","key":"teamname","params":["G2 Esports","Fnatic"],"alias":null,"negate":false,"disabled":false},"query":{"bool":{"should":[{"match_phrase":{"teamname":"G2 Esports"}},{"match_phrase":{"teamname":"Fnatic"}}],"minimum_should_match":1}},"$state":{"store":"appState"}}],"datasourceStates":{"indexpattern":{"layers":{"16960086-ebcd-4b26-95e5-7cfcc307204e":{"columns":{"9664c5d8-04a9-4007-8364-5b8c1cbcb7ef":{"label":"Most played champions","dataType":"string","operationType":"terms","scale":"ordinal","sourceField":"teamname","isBucketed":true,"params":{"size":5,"orderBy":{"type":"column","columnId":"7d323f30-b968-467d-8943-59509e4d7d23"},"orderDirection":"desc","otherBucket":false,"missingBucket":false,"parentFormat":{"id":"terms"},"secondaryFields":[]},"customLabel":true},"3ff1c021-fea7-447e-bca9-1fa15760c11f":{"label":"Top 5 values of champion","dataType":"string","operationType":"terms","scale":"ordinal","sourceField":"champion","isBucketed":true,"params":{"size":5,"orderBy":{"type":"column","columnId":"7d323f30-b968-467d-8943-59509e4d7d23"},"orderDirection":"desc","otherBucket":false,"missingBucket":false,"parentFormat":{"id":"terms"},"secondaryFields":[]}},"7d323f30-b968-467d-8943-59509e4d7d23":{"label":"Number of picks","dataType":"number","operationType":"count","isBucketed":false,"scale":"ratio","sourceField":"___records___","params":{"emptyAsNull":true},"customLabel":true}},"columnOrder":["9664c5d8-04a9-4007-8364-5b8c1cbcb7ef","3ff1c021-fea7-447e-bca9-1fa15760c11f","7d323f30-b968-467d-8943-59509e4d7d23"],"incompleteColumns":{}}}}}}},"enhancements":{}},"title":""},{"version":"8.2.3","type":"lens","gridData":{"x":0,"y":71,"w":24,"h":15,"i":"bf7d46aa-1428-4ba9-9060-0361a7b5ec3f"},"panelIndex":"bf7d46aa-1428-4ba9-9060-0361a7b5ec3f","embeddableConfig":{"attributes":{"title":"","visualizationType":"lnsXY","type":"lens","references":[{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-layer-6a8f924b-142c-497a-bf94-c37042bd4130"}],"state":{"visualization":{"legend":{"isVisible":true,"position":"right"},"valueLabels":"hide","fittingFunction":"None","axisTitlesVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"tickLabelsVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"labelsOrientation":{"x":0,"yLeft":0,"yRight":0},"gridlinesVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"preferredSeriesType":"bar_stacked","layers":[{"layerId":"6a8f924b-142c-497a-bf94-c37042bd4130","accessors":["fd625a26-ac15-491d-8d6b-9a854aff56bc"],"position":"top","seriesType":"bar_stacked","showGridlines":false,"layerType":"data","xAccessor":"9161a173-fd94-4819-9ce6-0516f2a7ed1f","splitAccessor":"68ea422a-4f18-4493-b65e-bba0a9aec4db"}]},"query":{"query":"","language":"kuery"},"filters":[],"datasourceStates":{"indexpattern":{"layers":{"6a8f924b-142c-497a-bf94-c37042bd4130":{"columns":{"68ea422a-4f18-4493-b65e-bba0a9aec4db":{"label":"Top 10 values of ban1","dataType":"string","operationType":"terms","scale":"ordinal","sourceField":"ban1","isBucketed":true,"params":{"size":10,"orderBy":{"type":"column","columnId":"fd625a26-ac15-491d-8d6b-9a854aff56bc"},"orderDirection":"desc","otherBucket":false,"missingBucket":false,"parentFormat":{"id":"terms"},"secondaryFields":[]}},"9161a173-fd94-4819-9ce6-0516f2a7ed1f":{"label":"Interwał -","dataType":"date","operationType":"date_histogram","sourceField":"@timestamp","isBucketed":true,"scale":"interval","params":{"interval":"7d","includeEmptyRows":true,"dropPartials":false,"ignoreTimeRange":false},"customLabel":true},"fd625a26-ac15-491d-8d6b-9a854aff56bc":{"label":"Całkowita liczba wykluczonych postaci","dataType":"number","operationType":"unique_count","scale":"ratio","sourceField":"teamname","isBucketed":false,"params":{"emptyAsNull":true},"customLabel":true}},"columnOrder":["68ea422a-4f18-4493-b65e-bba0a9aec4db","9161a173-fd94-4819-9ce6-0516f2a7ed1f","fd625a26-ac15-491d-8d6b-9a854aff56bc"],"incompleteColumns":{}}}}}}},"enhancements":{}}},{"version":"8.2.3","type":"lens","gridData":{"x":24,"y":71,"w":24,"h":15,"i":"e7e3b98b-bf51-4471-9119-0a342ed7ae81"},"panelIndex":"e7e3b98b-bf51-4471-9119-0a342ed7ae81","embeddableConfig":{"attributes":{"title":"","visualizationType":"lnsMetric","type":"lens","references":[{"type":"index-pattern","id":"ca48aa40-3a83-11ed-9119-6ba9cd163d2b","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"ca48aa40-3a83-11ed-9119-6ba9cd163d2b","name":"indexpattern-datasource-layer-c834ea0f-fec7-4871-851c-65373035d34d"}],"state":{"visualization":{"layerId":"c834ea0f-fec7-4871-851c-65373035d34d","accessor":"105a18da-16af-4d14-832c-7dafa1920fc2","layerType":"data"},"query":{"query":"","language":"kuery"},"filters":[],"datasourceStates":{"indexpattern":{"layers":{"c834ea0f-fec7-4871-851c-65373035d34d":{"columns":{"105a18da-16af-4d14-832c-7dafa1920fc2":{"label":"Unique count of player_info.Twitter.keyword","dataType":"number","operationType":"unique_count","scale":"ratio","sourceField":"player_info.Twitter.keyword","isBucketed":false,"params":{"emptyAsNull":false}}},"columnOrder":["105a18da-16af-4d14-832c-7dafa1920fc2"],"incompleteColumns":{}}}}}}},"enhancements":{}},"title":""},{"version":"8.2.3","type":"lens","gridData":{"x":0,"y":86,"w":24,"h":15,"i":"e398cd84-e82d-4ec2-8c75-ba9311c8103c"},"panelIndex":"e398cd84-e82d-4ec2-8c75-ba9311c8103c","embeddableConfig":{"attributes":{"title":"","visualizationType":"lnsXY","type":"lens","references":[{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-current-indexpattern"},{"type":"index-pattern","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379","name":"indexpattern-datasource-layer-e0013e9e-203a-4226-8dfb-6114b6920bce"},{"type":"index-pattern","name":"2f96022d-e516-49a1-b026-7ad3a57d617b","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"},{"type":"index-pattern","name":"a97b9d33-a9fa-412a-8c3c-51f172e45770","id":"4fa727f0-2c3f-11ed-8ef3-63a747542379"}],"state":{"visualization":{"legend":{"isVisible":true,"position":"right"},"valueLabels":"hide","fittingFunction":"None","curveType":"LINEAR","axisTitlesVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"tickLabelsVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"labelsOrientation":{"x":0,"yLeft":0,"yRight":0},"gridlinesVisibilitySettings":{"x":true,"yLeft":true,"yRight":true},"preferredSeriesType":"line","layers":[{"layerId":"e0013e9e-203a-4226-8dfb-6114b6920bce","seriesType":"line","accessors":["384f654e-5b95-462d-bf04-d994e7cc9239"],"layerType":"data","xAccessor":"88ff83d6-3746-438f-9d39-358826703c80","splitAccessor":"88ffbe00-cba2-4cf6-9ad4-71a42fde2c99"}]},"query":{"language":"kuery","query":""},"filters":[{"meta":{"index":"2f96022d-e516-49a1-b026-7ad3a57d617b","type":"phrases","key":"teamname","params":["Fnatic","G2 Esports"],"alias":"Head-to-head G2 vs Fnatic ","negate":false,"disabled":false},"query":{"bool":{"should":[{"match_phrase":{"teamname":"Fnatic"}},{"match_phrase":{"teamname":"G2 Esports"}}],"minimum_should_match":1}},"$state":{"store":"appState"}},{"meta":{"index":"a97b9d33-a9fa-412a-8c3c-51f172e45770","alias":null,"negate":true,"disabled":false,"type":"phrase","key":"position","params":{"query":"team"}},"query":{"match_phrase":{"position":"team"}},"$state":{"store":"appState"}}],"datasourceStates":{"indexpattern":{"layers":{"e0013e9e-203a-4226-8dfb-6114b6920bce":{"columns":{"384f654e-5b95-462d-bf04-d994e7cc9239":{"label":"Average of assists","dataType":"number","operationType":"average","sourceField":"assists","isBucketed":false,"scale":"ratio","params":{"emptyAsNull":true}},"88ff83d6-3746-438f-9d39-358826703c80":{"label":"Top 5 values of kills","dataType":"number","operationType":"terms","scale":"ordinal","sourceField":"kills","isBucketed":true,"params":{"size":5,"orderBy":{"type":"column","columnId":"384f654e-5b95-462d-bf04-d994e7cc9239"},"orderDirection":"desc","otherBucket":true,"missingBucket":false,"parentFormat":{"id":"terms"},"secondaryFields":[]}},"88ffbe00-cba2-4cf6-9ad4-71a42fde2c99":{"label":"Top value of playername","dataType":"string","operationType":"terms","scale":"ordinal","sourceField":"playername","isBucketed":true,"params":{"size":1,"orderBy":{"type":"column","columnId":"384f654e-5b95-462d-bf04-d994e7cc9239"},"orderDirection":"desc","otherBucket":false,"missingBucket":false,"parentFormat":{"id":"terms"},"secondaryFields":[]}}},"columnOrder":["88ff83d6-3746-438f-9d39-358826703c80","88ffbe00-cba2-4cf6-9ad4-71a42fde2c99","384f654e-5b95-462d-bf04-d994e7cc9239"],"incompleteColumns":{}}}}}}},"enhancements":{}}}]""",
+            "optionsJSON" : """{"useMargins":true,"syncColors":false,"hidePanelTitles":false}""",
+            "version" : 1,
+            "timeRestore" : false,
+            "kibanaSavedObjectMeta" : {
+              "searchSourceJSON" : """{"query":{"query":"","language":"kuery"},"filter":[]}"""
+            }
+          },
+          "type" : "dashboard",
+          "references" : [
+            {
+              "name" : "16cbff27-ddf4-4ed9-93d4-3d64c5c8912a:kibanaSavedObjectMeta.searchSourceJSON.index",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "name" : "16cbff27-ddf4-4ed9-93d4-3d64c5c8912a:kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "name" : "16cbff27-ddf4-4ed9-93d4-3d64c5c8912a:kibanaSavedObjectMeta.searchSourceJSON.filter[1].meta.index",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "b6d6c0e9-1885-4e7b-ab75-eafdefa7d71f:indexpattern-datasource-current-indexpattern"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "b6d6c0e9-1885-4e7b-ab75-eafdefa7d71f:indexpattern-datasource-layer-a74beb3b-0dc8-4408-8727-1db00a438018"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "b6d6c0e9-1885-4e7b-ab75-eafdefa7d71f:18838fd7-532f-4987-9fcf-58ec2a549b79",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "b6d6c0e9-1885-4e7b-ab75-eafdefa7d71f:9431f846-4ebc-48ac-a4b6-7c03f9b4798b",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "name" : "4ba0d09b-af85-4eaa-af72-3df2fb63fc53:panel_4ba0d09b-af85-4eaa-af72-3df2fb63fc53",
+              "type" : "lens",
+              "id" : "4d9456f0-2dd3-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "a3f5af4a-f9a0-4084-89bf-49af7116a269:indexpattern-datasource-current-indexpattern"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "a3f5af4a-f9a0-4084-89bf-49af7116a269:indexpattern-datasource-layer-a74beb3b-0dc8-4408-8727-1db00a438018"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "a3f5af4a-f9a0-4084-89bf-49af7116a269:b009bb32-2c27-471e-9f4e-74c13ee3785d",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "a3f5af4a-f9a0-4084-89bf-49af7116a269:cba2659e-30a0-48da-b25e-10fed7793080",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "f6fe893d-9605-4e0a-bcfb-ef7c1cab5605:indexpattern-datasource-current-indexpattern"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "f6fe893d-9605-4e0a-bcfb-ef7c1cab5605:indexpattern-datasource-layer-a74beb3b-0dc8-4408-8727-1db00a438018"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "f6fe893d-9605-4e0a-bcfb-ef7c1cab5605:39cf8f47-87ce-40cf-95ba-e61493c9fc24",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "f6fe893d-9605-4e0a-bcfb-ef7c1cab5605:26fd5cf7-db9c-48dd-8f2e-d19ded88a83e",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "5bc35241-0e18-489b-9358-f511fd8abcb7:indexpattern-datasource-current-indexpattern"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "5bc35241-0e18-489b-9358-f511fd8abcb7:indexpattern-datasource-layer-a74beb3b-0dc8-4408-8727-1db00a438018"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "5bc35241-0e18-489b-9358-f511fd8abcb7:e83434b2-6eff-4d9e-88d8-0be160750cd0",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "5bc35241-0e18-489b-9358-f511fd8abcb7:a1368554-32d0-422e-adf0-f4c7da00b36a",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "711d221b-418b-46f3-a3af-2b45207618cb:indexpattern-datasource-current-indexpattern"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "711d221b-418b-46f3-a3af-2b45207618cb:indexpattern-datasource-layer-a74beb3b-0dc8-4408-8727-1db00a438018"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "711d221b-418b-46f3-a3af-2b45207618cb:16a9d3f8-d4d5-4c2a-98af-1541399fee51",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "711d221b-418b-46f3-a3af-2b45207618cb:74222afa-e1c9-427f-aad4-22fd5d7a08f7",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "name" : "37c56853-4f13-426a-941f-9079acccecf0:kibanaSavedObjectMeta.searchSourceJSON.index",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "name" : "37c56853-4f13-426a-941f-9079acccecf0:kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "name" : "37c56853-4f13-426a-941f-9079acccecf0:kibanaSavedObjectMeta.searchSourceJSON.filter[1].meta.index",
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "5430d465-13bf-45c9-b921-1a7707234568:indexpattern-datasource-current-indexpattern"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "5430d465-13bf-45c9-b921-1a7707234568:indexpattern-datasource-layer-ebfc4422-98bf-42d5-adf2-302c5c8dc858"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "5430d465-13bf-45c9-b921-1a7707234568:31c8baa7-57e8-4b56-b82b-4fb4c86b52c7",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "3bea95c1-9092-4520-b838-555ad1b021e8:indexpattern-datasource-current-indexpattern"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "3bea95c1-9092-4520-b838-555ad1b021e8:indexpattern-datasource-layer-16960086-ebcd-4b26-95e5-7cfcc307204e"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "3bea95c1-9092-4520-b838-555ad1b021e8:5cdf2766-4096-420a-8615-5ef9bf3b3fe0",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "82aa7bd6-136e-4780-b6f6-f8983c06d75d:indexpattern-datasource-current-indexpattern"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "82aa7bd6-136e-4780-b6f6-f8983c06d75d:indexpattern-datasource-layer-ebfc4422-98bf-42d5-adf2-302c5c8dc858"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "82aa7bd6-136e-4780-b6f6-f8983c06d75d:43dcd5e9-3b2a-41ee-992c-c5d0140c3fd7",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "5d66984b-23fa-4c21-b68a-6a13728f14a8:indexpattern-datasource-current-indexpattern"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "5d66984b-23fa-4c21-b68a-6a13728f14a8:indexpattern-datasource-layer-16960086-ebcd-4b26-95e5-7cfcc307204e"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "5d66984b-23fa-4c21-b68a-6a13728f14a8:f7172ab6-12b3-4b7e-a4ed-137ac5207464",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "bf7d46aa-1428-4ba9-9060-0361a7b5ec3f:indexpattern-datasource-current-indexpattern"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "bf7d46aa-1428-4ba9-9060-0361a7b5ec3f:indexpattern-datasource-layer-6a8f924b-142c-497a-bf94-c37042bd4130"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "ca48aa40-3a83-11ed-9119-6ba9cd163d2b",
+              "name" : "e7e3b98b-bf51-4471-9119-0a342ed7ae81:indexpattern-datasource-current-indexpattern"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "ca48aa40-3a83-11ed-9119-6ba9cd163d2b",
+              "name" : "e7e3b98b-bf51-4471-9119-0a342ed7ae81:indexpattern-datasource-layer-c834ea0f-fec7-4871-851c-65373035d34d"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "e398cd84-e82d-4ec2-8c75-ba9311c8103c:indexpattern-datasource-current-indexpattern"
+            },
+            {
+              "type" : "index-pattern",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379",
+              "name" : "e398cd84-e82d-4ec2-8c75-ba9311c8103c:indexpattern-datasource-layer-e0013e9e-203a-4226-8dfb-6114b6920bce"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "e398cd84-e82d-4ec2-8c75-ba9311c8103c:2f96022d-e516-49a1-b026-7ad3a57d617b",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            },
+            {
+              "type" : "index-pattern",
+              "name" : "e398cd84-e82d-4ec2-8c75-ba9311c8103c:a97b9d33-a9fa-412a-8c3c-51f172e45770",
+              "id" : "4fa727f0-2c3f-11ed-8ef3-63a747542379"
+            }
+          ],
+          "namespaces" : [
+            "default"
+          ],
+          "migrationVersion" : {
+            "dashboard" : "8.2.0"
+          },
+          "coreMigrationVersion" : "8.2.3",
+          "updated_at" : "2022-09-25T08:55:31.071Z"
+        }
+      }
+    ]
+  }
+}

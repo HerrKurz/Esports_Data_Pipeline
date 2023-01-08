@@ -1,0 +1,884 @@
+{
+  "mappings": {
+    "properties": {
+      "Coordinates": {
+        "type": "geo_point"
+      },
+      "Country": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "Country_code": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "Player_info": {
+        "properties": {
+          "Age": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Askfm": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Birthdate": {
+            "type": "date"
+          },
+          "Birthdate__precision": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Country": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Discord": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Facebook": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "FavChamps": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "ID": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Image": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Instagram": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "IsAutoTeam": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "IsLowContent": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "IsLowercase": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "IsPersonality": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "IsRetired": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "IsSubstitute": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Lolpros": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Name": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "NameAlphabet": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "NameFull": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Nationality": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "NationalityPrimary": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "NativeName": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "OverviewPage": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Player": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Reddit": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Residency": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "ResidencyFormer": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Role": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "RoleLast": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "SoloqueueIds": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Stream": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Team": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Team2": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Team2System": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "TeamLast": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "TeamSystem": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "ToWildrift": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Twitter": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Vk": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Weibo": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Youtube": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          }
+        }
+      },
+      "assists": {
+        "type": "long"
+      },
+      "assistsat10": {
+        "type": "float"
+      },
+      "assistsat15": {
+        "type": "float"
+      },
+      "ban1": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "ban2": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "ban3": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "ban4": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "ban5": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "barons": {
+        "type": "float"
+      },
+      "champion": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "chemtechs": {
+        "type": "float"
+      },
+      "ckpm": {
+        "type": "float"
+      },
+      "clouds": {
+        "type": "float"
+      },
+      "controlwardsbought": {
+        "type": "float"
+      },
+      "csat10": {
+        "type": "float"
+      },
+      "csat15": {
+        "type": "float"
+      },
+      "csdiffat10": {
+        "type": "float"
+      },
+      "csdiffat15": {
+        "type": "float"
+      },
+      "cspm": {
+        "type": "float"
+      },
+      "damagemitigatedperminute": {
+        "type": "float"
+      },
+      "damageshare": {
+        "type": "float"
+      },
+      "damagetakenperminute": {
+        "type": "float"
+      },
+      "damagetochampions": {
+        "type": "float"
+      },
+      "datacompleteness": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "date": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "deaths": {
+        "type": "long"
+      },
+      "deathsat10": {
+        "type": "float"
+      },
+      "deathsat15": {
+        "type": "float"
+      },
+      "doublekills": {
+        "type": "float"
+      },
+      "dpm": {
+        "type": "float"
+      },
+      "dragons": {
+        "type": "float"
+      },
+      "dragons (type unknown)": {
+        "type": "float"
+      },
+      "earned gpm": {
+        "type": "float"
+      },
+      "earnedgold": {
+        "type": "float"
+      },
+      "earnedgoldshare": {
+        "type": "float"
+      },
+      "elders": {
+        "type": "float"
+      },
+      "elementaldrakes": {
+        "type": "float"
+      },
+      "firstbaron": {
+        "type": "float"
+      },
+      "firstblood": {
+        "type": "float"
+      },
+      "firstbloodassist": {
+        "type": "float"
+      },
+      "firstbloodkill": {
+        "type": "float"
+      },
+      "firstbloodvictim": {
+        "type": "float"
+      },
+      "firstdragon": {
+        "type": "float"
+      },
+      "firstherald": {
+        "type": "float"
+      },
+      "firstmidtower": {
+        "type": "float"
+      },
+      "firsttothreetowers": {
+        "type": "float"
+      },
+      "firsttower": {
+        "type": "float"
+      },
+      "game": {
+        "type": "long"
+      },
+      "gameid": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "gamelength": {
+        "type": "long"
+      },
+      "goldat10": {
+        "type": "float"
+      },
+      "goldat15": {
+        "type": "float"
+      },
+      "golddiffat10": {
+        "type": "float"
+      },
+      "golddiffat15": {
+        "type": "float"
+      },
+      "goldspent": {
+        "type": "float"
+      },
+      "gspd": {
+        "type": "float"
+      },
+      "heralds": {
+        "type": "float"
+      },
+      "hextechs": {
+        "type": "float"
+      },
+      "infernals": {
+        "type": "float"
+      },
+      "inhibitors": {
+        "type": "float"
+      },
+      "kills": {
+        "type": "long"
+      },
+      "killsat10": {
+        "type": "float"
+      },
+      "killsat15": {
+        "type": "float"
+      },
+      "league": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "minionkills": {
+        "type": "float"
+      },
+      "monsterkills": {
+        "type": "float"
+      },
+      "monsterkillsenemyjungle": {
+        "type": "float"
+      },
+      "monsterkillsownjungle": {
+        "type": "float"
+      },
+      "mountains": {
+        "type": "float"
+      },
+      "oceans": {
+        "type": "float"
+      },
+      "opp_assistsat10": {
+        "type": "float"
+      },
+      "opp_assistsat15": {
+        "type": "float"
+      },
+      "opp_barons": {
+        "type": "float"
+      },
+      "opp_csat10": {
+        "type": "float"
+      },
+      "opp_csat15": {
+        "type": "float"
+      },
+      "opp_deathsat10": {
+        "type": "float"
+      },
+      "opp_deathsat15": {
+        "type": "float"
+      },
+      "opp_dragons": {
+        "type": "float"
+      },
+      "opp_elders": {
+        "type": "float"
+      },
+      "opp_elementaldrakes": {
+        "type": "float"
+      },
+      "opp_goldat10": {
+        "type": "float"
+      },
+      "opp_goldat15": {
+        "type": "float"
+      },
+      "opp_heralds": {
+        "type": "float"
+      },
+      "opp_inhibitors": {
+        "type": "float"
+      },
+      "opp_killsat10": {
+        "type": "float"
+      },
+      "opp_killsat15": {
+        "type": "float"
+      },
+      "opp_towers": {
+        "type": "float"
+      },
+      "opp_turretplates": {
+        "type": "float"
+      },
+      "opp_xpat10": {
+        "type": "float"
+      },
+      "opp_xpat15": {
+        "type": "float"
+      },
+      "participantid": {
+        "type": "long"
+      },
+      "patch": {
+        "type": "float"
+      },
+      "pentakills": {
+        "type": "float"
+      },
+      "playerid": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "playername": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "playoffs": {
+        "type": "long"
+      },
+      "position": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "quadrakills": {
+        "type": "float"
+      },
+      "result": {
+        "type": "long"
+      },
+      "side": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "split": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "team kpm": {
+        "type": "float"
+      },
+      "teamdeaths": {
+        "type": "long"
+      },
+      "teamid": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "teamkills": {
+        "type": "long"
+      },
+      "teamname": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "total cs": {
+        "type": "float"
+      },
+      "totalgold": {
+        "type": "long"
+      },
+      "towers": {
+        "type": "float"
+      },
+      "triplekills": {
+        "type": "float"
+      },
+      "turretplates": {
+        "type": "float"
+      },
+      "url": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "visionscore": {
+        "type": "float"
+      },
+      "vspm": {
+        "type": "float"
+      },
+      "wardskilled": {
+        "type": "float"
+      },
+      "wardsplaced": {
+        "type": "float"
+      },
+      "wcpm": {
+        "type": "float"
+      },
+      "wpm": {
+        "type": "float"
+      },
+      "xpat10": {
+        "type": "float"
+      },
+      "xpat15": {
+        "type": "float"
+      },
+      "xpdiffat10": {
+        "type": "float"
+      },
+      "xpdiffat15": {
+        "type": "float"
+      },
+      "year": {
+        "type": "long"
+      }
+    }
+  }
+}

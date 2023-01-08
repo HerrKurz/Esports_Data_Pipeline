@@ -94,9 +94,7 @@ class DataEnricher:
             try:
                 response = requests.get(f"https://restcountries.com/v3.1/name/{country}")
                 response_json = response.json()[0]["latlng"]
-                coords_lat_lng = [int(i) for i in response_json]
-                coords_lng_lat = coords_lat_lng[::-1]
-                missing_coords[country] = coords_lng_lat
+                missing_coords[country] = [int(i) for i in response_json.reverse()]
             except KeyError as e:
                 print(f"Error {e} for {country}.")
                 continue
