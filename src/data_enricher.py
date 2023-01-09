@@ -8,7 +8,7 @@ import pandas as pd
 import requests
 from src.data_extractor import GetData
 from src.utils import convert_to_json, add_id_column, clean_countries_list
-from config import FIELDS
+from config import FIELDS, COUNTRIES_TRANSLATE_DICT
 
 
 class DataEnricher:
@@ -66,6 +66,15 @@ class DataEnricher:
             print(f"Key error {e}.")
 
         self.countries = clean_countries_list(countries)
+        print(self.countries)
+
+        # for k, v in COUNTRIES_TRANSLATE_DICT.items():
+        #     try:
+        #         result = player_dict[]
+        #     except KeyError as e:
+        #         print(f"{e}")
+        #         continue
+
         return player_dict
 
     def get_country_coordinates(self) -> dict:
@@ -78,6 +87,7 @@ class DataEnricher:
                 for page in result['query']['pages'].values():
                     if 'coordinates' in page:
                         coords[country] = [page['coordinates'][0]['lon'], page['coordinates'][0]['lat']]
+                        print(coords[country])
                     else:
                         self.countries_missing_coords.append(page['title'])
 
@@ -94,7 +104,9 @@ class DataEnricher:
             try:
                 response = requests.get(f"https://restcountries.com/v3.1/name/{country}")
                 response_json = response.json()[0]["latlng"]
-                missing_coords[country] = [int(i) for i in response_json.reverse()]
+                response_json.reverse()
+                missing_coords[country] = [int(i) for i in response_json]
+
             except KeyError as e:
                 print(f"Error {e} for {country}.")
                 continue
@@ -102,6 +114,7 @@ class DataEnricher:
 
     def append_coordinates_to_country(self, df_match: pd.DataFrame) -> pd.DataFrame:
         """Adds new column which contains longitude and latitude to main dataframe based on mapped "Country" values."""
+        print(self.final_coords)
         df_match["Coordinates"] = df_match["Country"].map(self.final_coords)
         return df_match
 
@@ -121,5 +134,6 @@ class DataEnricher:
 
     def append_country_codes_to_country(self, df_match: pd.DataFrame) -> pd.DataFrame:
         """Adds new column which contains country code to main dataframe based on mapped "Country" values."""
+        print(self.country_code)
         df_match["Country_code"] = df_match["Country"].map(self.country_code)
         return df_match
