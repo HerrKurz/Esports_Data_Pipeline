@@ -50,6 +50,10 @@ In order to gain the access to the database and other dashboards (Viewer role), 
 
 ## Process 
 TODO
+GetData class downloads the .csv files with e-sport matches data. 
+
+[//]: # (class method download_csv&#40;self, limits: int or None, year: list&#41; -> pd.DataFrame:)
+
 
 [//]: # (Najwazniejse mozliwosci konfiguracji, czyli np lata z plikami csv, limits, etc etc)
 
