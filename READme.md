@@ -16,7 +16,7 @@ The matches data and  comes from Oracle's Elixir, extracted from multiple .csv f
 
 ## Architecture diagram
 
-![Architecture diagram](images/diagram_architecture.jpg) 
+![Architecture diagram](images/architecture_diagram_v2.png) 
 
 1. Extract the match data from [Oracle's Elixir](https://oracleselixir.com/tools/downloads).
 2. Transform and enrich the data with player info using [Leaguepedia API](https://lol.fandom.com/wiki/Help:Leaguepedia_API), country geographic coordinates [GeoData MediaWiki](https://www.mediawiki.org/wiki/Extension:GeoData), and ISO 3166-1 numeric country code [Rest Countries](https://gitlab.com/amatos/rest-countries).
