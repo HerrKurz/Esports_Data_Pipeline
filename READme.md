@@ -1,18 +1,12 @@
 # Esports data pipeline
 
-The aim of this project, is to perform Extract, Transform, Load on professional League of Legends e-sport matches data.
+- This project aims to perform Extract, Transform, and Load professional League of Legends e-sport matches data and prepares it for further analysis.
 
 
-
-The matches data and  comes from Oracle's Elixir, extracted from multiple .csv files: 
-[Downloads](https://oracleselixir.com/tools/downloads) 
-
-[//]: # (The data contains 26 million user ratings of over 270,000 users on a collection of over 45,000 movies.)
+- The primary data source comes from Oracle`s Elixir ([Downloads](https://oracleselixir.com/tools/downloads)), which provides professional League of Legends e-sport matches data from 2014 to today. It's updated daily, and each calendar year has a separate .csv file.
 
 
-
-
-
+- Additional e-sport players' data is extracted from [Leaguepedia API](https://lol.fandom.com/wiki/Help:Leaguepedia_API). This step allows us to easily enrich the data by fetching other external resources. For example, geographic data enrichment involves adding country code or latitude and longitude to an existing dataset, enabling [Kibana's Maps](https://www.elastic.co/guide/en/kibana/current/maps.html) to visualize and explore the data.
 
 ## Architecture diagram
 
@@ -25,7 +19,33 @@ The matches data and  comes from Oracle's Elixir, extracted from multiple .csv f
 5. Deploy the application and database on [AWS EC2](https://aws.amazon.com/ec2/).
 
 ## Dashboard
-TODO
+![General dashboard](images/general_info_dashboard.png) 
+
+## Project structure
+```
+📦Esports_data_pipeline
+ ┣ 📂Elasticsearch
+ ┃ ┣ 📜dashboards.txt #backup for dashboards created in Kibana
+ ┃ ┣ 📜index_template.txt #template settings and mappings for indexes
+ ┃ ┣ 📜mapping.txt
+ ┃ ┗ 📜visualizations.txt
+ ┣ 📂images
+ ┃ ┣ 📜architecture_diagram_v2.png
+ ┃ ┣ 📜diagram_architecture.jpg
+ ┃ ┗ 📜general_info_dashboard.png
+ ┣ 📂src
+ ┃ ┣ 📜data_enricher.py
+ ┃ ┣ 📜data_extractor.py
+ ┃ ┣ 📜elasticsearch_connector.py
+ ┃ ┗ 📜utils.py
+ ┣ 📜.env
+ ┣ 📜.gitignore 
+ ┣ 📜READme.md
+ ┣ 📜config.py
+ ┣ 📜main.py
+ ┗ 📜requirements.txt
+```
+
 ## Process 
 TODO
 
@@ -36,6 +56,9 @@ TODO
 [//]: # (Pobieram data frame w klasie GetData)
 
 
+    
+
+
 ## Setup
 TODO
 
@@ -43,12 +66,24 @@ TODO
 
 [//]: # (instalacja kibany)
 
+
 [//]: # (index+mapping)
 
 [//]: # (wrzucanie do bazy)
 
-## Potential use cases
-TODO
+## Potential improvements and use cases
+Technologies:
+- Use a **data orchestration** tool to improve control over data flow [Apache Airflow
+](https://airflow.apache.org/) or [Perfect](https://www.prefect.io/). Improve logging and automate the script to update the data daily.
+- Update the setup process using [Terraform](https://www.terraform.io/) in order to reuse, and provision **infrastructure as a code**.
 
+Data enrichment:
+- Add teams' data from [Leaguepedia API](https://lol.fandom.com/wiki/Help:Leaguepedia_API).
+- Backfill missing players' data using [Liquipedia API](https://liquipedia.net/commons/Liquipedia:API_Usage_Guidelines).
+- Use social media links associated with a player/team to gain insight into their social media reach, following etc. 
 
+Dataset could be used to:
+
+- Calculate relative skill levels of players using [Elo rating system](https://en.wikipedia.org/wiki/Elo_rating_system).
+- Create a classification model that determines whether given team will win the upcoming match.
 
