@@ -21,12 +21,14 @@
 ## Dashboard
 ![General dashboard](images/general_info_dashboard.png) 
 
+### Database access
+In order to gain the access to the database and other dashboards (Viewer role), please contact me directly. EC2 t2.medium with Elasticsearch + Kibana is hosted at http://3.121.139.77:5601/.
 ## Project structure
 ```
 📦Esports_data_pipeline
  ┣ 📂Elasticsearch
- ┃ ┣ 📜dashboards.txt #backup for dashboards created in Kibana
- ┃ ┣ 📜index_template.txt #template settings and mappings for indexes
+ ┃ ┣ 📜dashboards.txt # - Backup for dashboards created in Kibana.
+ ┃ ┣ 📜index_template.txt # - Template settings and mappings for indexes.
  ┃ ┣ 📜mapping.txt
  ┃ ┗ 📜visualizations.txt
  ┣ 📂images
@@ -34,14 +36,14 @@
  ┃ ┣ 📜diagram_architecture.jpg
  ┃ ┗ 📜general_info_dashboard.png
  ┣ 📂src
- ┃ ┣ 📜data_enricher.py
- ┃ ┣ 📜data_extractor.py
- ┃ ┣ 📜elasticsearch_connector.py
- ┃ ┗ 📜utils.py
+ ┃ ┣ 📜data_enricher.py # - Handles additional extractions and data transformations.
+ ┃ ┣ 📜data_extractor.py # - Handles the main extraction part.
+ ┃ ┣ 📜elasticsearch_connector.py # - Handles the connection between Python and Elasticsearch and loads the data to the database.
+ ┃ ┗ 📜utils.py # - Utilities related to the project.
  ┣ 📜.env
  ┣ 📜.gitignore 
  ┣ 📜READme.md
- ┣ 📜config.py
+ ┣ 📜config.py # - Configuration file that contains constant variables.
  ┣ 📜main.py
  ┗ 📜requirements.txt
 ```
