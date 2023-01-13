@@ -31,5 +31,6 @@ CSV_FILES = {
 
 # Dictionary of countries that need translation to
 COUNTRIES_TRANSLATE_DICT = {
-    "United States": "USA"
+    "United States": "USA",
+    "China": "CN"
 }

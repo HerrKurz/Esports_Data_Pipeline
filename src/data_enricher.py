@@ -7,8 +7,8 @@ import json
 import pandas as pd
 import requests
 from src.data_extractor import GetData
-from src.utils import convert_to_json, add_id_column, clean_countries_list
-from config import FIELDS, COUNTRIES_TRANSLATE_DICT
+from src.utils import convert_to_json, add_id_column, clean_countries_list, change_dict_values
+from config import FIELDS
 
 
 class DataEnricher:
@@ -57,7 +57,7 @@ class DataEnricher:
                 missing_players.append(player)
                 continue
         print(f"{len(missing_players)} players weren't fetched from Leaguepedia, their names: {missing_players}.")
-
+        player_dict = change_dict_values(player_dict)
         try:
             player_country_dict = {player_name: country["Country"] for player_name, country in player_dict.items()}
             data.df_matches['Country'] = data.df_matches['playername'].map(player_country_dict)
@@ -66,14 +66,6 @@ class DataEnricher:
             print(f"Key error {e}.")
 
         self.countries = clean_countries_list(countries)
-        print(self.countries)
-
-        # for k, v in COUNTRIES_TRANSLATE_DICT.items():
-        #     try:
-        #         result = player_dict[]
-        #     except KeyError as e:
-        #         print(f"{e}")
-        #         continue
 
         return player_dict
 
@@ -95,6 +87,7 @@ class DataEnricher:
                 print(f"Coords not found {e}.")
                 continue
         print(f"Countries without coords matching {self.countries_missing_coords}.")
+        print(coords)
         return coords
 
     def fill_missing_coordinates(self) -> dict:
@@ -121,8 +114,9 @@ class DataEnricher:
     def get_country_codes(self) -> dict:
         """Fetches country codes in ISO 3166-1 numeric encoding system."""
         country_code = {}
+        countries = [country.replace('China', 'CN') for country in self.countries]
         countries_without_code = []
-        for country in self.countries:
+        for country in countries:
             try:
                 response = requests.get(f"https://restcountries.com/v3.1/name/{country}")
                 country_code[country] = response.json()[0]["ccn3"]
@@ -130,6 +124,7 @@ class DataEnricher:
                 countries_without_code.append(country)
                 print(f"Error {e} for {countries_without_code}. Can't find matching country code.")
                 continue
+        country_code["China"] = country_code.pop("CN")
         return country_code
 
     def append_country_codes_to_country(self, df_match: pd.DataFrame) -> pd.DataFrame:

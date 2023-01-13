@@ -40,7 +40,13 @@ def convert_years_to_url(years: list, current_year: int) -> list:
 
 
 def merge_csv_files(csv_files: list) -> pd.DataFrame:
-    """Merges the list of .csv files into single dataframe."""
+    """Merges the list of downloaded .csv files into single dataframe."""
     return pd.concat(map(pd.read_csv, csv_files), ignore_index=True)
 
-# funkcja, ktora jest odwrotnoscia do translate
+
+def change_dict_values(dictionary: dict) -> dict:
+    """Hotfix for data visualization purpose."""
+    for k, v in dictionary.items():
+        if v['Country'] == "United States":
+            v['Country'] = "USA"
+    return dictionary
