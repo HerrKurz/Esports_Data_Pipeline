@@ -32,8 +32,8 @@ class GetData:
                 convert_years_to_url(year, self.current_year)
                 counter += 1
 
-    def get_player_name(self) -> set:
+    def get_player_name(self) -> list:
         """Gets unique, non-empty player list from a dataframe used later to enrich the dataset."""
         df_playername = self.df_matches["playername"].dropna().unique()
-        player_list = set(list(df_playername))
+        player_list = list(df_playername)
         return player_list
