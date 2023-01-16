@@ -8,8 +8,8 @@ load_dotenv()
 # Elasticsearch connector variables
 URL = os.getenv("URL")
 PORT = int(os.getenv("PORT"))
-ELASTIC_USERNAME = os.getenv("ELASTIC")
-ELASTIC_PASSWORD = os.getenv("PASSWORD")
+ELASTIC_USERNAME = os.getenv("ELASTIC_USERNAME")
+ELASTIC_PASSWORD = os.getenv("ELASTIC_PASSWORD")
 
 # Leaguepedia fields variable
 FIELDS = "ID, OverviewPage, Player, Image, Name, NativeName, NameAlphabet, NameFull, Country, Nationality, NationalityPrimary, Age, Birthdate, ResidencyFormer, Team, Team2, CurrentTeams, TeamSystem, Team2System, Residency, Role, FavChamps, SoloqueueIds, Askfm, Discord, Facebook, Instagram, Lolpros, Reddit, Snapchat, Stream, Twitter, Vk, Website, Weibo, Youtube, TeamLast, RoleLast, IsRetired, ToWildrift, IsPersonality, IsSubstitute, IsTrainee, IsLowercase, IsAutoTeam, IsLowContent"
@@ -17,7 +17,7 @@ FIELDS = "ID, OverviewPage, Player, Image, Name, NativeName, NameAlphabet, NameF
 # OraclesElixir .csv URL links
 BASE_URL = "https://drive.google.com/uc?id="
 CSV_FILES = {
-    # "2023": BASE_URL+"1XXk2LO0CsNADBB1LRGOV5rUpyZdEZ8s2",
+    "2023": BASE_URL+"1XXk2LO0CsNADBB1LRGOV5rUpyZdEZ8s2",
     "2022": BASE_URL+"1EHmptHyzY8owv0BAcNKtkQpMwfkURwRy",
     "2021": BASE_URL+"1fzwTTz77hcnYjOnO9ONeoPrkWCoOSecA",
     "2020": BASE_URL+"1dlSIczXShnv1vIfGNvBjgk-thMKA5j7d",
