@@ -1,28 +1,31 @@
 # Esports data pipeline
 
-- This project aims to perform Extract, Transform, and Load professional League of Legends e-sport matches data and prepares it for further analysis.
+- This project aims to perform Extract, Transform, and Load on professional League of Legends e-sport match data and prepare it for further analysis. 
 
 
-- The primary data source comes from Oracle`s Elixir ([Downloads](https://oracleselixir.com/tools/downloads)), which provides professional League of Legends e-sport matches data from 2014 to today. It's updated daily, and each calendar year has a separate .csv file.
+- The primary data source is [Oracle`s Elixir](https://oracleselixir.com/tools/downloads), which provides professional League of Legends e-sport match data from 2014 to nowadays. It's updated daily, and the matches from the corresponding calendar year have a separate .csv file. Definitions for the data in these files can be found or inferred from the information on the [Definitions page](https://oracleselixir.com/tools/downloads). To better understand the dataset, it's worth adding that each game consists of twelve rows (two teams and five players per team).
 
 
 - Additional e-sport players' data is extracted from [Leaguepedia API](https://lol.fandom.com/wiki/Help:Leaguepedia_API). This step allows us to easily enrich the data by fetching other external resources. For example, geographic data enrichment involves adding country code or latitude and longitude to an existing dataset, enabling [Kibana's Maps](https://www.elastic.co/guide/en/kibana/current/maps.html) to visualize and explore the data.
 
+
+- For the purpose of the project, it's important to mention that `game` and `match` have different meanings. A match comprises games, while a League of Legends game can be won by [destroying the enemy's Nexus](https://www.leagueoflegends.com/en-us/how-to-play/). It can take multiple games to win the entire match. Usually, LoL e-sport matches follow the `Best-of-N `format (where N is the maximum number of games), where you need to win more than half of them. For example, for Bo5 matches, the scores 3-0 or 2-3 are valid.
 ## Architecture diagram
 
 ![Architecture diagram](images/architecture_diagram_v2.png) 
+_Diagram created using [Excalidraw](https://excalidraw.com/)._
 
 1. Extract the match data from [Oracle's Elixir](https://oracleselixir.com/tools/downloads).
-2. Transform and enrich the data with player info using [Leaguepedia API](https://lol.fandom.com/wiki/Help:Leaguepedia_API), country geographic coordinates [GeoData MediaWiki](https://www.mediawiki.org/wiki/Extension:GeoData), and ISO 3166-1 numeric country code [Rest Countries](https://gitlab.com/amatos/rest-countries).
-3. Load the data to [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html).
-4. Create a dashboard using [Kibana](https://www.elastic.co/guide/en/kibana/master/index.html). 
-5. Deploy the application and database on [AWS EC2](https://aws.amazon.com/ec2/).
+2. Transform and enrich the data with player info using [Leaguepedia API](https://lol.fandom.com/wiki/Help:Leaguepedia_API). Get the countries' geographic coordinates from [GeoData MediaWiki](https://www.mediawiki.org/wiki/Extension:GeoData). Finally, ingest [ISO 3166-1]((https://en.wikipedia.org/wiki/ISO_3166-1_numeric)) numeric country code using [Rest Countries](https://gitlab.com/amatos/rest-countries).
+3. Deploy the application and database on [AWS EC2](https://aws.amazon.com/ec2/).
+4. Load the data to [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html).
+5. Create a dashboard using [Kibana](https://www.elastic.co/guide/en/kibana/master/index.html).
 
 ## Dashboard
 ![General dashboard](images/general_info_dashboard.png) 
 
-### Database access
-In order to gain the access to the database and other dashboards (Viewer role), please contact me directly. EC2 t2.medium with Elasticsearch + Kibana is hosted at http://3.121.139.77:5601/.
+### Dashboard access
+Please contact  me directly to gain access to the database and related dashboards (Viewer role). The `AWS EC2 t2.medium` instance with Elasticsearch and Kibana installed is hosted at the address http://3.121.139.77:5601.
 ## Project structure
 ```
 📦Esports_data_pipeline
@@ -127,7 +130,7 @@ To ensure a proper setup, you need to keep quotation marks `" "` for those value
 `URL = "X.XX.XXX.XXX" `- The IP address of your hostname, for example, the URL of AWS EC2 with Elasticsearch setup. It can be omitted if running the script in a local environment with Elasticsearch installed; in that case, you need to specify the argument for `ElasticsearchConnector(local=True)` inside `main.py`.
 
 
-`PORT = 9200` - Default port 9200 is used for all API calls over HTTP. This includes search and aggregations, monitoring and anything else that uses a HTTP request.
+`PORT = 9200` - Default port 9200 to communicate with Elasticsearch, it is used for all API calls over HTTP. This includes search and aggregations, monitoring and anything else that uses the HTTP request.
 
 `ELASTIC_USERNAME = "elastic"` - default username.
 
@@ -166,19 +169,7 @@ python3 main.py
 ```
 Finally, run the script. 
 
-Note that it might be necessary to execute `python` instead of `python3`, depending on unix-like distributions. 
-
-
-
-
-[//]: # (wrzuc link do instalacji elastica)
-
-[//]: # (instalacja kibany)
-
-
-[//]: # (index+mapping)
-
-[//]: # (wrzucanie do bazy)
+Note that it might be necessary to execute `python` instead of `python3`, depending on unix-like distributions.
 
 ## Potential improvements and use cases
 Technologies:
