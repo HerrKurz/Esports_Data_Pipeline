@@ -20,7 +20,7 @@ class DataEnricher:
         self.countries = self.add_player_countries(self.complementary_dict)
         self.countries_missing_coords = []
         self.coords = self.get_country_coordinates()
-        self.missing_coords = self.fill_missing_coordinates()
+        self.missing_coords = self.get_missing_coordinates()
         self.final_coords = self.coords | self.missing_coords
         self.country_code = self.get_country_codes()
 
@@ -38,11 +38,11 @@ class DataEnricher:
         player_list = []
         for players_batch in range(0, 17000, 500):
             response = self.lol_site.api('cargoquery',
-                                    limit='max',
-                                    tables="Players",
-                                    offset=players_batch,
-                                    fields=FIELDS,
-                                    format="json")
+                                         limit='max',
+                                         tables="Players",
+                                         offset=players_batch,
+                                         fields=FIELDS,
+                                         format="json")
             try:
                 parsed = json.loads(json.dumps(response["cargoquery"]))
                 player_list.append(parsed)
@@ -71,8 +71,7 @@ class DataEnricher:
         return clean_countries_list(list_of_player_countries)
 
     def get_country_coordinates(self) -> dict:
-        """Collects geographical coordinates - GeoPoint(longitude, latitude) for unique list
-        of countries using MediaWiki API."""
+        """Extracts geographic coordinates (longitude and latitude) from MediaWiki API."""
         coords = {}
         for country in self.countries:
             result = self.wiki_site.api('query', prop='coordinates', titles=country)
@@ -89,8 +88,8 @@ class DataEnricher:
         print(f"Countries without coords matching {self.countries_missing_coords}.")
         return coords
 
-    def fill_missing_coordinates(self) -> dict:
-        """Fetches missing geographical coordinates using backup Countries REST API."""
+    def get_missing_coordinates(self) -> dict:
+        """Extracts missing geographic coordinates (longitude and latitude) from REST Countries API."""
         missing_coords = {}
         for country in self.countries_missing_coords:
             try:
@@ -113,10 +112,8 @@ class DataEnricher:
     def get_country_codes(self) -> dict:
         """Extracts country codes in ISO 3166-1 numeric encoding system from REST Countries API."""
         country_code = {}
-        countries = self.countries
-        # countries = [country.replace('China', 'CN') for country in self.countries]
         countries_without_code = []
-        for country in countries:
+        for country in self.countries:
             try:
                 response = requests.get(f"https://restcountries.com/v3.1/name/{country}")
                 country_code[country] = response.json()[0]["ccn3"]
@@ -124,7 +121,6 @@ class DataEnricher:
                 countries_without_code.append(country)
                 print(f"Error {e} for {countries_without_code}. Can't find matching country code.")
                 continue
-        # country_code["China"] = country_code.pop("CN")
         return country_code
 
     def append_country_codes_to_country(self, df_match: pd.DataFrame) -> pd.DataFrame:
