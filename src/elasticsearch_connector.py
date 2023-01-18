@@ -1,11 +1,13 @@
 """
 Handles the connection between Python and Elasticsearch and loads the data to the database.
 """
+from config import URL, PORT, ELASTIC_USERNAME, ELASTIC_PASSWORD
 import datetime
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 from elasticsearch.helpers import bulk
-from config import URL, PORT, ELASTIC_USERNAME, ELASTIC_PASSWORD
 from src.utils import clean_json, create_msg_batches
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 TODAY = str(datetime.date.today())
 
 
@@ -28,15 +30,12 @@ class ElasticsearchConnector:
         Possible to specify the name of the Elasticsearch index as an argument.
         """
         msg_batches = create_msg_batches(message_list, batch_size)
-        counter = 0
-        for batch in msg_batches:
-            counter += 1
+        for count, batch in enumerate(msg_batches, start=1):
             clean_json(batch, "index")
             resp = bulk(
                 client=self.es_client,
                 index=index,
                 actions=batch,
             )
-            counter += 1
-            print(f"Sending: batch {counter}/{len(msg_batches)}, to the index {index} with response: {resp}.")
+            print(f"Sending: batch {count}/{len(message_list)//batch_size+1}, to the index {index} with response: {resp}.")
         print(f"Loading data to Elasticsearch to index {index} has been completed.")
