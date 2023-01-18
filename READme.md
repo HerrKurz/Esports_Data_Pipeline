@@ -16,10 +16,13 @@
 _Diagram created using [Excalidraw](https://excalidraw.com/)._
 
 1. Extract the match data from [Oracle's Elixir](https://oracleselixir.com/tools/downloads).
-2. Transform and enrich the data with player info using [Leaguepedia API](https://lol.fandom.com/wiki/Help:Leaguepedia_API). Get the countries' geographic coordinates from [GeoData MediaWiki](https://www.mediawiki.org/wiki/Extension:GeoData). Finally, ingest [ISO 3166-1]((https://en.wikipedia.org/wiki/ISO_3166-1_numeric)) numeric country code using [Rest Countries](https://gitlab.com/amatos/rest-countries).
-3. Deploy the application and database on [AWS EC2](https://aws.amazon.com/ec2/).
+2. Enrich by extracting and transforming the data: 
+- players' information using [Leaguepedia API](https://lol.fandom.com/wiki/Help:Leaguepedia_API),
+- country geographic coordinates from [GeoData MediaWiki](https://www.mediawiki.org/wiki/Extension:GeoData),
+- numeric country code [ISO 3166-1]((https://en.wikipedia.org/wiki/ISO_3166-1_numeric)) using [Rest Countries](https://gitlab.com/amatos/rest-countries).
+3. Deploy the application and database on [AWS EC2](https://aws.amazon.com/ec2/) instances.
 4. Load the data to [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html).
-5. Create a dashboard using [Kibana](https://www.elastic.co/guide/en/kibana/master/index.html).
+5. Explore the data and create a dashboard using [Kibana](https://www.elastic.co/guide/en/kibana/master/index.html).
 
 ## Dashboard
 ![General dashboard](images/general_info_dashboard.png) 
@@ -39,10 +42,10 @@ Please contact  me directly to gain access to the database and related dashboard
  ┃ ┣ 📜diagram_architecture.jpg
  ┃ ┗ 📜general_info_dashboard.png
  ┣ 📂src
- ┃ ┣ 📜data_enricher.py # - Handles additional extractions and data transformations.
- ┃ ┣ 📜data_extractor.py # - Handles the main extraction part.
- ┃ ┣ 📜elasticsearch_connector.py # - Handles the connection between Python and Elasticsearch and loads the data to the database.
- ┃ ┗ 📜utils.py # - Utilities related to the project.
+ ┃ ┣ 📜data_enricher.py # - Data enrichment with additional extractions and data transformations.
+ ┃ ┣ 📜data_extractor.py # - Extraction of main data.
+ ┃ ┣ 📜elasticsearch_connector.py # - Connection between Python and Elasticsearch and data loading.
+ ┃ ┗ 📜utils.py # - Utility functions related to the project.
  ┣ 📜.env
  ┣ 📜.gitignore 
  ┣ 📜READme.md
@@ -52,7 +55,7 @@ Please contact  me directly to gain access to the database and related dashboard
 ```
 
 ## Process
-All relevant classes and function definitions designed for the project's purpose utilize [type hints]("https://docs.python.org/3/library/typing.html")  to build and maintain a cleaner architecture. Inside the project, all modules, Classes, and functions have a summary [docstring](https://peps.python.org/pep-0257/#what-is-a-docstring). The entire process and the reasoning are explained below; please do not hesitate to contact me directly if you have any questions/feedback about the code or architecture.
+All relevant classes and function definitions designed for the project's purpose utilize [type hints]("https://docs.python.org/3/library/typing.html")  to build and maintain a cleaner architecture. Inside the project, all modules, classes, and functions have a summary [docstrings](https://peps.python.org/pep-0257/#what-is-a-docstring).
 
 The focal part of the code is located in the`main.py` file, which serves as a "dashboard" for the entire project. `if __name__ == "__main__":` statement allows to execute the code if the file is run as a script, but not if it is imported as a module.
 ```
@@ -63,15 +66,19 @@ if __name__ == "__main__":
     enriched_data = data_enricher.enrich_data(data.df_matches)
     elasticsearch_connector.send_data(message_list=enriched_data, batch_size=5000)
 ```
-Each line of the statement has been explicitly described below. It provides crucial information about classes, methods and their arguments.
+Each line of the statement has been explicitly described below.
 ```
 elasticsearch_connector = ElasticsearchConnector()
 ```
-Initializes the new instance of ElasticsearchConnector, which sets up and manages the connection between Python and Elasticsearch. We can make the connection with a database more convenient by using [Python Elasticsearch Client](https://elasticsearch-py.readthedocs.io/en/v8.6.0/#python-elasticsearch-client), which is a wrapper around Elasticsearch’s REST API. The client also contains a set of helpers for more engaging tasks like [bulk indexing](https://elasticsearch-py.readthedocs.io/en/v8.6.0/helpers.html#helpers), which immensely increases the performance of loading the data to the database. You can specify if the connection to Elasticsearch is made on localhost by setting the argument `local=True`. By default, the constructor method `__init__(self, local: bool = False):` tries to connect to the `URL` provided inside `config.py`.
+Initializes the new instance of ElasticsearchConnector, which sets up and manages the connection between Python and Elasticsearch. Making the connection with a database more convenient by using [Python Elasticsearch Client](https://elasticsearch-py.readthedocs.io/en/v8.6.0/#python-elasticsearch-client) - a wrapper around Elasticsearch’s REST API. The client also contains a set of helpers for tasks like [bulk indexing](https://elasticsearch-py.readthedocs.io/en/v8.6.0/helpers.html#helpers), which increases the performance of loading the data to the database. Specify if the connection to Elasticsearch is made on localhost by setting the argument `local=True`. By default, the constructor method `__init__(self, local: bool = False):` connects to the `URL` provided inside `config.py`.
 ```
-data = GetData()
+data = GetData(year=[2023], limits=None)
 ```
-**GetData** class downloads the .csv files with e-sport matches data; it's required to provide the list of years for the selected year range (2014-2023 included). The `limits` parameter lets us narrow down the number of rows we want to extract from a data frame; by default, it takes None, so the entire file is processed instead. The e-sport matches data downloaded and stored as [pandas.DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) object. During that process, it's necessary to convert the provided list of years to find matching URL links stored inside config.py; each file is stored on [Google Drive](https://drive.google.com/drive/u/1/folders/1gLSw0RLjBbtaNy0dgnGQDAZOHIgCe-HH). Each file has a unique id - it's done using the `convert_years_to_url(years: list, current_year: int) -> list:` which handles the conversion and returns the unique list of URLs. If provided year is not found inside the `CSV_FILES` dictionary located in `config.py`, then the .csv for the current year is chosen instead. Afterwards auxiliary function `merge_csv_files` concatenates the files and stores them as a single data frame. Method `get_player_name(self) -> list:` returns, unique, non-empty lists of players from downloaded matches data.
+**GetData** class downloads the .csv files with e-sport matches data; `year` to provide the list of years from 2014 to 2023 (included). Takes a current year as a default argument.
+The `limits` parameter narrows down the number of rows we want to extract from a data frame; by default, it takes None, so the entire file is processed instead.
+The e-sport matches data is downloaded and stored as [pandas.DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) object.
+Next, it converts the provided list of years to find matching URL links stored inside `config.py`. Each csv file is stored on [Google Drive](https://drive.google.com/drive/u/1/folders/1gLSw0RLjBbtaNy0dgnGQDAZOHIgCe-HH), and it has a unique id.
+Using helper function `convert_years_to_url(years: list, current_year: int) -> list:` which converts and then returns the unique list of URLs. If provided year is not inside `CSV_FILES` dictionary. Afterwards auxiliary function `merge_csv_files` concatenates the files and stores them as a single data frame. Method `get_player_name(self) -> list:` returns, unique, non-empty lists of players from downloaded matches data.
 
 ```
 data_enricher = DataEnricher(data)
