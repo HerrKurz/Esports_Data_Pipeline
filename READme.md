@@ -10,7 +10,7 @@
 
 
 - For the purpose of the project, it's important to mention that `game` and `match` have different meanings. A match comprises games, while a League of Legends game can be won by [destroying the enemy's Nexus](https://www.leagueoflegends.com/en-us/how-to-play/). It can take multiple games to win the entire match. Usually, LoL e-sport matches follow the `Best-of-N `format (where N is the maximum number of games), where you need to win more than half of them. For example, for Bo5 matches, the scores 3-0 or 2-3 are valid.
-## Architecture diagram
+# Architecture diagram
 
 ![Architecture diagram](images/architecture_diagram_v2.png) 
 _Diagram created using [Excalidraw](https://excalidraw.com/)._
@@ -24,13 +24,13 @@ _Diagram created using [Excalidraw](https://excalidraw.com/)._
 4. Load the data to [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html).
 5. Explore the data and create a dashboard using [Kibana](https://www.elastic.co/guide/en/kibana/master/index.html).
 
-## Dashboard
+# Dashboard
 ![General dashboard](images/general_info_dashboard.png) 
 
-### Dashboard access
+## Dashboard access
 Please contact  me directly to gain access to the database and related dashboards (Viewer role).
 
-## Project structure
+# Project structure
 ```
 📦Esports_data_pipeline
  ┣ 📂Elasticsearch
@@ -55,7 +55,7 @@ Please contact  me directly to gain access to the database and related dashboard
  ┗ 📜requirements.txt
 ```
 
-## Process
+# Process
 The focal part of the code is located in `main.py` file.
 ```
 if __name__ == "__main__":
@@ -129,9 +129,9 @@ Takes three keyword arguments:
   Both of these arguments are passed to `create_msg_batches(messages: list, batch_size: int) -> list`, which utilizes the [bulk helper function](https://elasticsearch-py.readthedocs.io/en/7.x/helpers.html) to optimize the speed of loading the data into Elasticsearch.
 - `index` specifies the name of an index where the data is loaded. It's recommended to provide the index name matching the pattern "`esports-data*`", which uses created template settings and mappings for indices. This step ensures the consistent data types for provided mappings when loading into Elasticsearch.
 
-## Setup
+# Setup
 
-### 1. AWS EC2
+## 1. AWS EC2
 [AWS EC2](https://aws.amazon.com/ec2/) is the Amazon Web Service compute service that enables to create and run virtual machines in the cloud. You can follow the official [installation guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) to set up the EC2. For optimal performance of Elasticsearch and Kibana, it is recommended to use a machine with a minimum of 4GB of RAM and two virtual CPU cores. Choosing the `t2.medium` instance type during the installation process enables one to meet the requirements.
 
 To connect to Linux EC2 instance, you can use SSH. For Unix-like
@@ -139,11 +139,11 @@ operating systems, you can use the terminal. For Windows,  follow one of these g
 
 To reduce the costs of a running instance, make sure to stop it after working with the application. Keeping `t2.medium` instance running for the entire month will exceed the [AWS free tier limits](https://aws.amazon.com/free/).
 
-### 2. Elasticsearch and Kibana
+## 2. Elasticsearch and Kibana
 Install Elasticsearch using a suitable [installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html); if you follow this setup guide, you should
 [install Elasticsearch with RPM](https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html#rpm). The same goes for [Kibana installation](https://www.elastic.co/guide/en/kibana/current/rpm.html). Finally, create the enrollment token to configure Kibana instances to communicate with an existing Elasticsearch cluster using this [installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/create-enrollment-token.html).
 
-### 3. Environment variables 
+## 3. Environment variables 
 In order to load the data inside Elasticsearch you need to create the `.env` file inside the main directory, like in the provided [project structure](#project-structure). Example `.env` file with Elasticsearch credentials  will look like this:
 ```
 URL = "X.XX.XXX.XXX"
@@ -163,7 +163,7 @@ To ensure a proper setup, you need to keep quotation marks `" "` for those value
 `ELASTIC_PASSWORD = "XXXXXXX"` - password provided during [Elasticsearch installation](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html).
 
 
-### 4. Running the project
+## 4. Running the project
 In order to download and run the project on your local machine follow these steps:
 
 ```
@@ -197,19 +197,19 @@ Finally, run the script.
 
 Note that it might be necessary to execute `python` instead of `python3`, depending on unix-like distributions.
 
-## Potential improvements and use cases
-Technologies:
+# Potential improvements and use cases
+### Technologies
 - Use a **data orchestration** tool to improve control over data flow [Apache Airflow
 ](https://airflow.apache.org/) or [Perfect](https://www.prefect.io/). Improve logging and automate the script to run the pipeline daily.
 - Update the setup process using [Terraform](https://www.terraform.io/) to reuse and provision **infrastructure as a code**.
 
 
-Data enrichment:
+### Data enrichment:
 - Add teams' data from [Leaguepedia API](https://lol.fandom.com/wiki/Help:Leaguepedia_API).
 - Backfill missing players' data using [Liquipedia API](https://liquipedia.net/commons/Liquipedia:API_Usage_Guidelines).
 - Use social media links associated with a player/team to gain insight into their social media reach, following etc. 
 
-Dataset could be used to:
+### Dataset could be used to:
 
 - Calculate the relative skill levels of players using the [Elo rating system](https://en.wikipedia.org/wiki/Elo_rating_system).
 - Create a classification model that determines whether given team will win the upcoming match.
