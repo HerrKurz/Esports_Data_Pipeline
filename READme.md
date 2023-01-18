@@ -200,7 +200,7 @@ Note that it might be necessary to execute `python` instead of `python3`, depend
 # Potential improvements and use cases
 ### Technologies
 - Use a **data orchestration** tool to improve control over data flow [Apache Airflow
-](https://airflow.apache.org/) or [Perfect](https://www.prefect.io/). Improve logging and automate the script to run the pipeline daily.
+](https://airflow.apache.org/) or [Prefect](https://www.prefect.io/). Improve logging and automate the script to run the pipeline daily.
 - Update the setup process using [Terraform](https://www.terraform.io/) to reuse and provision **infrastructure as a code**.
 
 
