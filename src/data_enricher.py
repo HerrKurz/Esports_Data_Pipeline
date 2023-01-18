@@ -48,7 +48,7 @@ class DataEnricher:
                 parsed = json.loads(json.dumps(response["cargoquery"]))
                 player_list.append(parsed)
             except KeyError as e:
-                print(f"KeyError EXCEPTION!!! {e} with {response}.")
+                print(f"EXCEPTION: {e} with {response}.")
 
         flat_player_list = list(itertools.chain(*player_list))
         print(f"Total number of players downloaded {len(flat_player_list)}.")
@@ -80,8 +80,7 @@ class DataEnricher:
                         self.countries_missing_coords.append(page['title'])
 
             except KeyError as e:
-                print(f"Coords not found {e}.")
-                continue
+                print(f"EXCEPTION:{e}, Country {country} not found")
         print(f"Countries without coords matching {self.countries_missing_coords}.")
         return coords
 
@@ -94,10 +93,8 @@ class DataEnricher:
                 response_json = response.json()[0]["latlng"]
                 response_json.reverse()
                 missing_coords[country] = [int(coordinate) for coordinate in response_json]
-
             except KeyError as e:
-                print(f"Error {e} for {country}.")
-                continue
+                print(f"EXCEPTION:{e}, Country {country} not found.")
         return missing_coords
 
     def append_geo_coordinates(self, df_match: pd.DataFrame) -> pd.DataFrame:
