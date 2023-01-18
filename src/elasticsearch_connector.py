@@ -31,7 +31,7 @@ class ElasticsearchConnector:
         counter = 0
         for batch in msg_batches:
             counter += 1
-            clean_json(batch)
+            clean_json(batch, "index")
             resp = bulk(
                 client=self.es_client,
                 index=index,
