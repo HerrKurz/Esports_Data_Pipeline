@@ -1,14 +1,15 @@
 """
 Enriches the data by handling additional extractions and data transformations.
 """
+from config import FIELDS
 import itertools
-import mwclient
 import json
+import mwclient
 import pandas as pd
 import requests
 from src.data_extractor import GetData
-from src.utils import convert_to_json, add_id_column, clean_countries_list, append_country_to_player, clean_json
-from config import FIELDS
+from src.utils import append_id, append_country_to_player, append_player_info, clean_countries_list, clean_json, \
+     convert_to_json
 
 
 class DataEnricher:
@@ -17,7 +18,7 @@ class DataEnricher:
         self.wiki_site = mwclient.Site('en.wikipedia.org')
         self.players = self.extract_players()
         self.complementary_dict = self.transform_player_data(data, self.players)
-        self.countries = self.add_player_countries(self.complementary_dict)
+        self.countries = self.get_player_countries(self.complementary_dict)
         self.countries_missing_coords = []
         self.coords = self.get_country_coordinates()
         self.missing_coords = self.get_missing_coordinates()
@@ -26,11 +27,11 @@ class DataEnricher:
 
     def enrich_data(self, main_df: pd.DataFrame) -> list:
         """Transforms the main data frame."""
-        main_df["Player_info"] = main_df["playername"].map(self.complementary_dict)
+        append_player_info(main_df, self.complementary_dict)
         append_country_to_player(main_df, self.complementary_dict)
-        self.append_coordinates_to_country(main_df)
-        self.append_country_codes_to_country(main_df)
-        add_id_column(main_df)
+        self.append_geo_coordinates(main_df)
+        self.append_country_codes(main_df)
+        append_id(main_df)
         return convert_to_json(main_df)
 
     def extract_players(self) -> list:
@@ -47,7 +48,7 @@ class DataEnricher:
                 parsed = json.loads(json.dumps(response["cargoquery"]))
                 player_list.append(parsed)
             except KeyError as e:
-                print(f"KeyError EXCEPTION!!! {e} {response}.")
+                print(f"KeyError EXCEPTION!!! {e} with {response}.")
 
         flat_player_list = list(itertools.chain(*player_list))
         print(f"Total number of players downloaded {len(flat_player_list)}.")
@@ -64,11 +65,11 @@ class DataEnricher:
         print(f"Number of players matched: {len(players_dict)}.")
         return players_dict
 
-    def add_player_countries(self, enriched_dict: dict) -> list:
+    def get_player_countries(self, enriched_dict: dict) -> list:
         """Takes a dictionary of enriched player data and returns the list
         of unique countries associated with the players."""
-        list_of_player_countries = list(set([player_val.get("Country") for player, player_val in enriched_dict.items()]))
-        return clean_countries_list(list_of_player_countries)
+        player_countries_list = list(set([player_val.get("Country") for player, player_val in enriched_dict.items()]))
+        return clean_countries_list(player_countries_list)
 
     def get_country_coordinates(self) -> dict:
         """Extracts geographic coordinates (longitude and latitude) from MediaWiki API."""
@@ -103,9 +104,8 @@ class DataEnricher:
                 continue
         return missing_coords
 
-    def append_coordinates_to_country(self, df_match: pd.DataFrame) -> pd.DataFrame:
-        """Adds new column with geographic coordinates (longitude and latitude)."""
-        print(self.final_coords)
+    def append_geo_coordinates(self, df_match: pd.DataFrame) -> pd.DataFrame:
+        """Adds a new column with geographic coordinates (longitude and latitude)."""
         df_match["Coordinates"] = df_match["Country"].map(self.final_coords)
         return df_match
 
@@ -123,8 +123,7 @@ class DataEnricher:
                 continue
         return country_code
 
-    def append_country_codes_to_country(self, df_match: pd.DataFrame) -> pd.DataFrame:
-        """Adds new column with country codes in ISO 3166-1 numeric encoding system."""
-        print(self.country_code)
+    def append_country_codes(self, df_match: pd.DataFrame) -> pd.DataFrame:
+        """Adds a new column with country codes in ISO 3166-1 numeric encoding system."""
         df_match["Country_code"] = df_match["Country"].map(self.country_code)
         return df_match
