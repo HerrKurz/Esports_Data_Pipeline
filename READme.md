@@ -1,6 +1,6 @@
 # Esports data pipeline
 
-- This project aims to perform Extract, Transform, and Load on professional League of Legends e-sport match data and prepare it for further analysis. 
+- This project aims to perform ETL on professional League of Legends e-sport match data and prepare it for further analysis. 
 
 
 - The primary data source is [Oracle`s Elixir](https://oracleselixir.com/tools/downloads), which provides professional League of Legends e-sport match data from 2014 to nowadays. It's updated daily, and the matches from the corresponding calendar year have a separate .csv file. Definitions for the data in these files can be found or inferred from the information on the [Definitions page](https://oracleselixir.com/tools/downloads). To better understand the dataset, it's worth adding that each game consists of twelve rows (two teams and five players per team).
@@ -28,7 +28,8 @@ _Diagram created using [Excalidraw](https://excalidraw.com/)._
 ![General dashboard](images/general_info_dashboard.png) 
 
 ### Dashboard access
-Please contact  me directly to gain access to the database and related dashboards (Viewer role). The `AWS EC2 t2.medium` instance with Elasticsearch and Kibana installed is hosted at the address http://3.121.139.77:5601.
+Please contact  me directly to gain access to the database and related dashboards (Viewer role).
+
 ## Project structure
 ```
 📦Esports_data_pipeline
@@ -55,18 +56,16 @@ Please contact  me directly to gain access to the database and related dashboard
 ```
 
 ## Process
-All relevant classes and function definitions designed for the project's purpose utilize [type hints]("https://docs.python.org/3/library/typing.html")  to build and maintain a cleaner architecture. Inside the project, all modules, classes, and functions have a summary [docstrings](https://peps.python.org/pep-0257/#what-is-a-docstring).
-
-The focal part of the code is located in the`main.py` file, which serves as a "dashboard" for the entire project. `if __name__ == "__main__":` statement allows to execute the code if the file is run as a script, but not if it is imported as a module.
+The focal part of the code is located in `main.py` file.
 ```
 if __name__ == "__main__":
-    elasticsearch_connector = ElasticsearchConnector()
+    elasticsearch_connector = ElasticsearchConnector(local=False)
     data = GetData(year=["2022"])
     data_enricher = DataEnricher(data)
     enriched_data = data_enricher.enrich_data(data.df_matches)
     elasticsearch_connector.send_data(message_list=enriched_data, batch_size=5000)
 ```
-Each line of the statement has been explicitly described below.
+All relevant classes and function definitions designed for the project's purpose has been explicitly described below.
 ```
 elasticsearch_connector = ElasticsearchConnector()
 ```
@@ -149,7 +148,7 @@ In order to load the data inside Elasticsearch you need to create the `.env` fil
 ```
 URL = "X.XX.XXX.XXX"
 PORT = 9200
-ELASTIC_USERNAME = "elastic"
+ELASTIC_USERNAME = "XXXXXXX"
 ELASTIC_PASSWORD = "XXXXXXX"
 ```
 To ensure a proper setup, you need to keep quotation marks `" "` for those values.
@@ -159,7 +158,7 @@ To ensure a proper setup, you need to keep quotation marks `" "` for those value
 
 `PORT = 9200` - Default port 9200 to communicate with Elasticsearch, it is used for all API calls over HTTP. This includes search and aggregations, and anything else that uses the HTTP request.
 
-`ELASTIC_USERNAME = "elastic"` - default username.
+`ELASTIC_USERNAME = "XXXXXXX"` - default username.
 
 `ELASTIC_PASSWORD = "XXXXXXX"` - password provided during [Elasticsearch installation](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html).
 
