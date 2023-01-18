@@ -57,11 +57,7 @@ class DataEnricher:
 
     def transform_player_data(self, data: GetData, player_list: list):
         """Complements enriched player info form Leaguepedia with the players list from Oracle's Elixir match data."""
-        players_dict = {}
-        for player in player_list:
-            if player.get("ID") in data.player_names:
-                players_dict[player.get("ID")] = player
-
+        players_dict = {player["ID"]: player for player in player_list if player.get("ID") in data.player_names}
         print(f"Number of players matched: {len(players_dict)}.")
         return players_dict
 
