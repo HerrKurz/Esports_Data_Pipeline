@@ -8,9 +8,9 @@ from config import COUNTRIES_TRANSLATE_DICT, CSV_FILES
 pd.options.mode.chained_assignment = None
 
 
-def clean_json(batch: list) -> list:
+def clean_json(batch: list, pop_item_name: str) -> list:
     """Removes index key created by pandas dataframe."""
-    return list(map(lambda elem: elem.pop("index"), batch))
+    return list(map(lambda elem: elem.pop(pop_item_name), batch))
 
 
 def convert_to_json(df: pd.DataFrame) -> list:
@@ -50,3 +50,13 @@ def change_dict_values(dictionary: dict) -> dict:
         if v['Country'] == "United States":
             v['Country'] = "USA"
     return dictionary
+
+
+def append_country_to_player(main_df: pd.DataFrame, player_dict: dict) -> pd.DataFrame:
+    try:
+        player_country_dict = {player_name: country["Country"] for player_name, country in player_dict.items()}
+        main_df['Country'] = main_df['playername'].map(player_country_dict)
+    except KeyError as e:
+        main_df['Country'] = ""
+        print(f"Key error {e}.")
+    return main_df

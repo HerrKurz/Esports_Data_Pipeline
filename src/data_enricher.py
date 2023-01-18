@@ -1,13 +1,13 @@
 """
-Handles additional extractions and data transformations.
+Enriches the data by handling additional extractions and data transformations.
 """
-
+import itertools
 import mwclient
 import json
 import pandas as pd
 import requests
 from src.data_extractor import GetData
-from src.utils import convert_to_json, add_id_column, clean_countries_list, change_dict_values
+from src.utils import convert_to_json, add_id_column, clean_countries_list, append_country_to_player, clean_json
 from config import FIELDS
 
 
@@ -15,59 +15,60 @@ class DataEnricher:
     def __init__(self, data):
         self.lol_site = mwclient.Site('lol.fandom.com', path='/')
         self.wiki_site = mwclient.Site('en.wikipedia.org')
-        self.countries = []
+        self.players = self.extract_players()
+        self.complementary_dict = self.transform_player_data(data, self.players)
+        self.countries = self.add_player_countries(self.complementary_dict)
         self.countries_missing_coords = []
-        self.complementary_dict = self.enrich_player_data(data)
         self.coords = self.get_country_coordinates()
         self.missing_coords = self.fill_missing_coordinates()
         self.final_coords = self.coords | self.missing_coords
         self.country_code = self.get_country_codes()
 
     def enrich_data(self, main_df: pd.DataFrame) -> list:
-        """Takes main data frame and applies the transformations on the data."""
+        """Transforms the main data frame."""
         main_df["Player_info"] = main_df["playername"].map(self.complementary_dict)
+        append_country_to_player(main_df, self.complementary_dict)
         self.append_coordinates_to_country(main_df)
         self.append_country_codes_to_country(main_df)
         add_id_column(main_df)
         return convert_to_json(main_df)
 
-    def enrich_player_data(self, data: GetData) -> dict:
-        """Extracts data about the players from Leaguepedia API."""
-        player_dict = {}
-        missing_players = []
-        countries = []
-        for count, player in enumerate(data.player_names):
+    def extract_players(self) -> list:
+        """Extracts player data from Leaguepedia API."""
+        player_list = []
+        for players_batch in range(0, 17000, 500):
             response = self.lol_site.api('cargoquery',
-                limit = 'max',
-                tables = "Players",
-                fields = FIELDS,
-                where=f'id="{player}"',
-                format = "json")
+                                    limit='max',
+                                    tables="Players",
+                                    offset=players_batch,
+                                    fields=FIELDS,
+                                    format="json")
             try:
-                parsed = json.loads(json.dumps(response["cargoquery"]))[0]["title"]
-                print(f"Getting player {player} {count + 1}/{len(data.player_names)} of players from Leaguepedia.")
-                player_dict[parsed["ID"]] = parsed
-                countries.append(parsed["Country"])
-
+                parsed = json.loads(json.dumps(response["cargoquery"]))
+                player_list.append(parsed)
             except KeyError as e:
                 print(f"KeyError EXCEPTION!!! {e} {response}.")
-                continue
-            except IndexError as e:
-                print(f"Missing player {player} at Leaguepedia. With error {e}.")
-                missing_players.append(player)
-                continue
-        print(f"{len(missing_players)} players weren't fetched from Leaguepedia, their names: {missing_players}.")
-        player_dict = change_dict_values(player_dict)
-        try:
-            player_country_dict = {player_name: country["Country"] for player_name, country in player_dict.items()}
-            data.df_matches['Country'] = data.df_matches['playername'].map(player_country_dict)
-        except KeyError as e:
-            data.df_matches['Country'] = ""
-            print(f"Key error {e}.")
 
-        self.countries = clean_countries_list(countries)
+        flat_player_list = list(itertools.chain(*player_list))
+        print(f"Total number of players downloaded {len(flat_player_list)}.")
+        flat_player_list = clean_json(flat_player_list, "title")
+        return flat_player_list
 
-        return player_dict
+    def transform_player_data(self, data: GetData, player_list: list):
+        """Complements enriched player info form Leaguepedia with the players list from Oracle's Elixir match data."""
+        players_dict = {}
+        for player in player_list:
+            if player.get("ID") in data.player_names:
+                players_dict[player.get("ID")] = player
+
+        print(f"Number of players matched: {len(players_dict)}.")
+        return players_dict
+
+    def add_player_countries(self, enriched_dict: dict) -> list:
+        """Takes a dictionary of enriched player data and returns the list
+        of unique countries associated with the players."""
+        list_of_player_countries = list(set([player_val.get("Country") for player, player_val in enriched_dict.items()]))
+        return clean_countries_list(list_of_player_countries)
 
     def get_country_coordinates(self) -> dict:
         """Collects geographical coordinates - GeoPoint(longitude, latitude) for unique list
@@ -79,7 +80,6 @@ class DataEnricher:
                 for page in result['query']['pages'].values():
                     if 'coordinates' in page:
                         coords[country] = [page['coordinates'][0]['lon'], page['coordinates'][0]['lat']]
-                        print(coords[country])
                     else:
                         self.countries_missing_coords.append(page['title'])
 
@@ -87,7 +87,6 @@ class DataEnricher:
                 print(f"Coords not found {e}.")
                 continue
         print(f"Countries without coords matching {self.countries_missing_coords}.")
-        print(coords)
         return coords
 
     def fill_missing_coordinates(self) -> dict:
@@ -98,7 +97,7 @@ class DataEnricher:
                 response = requests.get(f"https://restcountries.com/v3.1/name/{country}")
                 response_json = response.json()[0]["latlng"]
                 response_json.reverse()
-                missing_coords[country] = [int(i) for i in response_json]
+                missing_coords[country] = [int(coordinate) for coordinate in response_json]
 
             except KeyError as e:
                 print(f"Error {e} for {country}.")
@@ -106,15 +105,16 @@ class DataEnricher:
         return missing_coords
 
     def append_coordinates_to_country(self, df_match: pd.DataFrame) -> pd.DataFrame:
-        """Adds new column which contains longitude and latitude to main dataframe based on mapped "Country" values."""
+        """Adds new column with geographic coordinates (longitude and latitude)."""
         print(self.final_coords)
         df_match["Coordinates"] = df_match["Country"].map(self.final_coords)
         return df_match
 
     def get_country_codes(self) -> dict:
-        """Fetches country codes in ISO 3166-1 numeric encoding system."""
+        """Extracts country codes in ISO 3166-1 numeric encoding system from REST Countries API."""
         country_code = {}
-        countries = [country.replace('China', 'CN') for country in self.countries]
+        countries = self.countries
+        # countries = [country.replace('China', 'CN') for country in self.countries]
         countries_without_code = []
         for country in countries:
             try:
@@ -124,11 +124,11 @@ class DataEnricher:
                 countries_without_code.append(country)
                 print(f"Error {e} for {countries_without_code}. Can't find matching country code.")
                 continue
-        country_code["China"] = country_code.pop("CN")
+        # country_code["China"] = country_code.pop("CN")
         return country_code
 
     def append_country_codes_to_country(self, df_match: pd.DataFrame) -> pd.DataFrame:
-        """Adds new column which contains country code to main dataframe based on mapped "Country" values."""
+        """Adds new column with country codes in ISO 3166-1 numeric encoding system."""
         print(self.country_code)
         df_match["Country_code"] = df_match["Country"].map(self.country_code)
         return df_match
