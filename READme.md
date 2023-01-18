@@ -70,45 +70,60 @@ Each line of the statement has been explicitly described below.
 ```
 elasticsearch_connector = ElasticsearchConnector()
 ```
-Initializes the new instance of ElasticsearchConnector, which sets up and manages the connection between Python and Elasticsearch. Making the connection with a database more convenient by using [Python Elasticsearch Client](https://elasticsearch-py.readthedocs.io/en/v8.6.0/#python-elasticsearch-client) - a wrapper around Elasticsearch’s REST API. The client also contains a set of helpers for tasks like [bulk indexing](https://elasticsearch-py.readthedocs.io/en/v8.6.0/helpers.html#helpers), which increases the performance of loading the data to the database. Specify if the connection to Elasticsearch is made on localhost by setting the argument `local=True`. By default, the constructor method `__init__(self, local: bool = False):` connects to the `URL` provided inside `config.py`.
+**ElasticsearchConnector** class - sets up and manages the connection between Python and Elasticsearch. Making the connection with a database more convenient by using [Python Elasticsearch Client](https://elasticsearch-py.readthedocs.io/en/v8.6.0/#python-elasticsearch-client) - a wrapper around Elasticsearch’s REST API. The client also contains a set of helpers for tasks like [bulk indexing](https://elasticsearch-py.readthedocs.io/en/v8.6.0/helpers.html#helpers), which increases the performance of loading the data to the database. Specify if the connection to Elasticsearch is made on localhost by setting the argument `local=True`. By default, the constructor method `__init__(self, local: bool = False):` connects to the `URL` provided inside `config.py`.
 ```
 data = GetData(year=[2023], limits=None)
 ```
-**GetData** class downloads the .csv files with e-sport matches data; `year` to provide the list of years from 2014 to 2023 (included). Takes a current year as a default argument.
+**GetData** class - downloads the .csv files with e-sport matches data; `year` to provide the list of years from 2014 to 2023 (included). Takes a current year as a default argument.
 The `limits` parameter narrows down the number of rows we want to extract from a data frame; by default, it takes None, so the entire file is processed instead.
 The e-sport matches data is downloaded and stored as [pandas.DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) object.
 Next, it converts the provided list of years to find matching URL links stored inside `config.py`. Each csv file is stored on [Google Drive](https://drive.google.com/drive/u/1/folders/1gLSw0RLjBbtaNy0dgnGQDAZOHIgCe-HH), and it has a unique id.
-Using helper function `convert_years_to_url(years: list, current_year: int) -> list:` which converts and then returns the unique list of URLs. If provided year is not inside `CSV_FILES` dictionary. Afterwards auxiliary function `merge_csv_files` concatenates the files and stores them as a single data frame. Method `get_player_name(self) -> list:` returns, unique, non-empty lists of players from downloaded matches data.
+Using helper function `convert_years_to_url(years: list, current_year: int) -> list:` which converts and then returns the unique list of URLs. If the provided year is not inside `CSV_FILES` dictionary. Afterwards auxiliary function `merge_csv_files` concatenates the files and stores them as a single data frame. Method `get_player_name(self) -> list:` returns, unique, non-empty lists of players from downloaded matches data.
 
 ```
 data_enricher = DataEnricher(data)
 enriched_data = data_enricher.enrich_data(data.df_matches)
 ```
-`DataEnricher`handles additional extractions and data transformations. `enrich_data()` is the class's core method that processes and prepares the data for being loaded into the database.
+**DataEnricher** class - enriches the data by handling additional extractions and data transformations. `enrich_data()` is a main method that transforms and prepares the data for being loaded into the database. Most of the data extractions are done in class constructor.
+
+` extract_players(self) -> list:` - Extracts player data from [Leaguepedia API](https://lol.fandom.com/wiki/Help:Leaguepedia_API). 
+
+`get_country_coordinates(self) -> dict`- Collects geographical coordinates as a GeoPoint(longitude, latitude) for unique list of countries using [MediaWiki API](https://www.mediawiki.org/wiki/Extension:GeoData). 
+
+In case when the coordinates are not found for a specific country, the function `get_country_coordinates(self) -> dict` backfills the data by sending a GET request to [Rest Countries API](https://gitlab.com/amatos/rest-countries). Finally, appends to the main data frame in the function `append_coordinates_to_country()`.
+
+`get_country_codes(self) -> dict:`- Fetches country codes in [ISO 3166-1 numeric encoding system](https://en.wikipedia.org/wiki/ISO_3166-1_numeric) from [Rest Countries API](https://gitlab.com/amatos/rest-countries). It allows to later visualize the geo-data in [Kibana](https://www.elastic.co/guide/en/kibana/master/index.html).
+
 ```
 def enrich_data(self, main_df: pd.DataFrame) -> list:
-    """Takes main data frame and applies the transformations on the data."""
-    main_df["Player_info"] = main_df["playername"].map(self.complementary_dict)
-    self.append_coordinates_to_country(main_df)
-    self.append_country_codes_to_country(main_df)
-    add_id_column(main_df)
-    return convert_to_json(main_df)
+   append_player_info(main_df, self.complementary_dict)
+   append_country_to_player(main_df, self.complementary_dict)
+   self.append_geo_coordinates(main_df)
+   self.append_country_codes(main_df)
+   append_id(main_df)
+   return convert_to_json(main_df)
 ```
-`enrich_player_data(self, data: GetData) -> dict:`- Takes the list of unique player names and extracts data about the players from [Leaguepedia API](https://lol.fandom.com/wiki/Help:Leaguepedia_API). 
+`append_player_info(df: pd.DataFrame, players_dict: dict):`- Adds the column with player info dictionary for each player occurrence in a 'playername' column.
 
-`get_country_coordinates(self) -> dict`- Collects geographical coordinates as a GeoPoint(longitude, latitude) for unique list of countries using [MediaWiki API](https://www.mediawiki.org/wiki/Extension:GeoData). In case when the coordinates are not found for a specific country, the function `fill_missing_coordinates()`backfills the data by sending a GET request to [Rest Countries API](https://gitlab.com/amatos/rest-countries). Finally, appends to the main data frame in the function `append_coordinates_to_country()`.
+`append_country_to_player(df: pd.DataFrame, player_dict: dict) -> pd.DataFrame:` - Adds a new column with a country name for a player.
 
-`get_country_codes(self) -> dict:`- Fetches country codes in [ISO 3166-1 numeric encoding system](https://en.wikipedia.org/wiki/ISO_3166-1_numeric) from [Rest Countries API](https://gitlab.com/amatos/rest-countries). It allows to later visualize the geo-data in [Kibana](https://www.elastic.co/guide/en/kibana/master/index.html).Then `append_country_codes_to_country()`adds the column to the main data frame.
+`append_geo_coordinates(self, df_match: pd.DataFrame) -> pd.DataFrame:` - Adds a new column with geographic coordinates (longitude and latitude).
 
-`add_id_column()` - creates a unique id for each row of the data by concatenating `gameid` and `participantid` for a given game.
+`append_country_codes(self, df_match: pd.DataFrame) -> pd.DataFrame:` - Adds a new column with country codes in ISO 3166-1 numeric encoding system.
 
-`convert_to_json(df: pd.DataFrame) -> list:`- Converts a dataframe to json, to help loading it into Elasticsearch by using [pandas.DataFrame.to_json](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_json.html) with a`table` argument for`orient` to fit a dict like schema.
+`add_id_column()` - ensures a unique id for each row of the data by concatenating `gameid` and `participantid` for a given game.
+
+`convert_to_json(df: pd.DataFrame) -> list:`- Converts a dataframe to json. It helps loading the data into Elasticsearch by using [pandas.DataFrame.to_json](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_json.html) with a`table` argument for`orient` to fit a dictionary like schema.
 
 ```
-elasticsearch_connector.send_data(message_list=enriched_data, batch_size=5000, index: str = f"esports-data-{TODAY}")
-```
-`send_data(self, message_list: list, batch_size: int = 500, index: str = f"esports-data-{TODAY}")`- 
- The function takes three keyword arguments, `message_list` for a list of dictionaries containing the data, and a `batch_size` to split the list of items into batches of specified size. Both of these arguments are passed into the function `create_msg_batches(messages: list, batch_size: int) -> list`, which utilizes the [bulk helper function](https://elasticsearch-py.readthedocs.io/en/7.x/helpers.html) to optimize the speed of loading the data into Elasticsearch. The final keyword argument is the `index`, which specifies the name of an index where the data is loaded. It's recommended to provide the index name matching the pattern "`esports-data*`", which uses created template settings and mappings for indices. This step ensures the consistent data types for provided mappings when loading into Elasticsearch.
+send_data(message_list=enriched_data, batch_size=5000, index: str = f"esports-data-{TODAY}")
+``` 
+Takes three keyword arguments: 
+- `message_list` list of dictionaries containing the data.
+- `batch_size` splits the list of items into batches of specified size. 
+
+  Both of these arguments are passed to `create_msg_batches(messages: list, batch_size: int) -> list`, which utilizes the [bulk helper function](https://elasticsearch-py.readthedocs.io/en/7.x/helpers.html) to optimize the speed of loading the data into Elasticsearch.
+- `index` specifies the name of an index where the data is loaded. It's recommended to provide the index name matching the pattern "`esports-data*`", which uses created template settings and mappings for indices. This step ensures the consistent data types for provided mappings when loading into Elasticsearch.
 
 ## Setup
 
