@@ -3,7 +3,7 @@ from src.data_extractor import GetData
 from src.elasticsearch_connector import ElasticsearchConnector
 
 if __name__ == "__main__":
-    elasticsearch_connector = ElasticsearchConnector()
+    elasticsearch_connector = ElasticsearchConnector(local=False)
     data = GetData(year=[2023], limits=None)
     data_enricher = DataEnricher(data)
     enriched_data = data_enricher.enrich_data(data.df_matches)

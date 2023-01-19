@@ -9,7 +9,6 @@ CURRENT_YEAR = datetime.date.today().year
 class GetData:
     def __init__(self, year: list = f"{CURRENT_YEAR}", retries: int = 1, limits: int or None = None):
         self.retries = retries
-        self.current_year = datetime.date.today().year
         self.df_matches = self.download_csv(limits, year)
         self.player_names = self.get_player_name()
 
@@ -21,14 +20,13 @@ class GetData:
         counter = 0
         while counter < self.retries:
             try:
-                url_list = convert_years_to_url(year, self.current_year)
+                url_list = convert_years_to_url(year, CURRENT_YEAR)
                 df = merge_csv_files(url_list)
                 print(f"Downloaded matches data frame consists of {df.shape[0]} rows and {df.shape[1]} columns.")
                 return df[:limits] if limits else df
             except pd.errors.EmptyDataError as e:
-                print(f"{e} for year {self.current_year}. Trying to fetch previous year.")
-                self.current_year = self.current_year
-                convert_years_to_url(year, self.current_year)
+                print(f"{e} for year {CURRENT_YEAR}. Trying to fetch previous year.")
+                convert_years_to_url(year, CURRENT_YEAR)
                 counter += 1
 
     def get_player_name(self) -> list:

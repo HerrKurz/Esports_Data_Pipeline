@@ -31,7 +31,6 @@ class ElasticsearchConnector:
         Possible to specify the name of the Elasticsearch index as an argument.
         """
         msg_batches = create_msg_batches(message_list, batch_size)
-        # for count, batch in tqdm(enumerate(msg_batches, start=1)):
         for batch in tqdm(msg_batches, colour='CYAN', desc=f'Sending data to the index {index}'):
             clean_json(batch, "index")
             resp = bulk(
