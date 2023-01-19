@@ -4,6 +4,7 @@ Handles the main extraction part, enables to choose the dataset sample size for 
 import pandas as pd
 import datetime
 from src.utils import convert_years_to_url, merge_csv_files
+from tqdm import tqdm
 CURRENT_YEAR = datetime.date.today().year
 
 class GetData:
@@ -22,9 +23,8 @@ class GetData:
         while counter < self.retries:
             try:
                 url_list = convert_years_to_url(year, self.current_year)
-                print(url_list)
                 df = merge_csv_files(url_list)
-                print(f"Dataframe consists of {df.shape[0]} rows and {df.shape[1]} columns.")
+                print(f"Downloaded matches data frame consists of {df.shape[0]} rows and {df.shape[1]} columns.")
                 return df[:limits] if limits else df
             except pd.errors.EmptyDataError as e:
                 print(f"{e} for year {self.current_year}. Trying to fetch previous year.")

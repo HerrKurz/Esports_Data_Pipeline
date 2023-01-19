@@ -1,6 +1,7 @@
 """
 Handles the connection between Python and Elasticsearch and loads the data to the database.
 """
+from tqdm import tqdm
 from config import URL, PORT, ELASTIC_USERNAME, ELASTIC_PASSWORD
 import datetime
 from elasticsearch import Elasticsearch, RequestsHttpConnection
@@ -30,12 +31,12 @@ class ElasticsearchConnector:
         Possible to specify the name of the Elasticsearch index as an argument.
         """
         msg_batches = create_msg_batches(message_list, batch_size)
-        for count, batch in enumerate(msg_batches, start=1):
+        # for count, batch in tqdm(enumerate(msg_batches, start=1)):
+        for batch in tqdm(msg_batches, colour='CYAN', desc=f'Sending data to the index {index}'):
             clean_json(batch, "index")
             resp = bulk(
                 client=self.es_client,
                 index=index,
                 actions=batch,
             )
-            print(f"Sending: batch {count}/{len(message_list)//batch_size+1}, to the index {index} with response: {resp}.")
         print(f"Loading data to Elasticsearch to index {index} has been completed.")

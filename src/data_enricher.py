@@ -10,6 +10,8 @@ import requests
 from src.data_extractor import GetData
 from src.utils import append_id, append_country_to_player, append_player_info, clean_countries_list, clean_json, \
      convert_to_json
+from tqdm import tqdm
+
 
 
 class DataEnricher:
@@ -37,7 +39,7 @@ class DataEnricher:
     def extract_players(self) -> list:
         """Extracts player data from Leaguepedia API."""
         player_list = []
-        for players_batch in range(0, 17000, 500):
+        for players_batch in tqdm(range(0, 17000, 500), colour='CYAN', desc=f'Extracting player data from Leaguepedia'):
             response = self.lol_site.api('cargoquery',
                                          limit='max',
                                          tables="Players",
@@ -57,9 +59,7 @@ class DataEnricher:
 
     def transform_player_data(self, data: GetData, player_list: list):
         """Complements enriched player info form Leaguepedia with the players list from Oracle's Elixir match data."""
-        players_dict = {player["ID"]: player for player in player_list if player.get("ID") in data.player_names}
-        print(f"Number of players matched: {len(players_dict)}.")
-        return players_dict
+        return {player["ID"]: player for player in player_list if player.get("ID") in data.player_names}
 
     def get_player_countries(self, enriched_dict: dict) -> list:
         """Takes a dictionary of enriched player data and returns the list
@@ -70,7 +70,7 @@ class DataEnricher:
     def get_country_coordinates(self) -> dict:
         """Extracts geographic coordinates (longitude and latitude) from MediaWiki API."""
         coords = {}
-        for country in self.countries:
+        for country in tqdm(self.countries, colour='CYAN', desc=f'Extracting geographic coordinates from MediaWiki API'):
             result = self.wiki_site.api('query', prop='coordinates', titles=country)
             try:
                 for page in result['query']['pages'].values():
@@ -78,7 +78,6 @@ class DataEnricher:
                         coords[country] = [page['coordinates'][0]['lon'], page['coordinates'][0]['lat']]
                     else:
                         self.countries_missing_coords.append(page['title'])
-
             except KeyError as e:
                 print(f"EXCEPTION:{e}, Country {country} not found")
         print(f"Countries without coords matching {self.countries_missing_coords}.")
@@ -87,7 +86,7 @@ class DataEnricher:
     def get_missing_coordinates(self) -> dict:
         """Extracts missing geographic coordinates (longitude and latitude) from REST Countries API."""
         missing_coords = {}
-        for country in self.countries_missing_coords:
+        for country in tqdm(self.countries_missing_coords, colour='CYAN', desc=f'Filling missing geographic coordinates from REST Countries API'):
             try:
                 response = requests.get(f"https://restcountries.com/v3.1/name/{country}")
                 response_json = response.json()[0]["latlng"]
@@ -106,7 +105,7 @@ class DataEnricher:
         """Extracts country codes in ISO 3166-1 numeric encoding system from REST Countries API."""
         country_code = {}
         countries_without_code = []
-        for country in self.countries:
+        for country in tqdm(self.countries, colour='CYAN', desc=f'Extracting country codes from REST Countries API'):
             try:
                 response = requests.get(f"https://restcountries.com/v3.1/name/{country}")
                 country_code[country] = response.json()[0]["ccn3"]
