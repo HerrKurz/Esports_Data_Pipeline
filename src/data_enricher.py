@@ -1,7 +1,7 @@
 """
 Enriches the data by handling additional extractions and data transformations.
 """
-from config import FIELDS
+from config import FIELDS, TEAM_FIELDS
 import itertools
 import json
 import mwclient
@@ -9,7 +9,7 @@ import pandas as pd
 import requests
 from src.data_extractor import GetData
 from src.utils import append_id, append_country_to_player, append_player_info, clean_countries_list, clean_json, \
-     convert_to_json
+     convert_to_json, append_team_info
 from tqdm import tqdm
 
 
@@ -19,7 +19,9 @@ class DataEnricher:
         self.lol_site = mwclient.Site('lol.fandom.com', path='/')
         self.wiki_site = mwclient.Site('en.wikipedia.org')
         self.players = self.extract_players()
+        self.teams = self.extract_teams()
         self.complementary_dict = self.transform_player_data(data, self.players)
+        self.complementary_team = self.transform_team_data(data, self.teams)
         self.countries = self.get_player_countries(self.complementary_dict)
         self.countries_missing_coords = []
         self.coords = self.get_country_coordinates()
@@ -30,6 +32,7 @@ class DataEnricher:
     def enrich_data(self, main_df: pd.DataFrame) -> list:
         """Transforms the main data frame."""
         append_player_info(main_df, self.complementary_dict)
+        append_team_info(main_df, self.complementary_team)
         append_country_to_player(main_df, self.complementary_dict)
         self.append_geo_coordinates(main_df)
         self.append_country_codes(main_df)
@@ -54,12 +57,42 @@ class DataEnricher:
 
         flat_player_list = list(itertools.chain(*player_list))
         print(f"Total number of players downloaded {len(flat_player_list)}.")
-        flat_player_list = clean_json(flat_player_list, "title")
-        return flat_player_list
+        return clean_json(flat_player_list, "title")
+
+    def extract_teams(self) -> list:
+        """Extracts team data from Leaguepedia API."""
+        team_list = []
+        for team_batch in tqdm(range(0, 3500, 500), colour='CYAN', desc=f'Extracting team data from Leaguepedia'):
+            response = self.lol_site.api('cargoquery',
+                                         limit='max',
+                                         tables="Teams",
+                                         offset=team_batch,
+                                         fields=TEAM_FIELDS,
+                                         format="json")
+            try:
+                parsed = json.loads(json.dumps(response["cargoquery"]))
+                team_list.append(parsed)
+            except KeyError as e:
+                print(f"EXCEPTION: {e} with {response}.")
+
+        flat_team_list = list(itertools.chain(*team_list))
+        print(f"Total number of teams downloaded {len(flat_team_list)}.")
+        return clean_json(flat_team_list, "title")
 
     def transform_player_data(self, data: GetData, player_list: list):
         """Complements enriched player info form Leaguepedia with the players list from Oracle's Elixir match data."""
         return {player["ID"]: player for player in player_list if player.get("ID") in data.player_names}
+
+    def transform_team_data(self, data: GetData, team_list: list):
+        """Complements enriched team info form Leaguepedia with a team names list from Oracle's Elixir match data."""
+        return {team["OverviewPage"]: team for team in team_list if team.get("OverviewPage") in data.team_names}
+
+
+
+
+
+
+
 
     def get_player_countries(self, enriched_dict: dict) -> list:
         """Takes a dictionary of enriched player data and returns the list

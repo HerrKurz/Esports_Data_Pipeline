@@ -11,6 +11,8 @@ class GetData:
         self.retries = retries
         self.df_matches = self.download_csv(limits, year)
         self.player_names = self.get_player_name()
+        self.team_names = self.get_team_name()
+
 
     def download_csv(self, limits: int or None, year: list) -> pd.DataFrame:
         """
@@ -32,5 +34,10 @@ class GetData:
     def get_player_name(self) -> list:
         """Gets unique, non-empty player list from a dataframe used later to enrich the dataset."""
         df_playername = self.df_matches["playername"].dropna().unique()
-        player_list = list(df_playername)
-        return player_list
+        return list(df_playername)
+
+    
+    def get_team_name(self) -> list:
+        """Gets unique, non-empty team list from a dataframe used later to enrich the dataset."""
+        df_team_name = self.df_matches["teamname"].dropna().unique()
+        return list(df_team_name)

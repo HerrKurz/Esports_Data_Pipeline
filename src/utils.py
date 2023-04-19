@@ -12,6 +12,11 @@ def append_id(df: pd.DataFrame) -> None:
     df['_id'] = df[['gameid', 'participantid']].apply(lambda x: '-'.join(x.map(str)), axis=1)
 
 
+def append_player_info(df: pd.DataFrame, players_dict: dict):
+    """Adds the player info for each player occurrence in 'playername' column."""
+    df["Player_info"] = df["playername"].map(players_dict)
+
+
 def append_country_to_player(df: pd.DataFrame, player_dict: dict) -> pd.DataFrame:
     """Adds a new column with a country name for a player."""
     try:
@@ -23,9 +28,15 @@ def append_country_to_player(df: pd.DataFrame, player_dict: dict) -> pd.DataFram
     return df
 
 
-def append_player_info(df: pd.DataFrame, players_dict: dict):
-    """Adds the player info for each player occurrence in 'playername' column."""
-    df["Player_info"] = df["playername"].map(players_dict)
+def append_team_info(df: pd.DataFrame, teams_dict: dict):
+    """Adds a team info for each team occurrence in 'teamname' column."""
+    df["Team_info"] = df["teamname"].map(teams_dict)
+
+
+
+
+
+
 
 
 def clean_json(batch: list, pop_item_name: str) -> list:

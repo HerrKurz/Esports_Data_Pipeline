@@ -13,6 +13,7 @@ ELASTIC_PASSWORD = os.getenv("ELASTIC_PASSWORD")
 
 # Leaguepedia fields variable
 FIELDS = "ID, OverviewPage, Player, Image, Name, NativeName, NameAlphabet, NameFull, Country, Nationality, NationalityPrimary, Age, Birthdate, ResidencyFormer, Team, Team2, CurrentTeams, TeamSystem, Team2System, Residency, Role, FavChamps, SoloqueueIds, Askfm, Discord, Facebook, Instagram, Lolpros, Reddit, Snapchat, Stream, Twitter, Vk, Website, Weibo, Youtube, TeamLast, RoleLast, IsRetired, ToWildrift, IsPersonality, IsSubstitute, IsTrainee, IsLowercase, IsAutoTeam, IsLowContent"
+TEAM_FIELDS = "Name, OverviewPage, Short, Location, TeamLocation, Region, OrganizationPage, Image, Twitter, Youtube, Facebook, Instagram, Discord, Snapchat, Vk, Subreddit, Website, RosterPhoto, IsDisbanded, RenamedTo, IsLowercase"
 
 # OraclesElixir .csv URL links
 BASE_URL = "https://drive.google.com/uc?id="
