@@ -13,7 +13,6 @@ from src.utils import append_id, append_country_to_player, append_player_info, c
 from tqdm import tqdm
 
 
-
 class DataEnricher:
     def __init__(self, data):
         self.lol_site = mwclient.Site('lol.fandom.com', path='/')
@@ -86,13 +85,6 @@ class DataEnricher:
     def transform_team_data(self, data: GetData, team_list: list):
         """Complements enriched team info form Leaguepedia with a team names list from Oracle's Elixir match data."""
         return {team["OverviewPage"]: team for team in team_list if team.get("OverviewPage") in data.team_names}
-
-
-
-
-
-
-
 
     def get_player_countries(self, enriched_dict: dict) -> list:
         """Takes a dictionary of enriched player data and returns the list

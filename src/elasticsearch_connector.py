@@ -25,8 +25,7 @@ class ElasticsearchConnector:
             retry_on_timeout=False,
             timeout=5000
         )
-    # def send_data(self, message_list: list, batch_size: int = 500, index: str = f"esports-data-{TODAY}"):
-    def send_data(self, message_list: list, batch_size: int = 500, index: str = f"also-teams{TODAY}"):
+    def send_data(self, message_list: list, batch_size: int = 500, index: str = f"esports-data-{TODAY}"):
         """Loads the data as a list of dicts into Elasticsearch using bulks of specified batch size.
         Possible to specify the name of the Elasticsearch index as an argument.
         """
