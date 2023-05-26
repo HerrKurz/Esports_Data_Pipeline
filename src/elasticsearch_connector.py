@@ -17,9 +17,9 @@ class ElasticsearchConnector:
     def __init__(self, local: bool = False):
         self.es_client = Elasticsearch(
             hosts=[{'host': URL if not local else "localhost", 'port': PORT}],
-            http_auth=(ELASTIC_USERNAME, ELASTIC_PASSWORD),
+            # http_auth=(ELASTIC_USERNAME, ELASTIC_PASSWORD),
             scheme='http',
-            use_ssl=True,
+            use_ssl=False,
             verify_certs=False,
             connection_class=RequestsHttpConnection,
             retry_on_timeout=False,
