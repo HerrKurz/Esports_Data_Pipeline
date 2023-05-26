@@ -1,3 +1,10 @@
+# Byte-compiled / optimized / DLL files
+*pycache*
+__pycache__
+*.py[cod]
+__pycache__/
+
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
@@ -24,5 +31,3 @@ ENV/
 # logs
 **/**.log
 
-# Byte-compiled / optimized / DLL files
-__pycache__/
