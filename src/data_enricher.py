@@ -29,7 +29,14 @@ class DataEnricher:
         self.country_code = self.get_country_codes()
 
     def enrich_data(self, main_df: pd.DataFrame) -> list:
-        """Transforms the main data frame."""
+        """Transforms the main data frame.
+
+        Parameters:
+            main_df (pd.DataFrame): The main DataFrame to be transformed.
+
+        Returns:
+            list: The transformed DataFrame converted to a list of JSON objects.
+        """
         append_player_info(main_df, self.complementary_dict)
         append_team_info(main_df, self.complementary_team)
         append_country_to_player(main_df, self.complementary_dict)
@@ -39,7 +46,11 @@ class DataEnricher:
         return convert_to_json(main_df)
 
     def extract_players(self) -> list:
-        """Extracts player data from Leaguepedia API."""
+        """Extracts player data from Leaguepedia API endpoint.
+
+        Returns:
+            list: A list of player data.
+        """
         player_list = []
         for players_batch in tqdm(range(0, 17000, 500), colour='CYAN', desc=f'Extracting player data from Leaguepedia'):
             response = self.lol_site.api('cargoquery',
@@ -59,7 +70,11 @@ class DataEnricher:
         return clean_json(flat_player_list, "title")
 
     def extract_teams(self) -> list:
-        """Extracts team data from Leaguepedia API."""
+        """Extracts team data from Leaguepedia API.
+
+        Returns:
+            list: A list of team data.
+        """
         team_list = []
         for team_batch in tqdm(range(0, 3500, 500), colour='CYAN', desc=f'Extracting team data from Leaguepedia'):
             response = self.lol_site.api('cargoquery',
@@ -79,21 +94,48 @@ class DataEnricher:
         return clean_json(flat_team_list, "title")
 
     def transform_player_data(self, data: GetData, player_list: list):
-        """Complements enriched player info form Leaguepedia with the players list from Oracle's Elixir match data."""
+        """Complements enriched player data form Leaguepedia with the players list from Oracle's Elixir match data.
+
+        Parameters:
+            data (GetData): An instance of the GetData class.
+            player_list (list): A list of player data.
+
+        Returns:
+            _type_: A dictionary containing the transformed player data.
+        """
         return {player["ID"]: player for player in player_list if player.get("ID") in data.player_names}
 
     def transform_team_data(self, data: GetData, team_list: list):
-        """Complements enriched team info form Leaguepedia with a team names list from Oracle's Elixir match data."""
+        """Complements enriched team data form Leaguepedia with a team names list from Oracle's Elixir match data.
+
+        Parameters:
+            data (GetData): An instance of the GetData class.
+            team_list (list): A list of team data.
+
+        Returns:
+            _type_: A dictionary containing the transformed team data.
+        """
         return {team["OverviewPage"]: team for team in team_list if team.get("OverviewPage") in data.team_names}
 
     def get_player_countries(self, enriched_dict: dict) -> list:
         """Takes a dictionary of enriched player data and returns the list
-        of unique countries associated with the players."""
+        of unique countries associated with the players.
+
+        Parameters:
+            enriched_dict (dict): A dictionary of enriched player data.
+
+        Returns:
+            list: A list of unique countries associated with the players.
+        """
         player_countries_list = list(set([player_val.get("Country") for player, player_val in enriched_dict.items()]))
         return clean_countries_list(player_countries_list)
 
     def get_country_coordinates(self) -> dict:
-        """Extracts geographic coordinates (longitude and latitude) from MediaWiki API."""
+        """Extracts geographic coordinates (longitude and latitude) from MediaWiki API.
+
+        Returns:
+            dict: A dictionary containing the country coordinates.
+        """
         coords = {}
         for country in tqdm(self.countries, colour='CYAN', desc=f'Extracting geographic coordinates from MediaWiki API'):
             result = self.wiki_site.api('query', prop='coordinates', titles=country)
@@ -109,7 +151,11 @@ class DataEnricher:
         return coords
 
     def get_missing_coordinates(self) -> dict:
-        """Extracts missing geographic coordinates (longitude and latitude) from REST Countries API."""
+        """Extracts missing geographic coordinates (longitude and latitude) from REST Countries API.
+
+        Returns:
+            dict: A dictionary containing the missing country coordinates.
+        """
         missing_coords = {}
         for country in tqdm(self.countries_missing_coords, colour='CYAN', desc=f'Filling missing geographic coordinates from REST Countries API'):
             try:
@@ -122,12 +168,23 @@ class DataEnricher:
         return missing_coords
 
     def append_geo_coordinates(self, df_match: pd.DataFrame) -> pd.DataFrame:
-        """Adds a new column with geographic coordinates (longitude and latitude)."""
+        """Adds a new column with geographic coordinates - longitude and latitude.
+
+        Parameters:
+            df_match (pd.DataFrame): The main DataFrame to be transformed.
+
+        Returns:
+            pd.DataFrame: The main DataFrame with the appended coordinates column.
+        """
         df_match["Coordinates"] = df_match["Country"].map(self.final_coords)
         return df_match
 
     def get_country_codes(self) -> dict:
-        """Extracts country codes in ISO 3166-1 numeric encoding system from REST Countries API."""
+        """Extracts country codes in ISO 3166-1 numeric encoding system from REST Countries API.
+
+        Returns:
+            dict: A dictionary containing the country codes.
+        """
         country_code = {}
         countries_without_code = []
         for country in tqdm(self.countries, colour='CYAN', desc=f'Extracting country codes from REST Countries API'):
@@ -141,6 +198,13 @@ class DataEnricher:
         return country_code
 
     def append_country_codes(self, df_match: pd.DataFrame) -> pd.DataFrame:
-        """Adds a new column with country codes in ISO 3166-1 numeric encoding system."""
+        """"Adds a new column with country codes in ISO 3166-1 numeric encoding system.
+
+        Parameters:
+            df_match (pd.DataFrame): The main DataFrame to be transformed.
+
+        Returns:
+            pd.DataFrame: The main DataFrame with the appended country codes column.
+        """
         df_match["Country_code"] = df_match["Country"].map(self.country_code)
         return df_match
