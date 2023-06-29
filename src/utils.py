@@ -129,11 +129,10 @@ def clean_countries_list(country_list: list) -> list:
     return [country.replace(country, COUNTRIES_TRANSLATE_DICT.get(country, country)) for country in set(country_list) if country]
 
 
-def change_dict_values(dictionary: dict) -> dict:
-    """Hotfix for data visualization purpose."""
-    for k, v in dictionary.items():
-        if v['Country'] == "United States":
-            v['Country'] = "USA"
-    return dictionary
+def adjust_dict_values(data_dict: dict) -> dict:
+    """Handling the United States and China name abbreviations."""
+    data_dict["United States"] = data_dict.pop("USA")
+    data_dict["China"] = data_dict.pop("CN")
+    return data_dict
 
 

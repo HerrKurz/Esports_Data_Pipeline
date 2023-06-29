@@ -9,7 +9,7 @@ import pandas as pd
 import requests
 from src.data_extractor import GetData
 from src.utils import append_id, append_country_to_player, append_player_info, clean_countries_list, clean_json, \
-     convert_to_json, append_team_info
+     convert_to_json, append_team_info, adjust_dict_values
 from tqdm import tqdm
 
 
@@ -165,6 +165,7 @@ class DataEnricher:
                 missing_coords[country] = [int(coordinate) for coordinate in response_json]
             except KeyError as e:
                 print(f"EXCEPTION:{e}, Country {country} not found.")
+        adjust_dict_values(missing_coords)
         return missing_coords
 
     def append_geo_coordinates(self, df_match: pd.DataFrame) -> pd.DataFrame:
@@ -195,6 +196,7 @@ class DataEnricher:
                 countries_without_code.append(country)
                 print(f"Error {e} for {countries_without_code}. Can't find matching country code.")
                 continue
+        adjust_dict_values(country_code)
         return country_code
 
     def append_country_codes(self, df_match: pd.DataFrame) -> pd.DataFrame:
