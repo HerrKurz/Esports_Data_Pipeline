@@ -407,6 +407,199 @@
           }
         }
       },
+      "Team_info": {
+        "properties": {
+          "Discord": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Facebook": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Image": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Instagram": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "IsDisbanded": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "IsLowercase": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Location": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Name": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "OrganizationPage": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "OverviewPage": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Region": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "RenamedTo": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "RosterPhoto": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Short": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Snapchat": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Subreddit": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "TeamLocation": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Twitter": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Vk": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Website": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "Youtube": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          }
+        }
+      },
       "assists": {
         "type": "long"
       },
@@ -483,7 +676,7 @@
         "type": "float"
       },
       "controlwardsbought": {
-        "type": "float"
+        "type": "long"
       },
       "csat10": {
         "type": "float"
@@ -510,7 +703,7 @@
         "type": "float"
       },
       "damagetochampions": {
-        "type": "float"
+        "type": "long"
       },
       "datacompleteness": {
         "type": "text",
@@ -550,7 +743,7 @@
         "type": "float"
       },
       "earnedgold": {
-        "type": "float"
+        "type": "long"
       },
       "earnedgoldshare": {
         "type": "float"
@@ -619,7 +812,7 @@
         "type": "float"
       },
       "goldspent": {
-        "type": "float"
+        "type": "long"
       },
       "gspd": {
         "type": "float"
@@ -658,7 +851,7 @@
         "type": "float"
       },
       "monsterkills": {
-        "type": "float"
+        "type": "long"
       },
       "monsterkillsenemyjungle": {
         "type": "float"
@@ -847,16 +1040,16 @@
         }
       },
       "visionscore": {
-        "type": "float"
+        "type": "long"
       },
       "vspm": {
         "type": "float"
       },
       "wardskilled": {
-        "type": "float"
+        "type": "long"
       },
       "wardsplaced": {
-        "type": "float"
+        "type": "long"
       },
       "wcpm": {
         "type": "float"
