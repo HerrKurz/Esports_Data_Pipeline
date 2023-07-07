@@ -34,12 +34,11 @@ class ElasticsearchConnector:
         Possible to specify the name of the Elasticsearch index as an argument.
         """
 
-    # def send_data(self, message_list: list, batch_size: int = 500, index: str = f"esports-data-{TODAY}"):
     def send_data(
         self,
         message_list: list,
         batch_size: int = 500,
-        index: str = f"esports-data-2023-06-30",
+        index: str = f"esports-data-{TODAY}",
     ):
         """
         Loads the data as a list of dicts into Elasticsearch using bulks of specified batch size.
