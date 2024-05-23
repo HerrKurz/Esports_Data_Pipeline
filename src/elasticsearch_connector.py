@@ -1,7 +1,7 @@
 import datetime
 import json
 import urllib3
-from elasticsearch import Elasticsearch, RequestsHttpConnection
+from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 from tqdm import tqdm
 from config import ELASTIC_PASSWORD, ELASTIC_USERNAME, PORT, URL
@@ -13,16 +13,20 @@ TODAY = str(datetime.date.today())
 
 class ElasticsearchConnector:
     def __init__(self, local: bool = False):
-        self.es_client = Elasticsearch(
-            hosts=[{"host": URL if not local else "localhost", "port": PORT}],
-            http_auth=(ELASTIC_USERNAME, ELASTIC_PASSWORD) if not local else None,
-            scheme="http",
-            use_ssl=False,
-            verify_certs=False,
-            connection_class=RequestsHttpConnection,
-            retry_on_timeout=False,
-            timeout=5000,
-        )
+        if local:
+            self.es_client = Elasticsearch(
+                "http://localhost:9200",
+                basic_auth=(ELASTIC_USERNAME, ELASTIC_PASSWORD),
+                verify_certs=False,
+                request_timeout=5000,
+            )
+        else:
+            self.es_client = Elasticsearch(
+                f"{URL}:{PORT}",
+                basic_auth=(ELASTIC_USERNAME, ELASTIC_PASSWORD),
+                verify_certs=True,
+                request_timeout=5000,
+            )
 
     def read_mappings(self, file_path: str) -> dict:
         """Read mappings from a file."""
