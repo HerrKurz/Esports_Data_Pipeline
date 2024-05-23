@@ -1,6 +1,7 @@
 """
 Enriches the data by handling additional extractions and data transformations.
 """
+
 import itertools
 import json
 
@@ -11,9 +12,16 @@ from tqdm import tqdm
 
 from config import FIELDS, TEAM_FIELDS
 from src.data_extractor import GetData
-from src.utils import (adjust_dict_values, append_country_to_player, append_id,
-                       append_player_info, append_team_info,
-                       clean_countries_list, clean_json, convert_to_json)
+from src.utils import (
+    adjust_dict_values,
+    append_country_to_player,
+    append_id,
+    append_player_info,
+    append_team_info,
+    clean_countries_list,
+    clean_json,
+    convert_to_json,
+)
 
 
 class DataEnricher:
@@ -58,7 +66,7 @@ class DataEnricher:
         for players_batch in tqdm(
             range(0, 17000, 500),
             colour="CYAN",
-            desc=f"Extracting player data from Leaguepedia",
+            desc="Extracting player data from Leaguepedia",
         ):
             response = self.lol_site.api(
                 "cargoquery",
@@ -88,7 +96,7 @@ class DataEnricher:
         for team_batch in tqdm(
             range(0, 3500, 500),
             colour="CYAN",
-            desc=f"Extracting team data from Leaguepedia",
+            desc="Extracting team data from Leaguepedia",
         ):
             response = self.lol_site.api(
                 "cargoquery",
@@ -170,7 +178,7 @@ class DataEnricher:
         for country in tqdm(
             self.countries,
             colour="CYAN",
-            desc=f"Extracting geographic coordinates from MediaWiki API",
+            desc="Extracting geographic coordinates from MediaWiki API",
         ):
             result = self.wiki_site.api("query", prop="coordinates", titles=country)
             try:
@@ -197,7 +205,7 @@ class DataEnricher:
         for country in tqdm(
             self.countries_missing_coords,
             colour="CYAN",
-            desc=f"Filling missing geographic coordinates from REST Countries API",
+            desc="Filling missing geographic coordinates from REST Countries API",
         ):
             try:
                 response = requests.get(
@@ -236,7 +244,7 @@ class DataEnricher:
         for country in tqdm(
             self.countries,
             colour="CYAN",
-            desc=f"Extracting country codes from REST Countries API",
+            desc="Extracting country codes from REST Countries API",
         ):
             try:
                 response = requests.get(
