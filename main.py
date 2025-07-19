@@ -4,7 +4,7 @@ from src.elasticsearch_connector import ElasticsearchConnector
 
 if __name__ == "__main__":
     elasticsearch_connector = ElasticsearchConnector(local=True)
-    oracle_data = GetData(year=[2024], limits=None)
+    oracle_data = GetData(year=[2025], limits=1000)
     data_enricher = DataEnricher(data=oracle_data)
     enriched_data = data_enricher.enrich_data(oracle_data.df_matches)
     elasticsearch_connector.send_data(message_list=enriched_data, batch_size=5000)

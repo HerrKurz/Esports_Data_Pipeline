@@ -1,6 +1,7 @@
 """
 Configuration file that contains constant variables.
 """
+
 import os
 
 from dotenv import load_dotenv
@@ -20,6 +21,7 @@ TEAM_FIELDS = "Name, OverviewPage, Short, Location, TeamLocation, Region, Organi
 # OraclesElixir .csv URL links
 BASE_URL = "https://drive.google.com/uc?id="
 CSV_FILES = {
+    "2025": BASE_URL + "1v6LRphp2kYciU4SXp0PCjEMuev1bDejc",
     "2024": BASE_URL + "1IjIEhLc9n8eLKeY-yh_YigKVWbhgGBsN",
     "2023": BASE_URL + "1XXk2LO0CsNADBB1LRGOV5rUpyZdEZ8s2",
     "2022": BASE_URL + "1EHmptHyzY8owv0BAcNKtkQpMwfkURwRy",
